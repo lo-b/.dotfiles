@@ -41,6 +41,9 @@ bindkey -M menuselect 'l' vi-forward-char
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Aliases
+alias nv='nvim'
+
 # Prompt
-PS1='%~ %F{red}⟩%f%F{green}⟩%f%F{blue}⟩%f '
+PS1='%~ %F{#CBCA89}⟩%f%F{#E8E77D}⟩%f%F{#FFFC00}⟩%f '
 
