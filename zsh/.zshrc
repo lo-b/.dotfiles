@@ -37,5 +37,5 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
 # Prompt
-PS1='%~ %F{blue}>%f%F{yellow}>%f '
+PS1='%~ %F{red}⟩%f%F{green}⟩%f%F{blue}⟩%f '
 
