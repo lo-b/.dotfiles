@@ -36,6 +36,10 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
+# Fish-like syntax highlighting using zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Prompt
 PS1='%~ %F{red}⟩%f%F{green}⟩%f%F{blue}⟩%f '
 
