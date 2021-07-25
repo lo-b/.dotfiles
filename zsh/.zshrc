@@ -29,6 +29,7 @@ export XDG_STATE_HOME=${HOME}/.local/state
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 export EDITOR='vim'
+export VISUAL='vim'
 
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char
