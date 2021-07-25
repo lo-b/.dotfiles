@@ -30,6 +30,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'tpope/vim-commentary'
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'tpope/vim-surround'
 call plug#end()
 
 colorscheme gruvbox
@@ -50,6 +53,7 @@ augroup TRIM_ON_SAVE
 augroup END
 
 let mapleader = " "
+let g:highlightedyank_highlight_duration = 500
 
 lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
 
