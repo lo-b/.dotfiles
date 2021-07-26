@@ -31,6 +31,9 @@ export XDG_CONFIG_DIRS=/etc/xdg
 export EDITOR='vim'
 export VISUAL='vim'
 
+# Needs to be set by nvim-jdtsl
+export JAVA_HOME='/usr/lib/jvm/java-16-openjdk'
+
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
