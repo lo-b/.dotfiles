@@ -48,5 +48,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-picom &
+picom --experimental-backends &
+nitrogen --random --set-auto $HOME/images/wallpapers &
 exec bspwm
