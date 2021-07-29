@@ -48,5 +48,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 alias nv='nvim'
 
 # Prompt
-PS1='%~ %F{#CBCA89}⟩%f%F{#E8E77D}⟩%f%F{#FFFC00}⟩%f '
+PS1='%~ %F{#ffffb3}⟩%f%F{#ffff63}⟩%f%F{#fff700}⟩%f '
 
+neofetch neofetch --gtk3 off --gtk2 off --disable memory --disable resolution --kitty Downloads/onepunch.png --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 2
