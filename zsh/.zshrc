@@ -1,3 +1,12 @@
+neofetch neofetch --gtk3 off --gtk2 off --disable memory --disable resolution --kitty Downloads/onepunch.png --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 2
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # History configuration
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -46,8 +55,12 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Aliases
 alias nv='nvim'
+alias syu='sudo pacman -Syyu'
+alias x='exa --icons'
+alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 
-# Prompt
-PS1='%~ %F{#ffffb3}⟩%f%F{#ffff63}⟩%f%F{#fff700}⟩%f '
+# powerlevel10k sourcing
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-neofetch neofetch --gtk3 off --gtk2 off --disable memory --disable resolution --kitty Downloads/onepunch.png --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 2
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
