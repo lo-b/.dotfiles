@@ -48,7 +48,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-setxkbmap -model kinesis -layout us -variant intl -option eurosign:5,lv3:lalt_switch
 picom --experimental-backends &
 nitrogen --random --set-auto $HOME/images/wallpapers &
 exec bspwm

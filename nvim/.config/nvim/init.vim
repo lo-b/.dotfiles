@@ -1,19 +1,28 @@
 " To get info about settings use `:h <option>`.
+
+set nocompatible
+filetype plugin on
+syntax on
+
+
 set expandtab tabstop=2 softtabstop=2
 set shiftwidth=2
 
 autocmd Filetype py setlocal tabstop=4 softtabstop=4 shiftwidth=4
+set nobackup
+set background=dark
 set expandtab
 set smartindent
 set relativenumber
-set nohlsearch
+set hlsearch
 
 " Use absolute line number instead of '0'.
 set nu
 set noerrorbells
 set incsearch
 set scrolloff=8
-set signcolumn=yes
+
+set signcolumn=yes:2
 set colorcolumn=80
 set clipboard+=unnamedplus
 set nowrap
@@ -34,9 +43,8 @@ set list
 " nvim-colorizer
 set termguicolors
 
-" Finally found it... Setting to change the default E icon from errors
-sign define LspDiagnosticsSignError text=🔥 texthl=GruvboxRed
-sign define LspDiagnosticsSignWarning text=⚡ texthl=GruvboxYellow
+set statusline+=%{get(b:,'gitsigns_status','')}
+
 
 let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
@@ -46,11 +54,10 @@ let g:completion_timer_cycle = 200 "default value is 80
 let g:indentLine_char = '🭳'
 let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
-" GitGutter
-let g:gitgutter_max_signs = 500
 
 " ALE settings
 " '*': ['remove_trailing_lines', 'trim_whitespace'],
+let g:ale_cursor_detail = 1
 let g:ale_completion_autoimport = 1
 let g:ale_fixers = {
 \  'java': ['google_java_format', 'uncrustify']
@@ -62,6 +69,7 @@ let g:ale_sign_error = '🔥'
 let g:ale_sign_info = '💡'
 let g:ale_sign_warning = '⚡'
 let g:ale_use_global_executables = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 
 " Hover settings
 let g:ale_floating_preview = 1
@@ -79,8 +87,14 @@ let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourse
 let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
 
 " vim-move
-let g:move_key_modifier = 'C'
+" let g:move_key_modifier = 'A'
 let g:move_map_keys = 1
+
+" viml
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -110,19 +124,23 @@ call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 " Completion settings
 let g:completion_trigger_keyword_length = 1 " default = 1
-
+" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
+let g:completion_enable_snippet = 'UltiSnips'
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-  Plug 'gruvbox-community/gruvbox'
+  Plug 'vimwiki/vimwiki'
+  Plug 'junegunn/vim-easy-align'
+  Plug 'doums/darcula'
   Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-eunuch'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'tpope/vim-commentary'
+  Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'machakann/vim-highlightedyank'
-  Plug 'tpope/vim-surround'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-jdtls'
   Plug 'nvim-lua/completion-nvim'
@@ -151,7 +169,24 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'jiangmiao/auto-pairs'
   Plug 'dbeniamine/cheat.sh-vim'
+  Plug 'lambdalisue/suda.vim'
+  Plug 'sirver/ultisnips'
+  " Snippets are separated from the engine. Add this if you want them:
+  Plug 'honza/vim-snippets'
+  Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 call plug#end()
+
+let &t_ut=''
+
+" UltiSnips
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Startify
 autocmd User Startified setlocal cursorline
@@ -210,8 +245,16 @@ let g:startify_lists = [
 
 let g:startify_custom_header = startify#center(startify#fortune#boxed())
 
-colorscheme gruvbox
+colorscheme darcula
 highlight Normal guibg=none
+
+" Darcula theme settings for ALE
+hi! link ALEError Error
+hi! link ALEWarning CodeWarning
+hi! link ALEInfo CodeInfo
+hi! link ALEErrorSign ErrorSign
+hi! link ALEWarningSign WarningSign
+hi! link ALEInfoSign InfoSign
 
 " Remove white space on save.
 fun! TrimWhitespace()
@@ -232,11 +275,168 @@ augroup lsp
   au BufEnter,FileType java lua require'completion'.on_attach()
 augroup end
 
-
 lua << EOF
+-- Setup viml
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = ' ', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = ' ', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = ' ', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = ' ', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = ' ', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  numhl = false,
+  linehl = false,
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+
+    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+
+    -- Text objects
+    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+  },
+  watch_index = {
+    interval = 1000,
+    follow_files = true
+  },
+  current_line_blame = true,
+  current_line_blame_delay = 1000,
+  current_line_blame_position = 'eol',
+  sign_priority = 80,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  word_diff = false,
+  use_decoration_api = true,
+  use_internal_diff = true,  -- If luajit is present
+}
+require'lspconfig'.vimls.setup{
+  on_attach=require'completion'.on_attach,
+  cmd = { "vim-language-server", "--stdio" },
+  filetypes = { "vim" },
+  init_options = {
+    diagnostic = {
+      enable = true
+    },
+    indexes = {
+      count = 3,
+      gap = 100,
+      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+      runtimepath = true
+    },
+    iskeyword = "@,48-57,_,192-255,-#",
+    runtimepath = "",
+    suggest = {
+      fromRuntimepath = true,
+      fromVimruntime = true
+    },
+    vimruntime = ""
+  }
+}
+
+
+-- set builtin signs
+-- symbols for autocomplete
+vim.lsp.protocol.CompletionItemKind = {
+  "   (Text) ",
+  "   (Method)",
+  "   (Function)",
+  "   (Constructor)",
+  " ﴲ  (Field)",
+  "[] (Variable)",
+  "   (Class)",
+  " ﰮ  (Interface)",
+  "   (Module)",
+  " 襁 (Property)",
+  "   (Unit)",
+  "   (Value)",
+  " 練 (Enum)",
+  "   (Keyword)",
+  "   (Snippet)",
+  "   (Color)",
+  "   (File)",
+  "   (Reference)",
+  "   (Folder)",
+  "   (EnumMember)",
+  " ﲀ  (Constant)",
+  " ﳤ  (Struct)",
+  "   (Event)",
+  "   (Operator)",
+  "   (TypeParameter)",
+}
+
+-- Setup builtin LspDiagnosticSigns
+local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🏷️" }
+
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+-- Get the current working directory for neovim
+local function cwd()
+  return vim.loop.cwd()
+end
+
+local system_name
+if vim.fn.has("mac") == 1 then
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
+end
+
+local sumneko_root_path = "/usr/share/lua-language-server"
+local sumneko_binary = "/usr/bin/lua-language-server"
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+  on_attach=require'completion'.on_attach,
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
 require('colorizer').setup()
 require('telescope').setup{
   defaults = {
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix = "🔭 ",
     selection_caret = "👉 ",
     path_display = { 'smart' },
@@ -250,15 +450,23 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
+  },
+  extensions = {
+    fzy_native = {
+      override_genereic_sorter = false,
+      override_file_sorter = true,
+    }
   }
 }
+require('telescope').load_extension('fzy_native')
 require'lualine'.setup {
   options = {
+    lower = false,
     icons_enabled = true,
-    theme = 'gruvbox_material',
+    theme = 'gruvbox',
     component_separators = {'', ''},
     section_separators = {'', ''},
-    padding = 2,
+    padding = 3,
     disabled_filetypes = {}
   },
   sections = {
@@ -280,7 +488,8 @@ require'lualine'.setup {
         'filename',
         file_status = true, -- displays file status (readonly status, modified status)
         path = 2 -- 0 = just filename, 1 = relative path, 2 = absolute path
-      }
+      },
+      cwd
     },
     lualine_x = {
       {
@@ -342,6 +551,7 @@ require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
     end,
   }):find()
 end
+
 require("trouble").setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
@@ -358,7 +568,25 @@ EOF
 
 
 """ REMAPS
-"map <c-p> to manually trigger completion
+" Make `Y` behave to copy trailing text
+nnoremap Y y$
+
+" Stay centered when merging lines or going trough searches with n/N
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Undo breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap , ,<c-g>u
+
+" Jumplist mutations
+nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
+
+map <c-p> to manually trigger completion
 imap <silent> <c-p> <Plug>(completion_trigger)
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -370,16 +598,28 @@ vnoremap < <gv
 vnoremap > >gv
 
 " GIT
-nmap <leader>gs :G<CR>
+nmap <leader>gg :G<CR>
 nmap <leader>gp :G push<CR>
-nmap <leader>hp :GitGutterPreviewHunk<CR>
-nmap <leader>hu :GitGutterUndoHunk<CR>
 
 " Using telescope
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🔎 "})<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ hidden = true }))<cr>
+
+" Search in open buffer
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🔎 ", grep_open_files = true})<cr>
+
+" Use for searching in all files from cwd
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "📖 "})<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "🗃️ "})<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags({prompt_prefix= "🤔 "})<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({depth = 3, hidden = true})<cr>
+nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands()<cr>
+nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles()<cr>
+nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps()<cr>
+nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history()<cr>
+nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash()<cr>
 
 
 " LSP remaps
@@ -401,3 +641,44 @@ nmap <leader>z :Goyo<CR>
 
 " Maximizer
 nmap <leader>m :MaximizerToggle!<CR>
+
+" Fix for netrw-gx
+nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'), 1)<cr>
+
+" Trouble
+nnoremap <leader>t :TroubleToggle<CR>
+
+" Easier naviagtion in nvim windows than cumborsome defaults.
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+" Clear highlighting on escape in normal mode
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Keybinds for drawing boxes in multiple languages
+autocmd BufEnter * nmap ,mc !!boxes -d pound-cmt<CR>
+autocmd BufEnter * vmap ,mc !boxes -d pound-cmt<CR>
+autocmd BufEnter * nmap ,xc !!boxes -d pound-cmt -r<CR>
+autocmd BufEnter * vmap ,xc !boxes -d pound-cmt -r<CR>
+autocmd BufEnter *.html nmap ,mc !!boxes -d html-cmt<CR>
+autocmd BufEnter *.html vmap ,mc !boxes -d html-cmt<CR>
+autocmd BufEnter *.html nmap ,xc !!boxes -d html-cmt -r<CR>
+autocmd BufEnter *.html vmap ,xc !boxes -d html-cmt -r<CR>
+autocmd BufEnter *.[chly],*.[pc]c nmap ,mc !!boxes -d c-cmt<CR>
+autocmd BufEnter *.[chly],*.[pc]c vmap ,mc !boxes -d c-cmt<CR>
+autocmd BufEnter *.[chly],*.[pc]c nmap ,xc !!boxes -d c-cmt -r<CR>
+autocmd BufEnter *.[chly],*.[pc]c vmap ,xc !boxes -d c-cmt -r<CR>
+autocmd BufEnter *.C,*.cpp,*.java nmap ,mc !!boxes -d java-cmt<CR>
+autocmd BufEnter *.C,*.cpp,*.java vmap ,mc !boxes -d java-cmt<CR>
+autocmd BufEnter *.C,*.cpp,*.java nmap ,xc !!boxes -d java-cmt -r<CR>
+autocmd BufEnter *.C,*.cpp,*.java vmap ,xc !boxes -d java-cmt -r<CR>
+autocmd BufEnter .vimrc*,.exrc nmap ,mc !!boxes -d vim-cmt<CR>
+autocmd BufEnter .vimrc*,.exrc vmap ,mc !boxes -d vim-cmt<CR>
+autocmd BufEnter .vimrc*,.exrc nmap ,xc !!boxes -d vim-cmt -r<CR>
+autocmd BufEnter .vimrc*,.exrc vmap ,xc !boxes -d vim-cmt -r<CR>

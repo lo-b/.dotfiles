@@ -29,6 +29,7 @@ zstyle ':completion:*' menu select
 # Compinit will sometimes not find new executables in the $PATH. To include
 # these new executables enable automatical rehash.
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 # ENV variables
 export XDG_CONFIG_HOME=${HOME}/.config
@@ -38,6 +39,9 @@ export XDG_STATE_HOME=${HOME}/.local/state
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 export EDITOR='nvim'
+# Use nvim as pager for manpage
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 export VISUAL='nvim'
 
 # Needs to be set by nvim-jdtsl
@@ -61,6 +65,10 @@ alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# Autopair completion
+source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
+autopair-init
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
