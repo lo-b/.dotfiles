@@ -50,5 +50,6 @@ fi
 
 picom --experimental-backends &
 nitrogen --random --set-auto $HOME/images/wallpapers &
+xbindkeys
 exec bspwm
 

@@ -59,7 +59,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Aliases
 alias nv='nvim'
-alias syu='sudo pacman -Syyu'
+alias syu='paru -Syyu'
 alias x='exa --icons'
 alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 
