@@ -22,7 +22,7 @@ set noerrorbells
 set incsearch
 set scrolloff=8
 
-set signcolumn=yes:2
+set signcolumn=yes:3
 set colorcolumn=80
 set clipboard+=unnamedplus
 set nowrap
@@ -130,6 +130,8 @@ let g:completion_enable_snippet = 'UltiSnips'
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'puremourning/vimspector'
   Plug 'mfussenegger/nvim-dap'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'vimwiki/vimwiki'
@@ -180,6 +182,9 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 let &t_ut=''
+
+" Coc global plugins for java
+let g:coc_global_extensions = ['coc-java', 'coc-java-debug']
 
 " UltiSnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
@@ -643,6 +648,18 @@ autocmd BufEnter .vimrc*,.exrc vmap ,mc !boxes -d vim-cmt<CR>
 autocmd BufEnter .vimrc*,.exrc nmap ,xc !!boxes -d vim-cmt -r<CR>
 autocmd BufEnter .vimrc*,.exrc vmap ,xc !boxes -d vim-cmt -r<CR>
 
+" Debugger remaps
+nnoremap<leader>dd <cmd>CocCommand java.debug.vimspector.start<cr>
+nnoremap<leader>de <cmd>VimspectorReset<cr>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorReset
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>dp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcp <Plug>VimspectorToggleBreakpoint
 
 " Markdown configurations
 
@@ -737,13 +754,3 @@ let g:mkdp_page_title = '「${name}」'
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
 
-" dap
-nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
-nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>

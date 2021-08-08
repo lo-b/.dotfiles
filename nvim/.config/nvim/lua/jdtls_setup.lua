@@ -4,25 +4,6 @@ function M.setup()
   local on_attach = function(client, bufnr)
     require'jdtls.setup'.add_commands()
     require'jdtls'.setup_dap()
-    local dap = require('dap')
-    dap.adapters.java = function(callback)
-      -- here a function needs to trigger the `vscode.java.startDebugSession` LSP command
-      -- The response to the command must be the `port` used below
-      callback({
-        type = 'server';
-        host = '127.0.0.1';
-        port = 5005;
-      })
-    end
-    dap.configurations.java = {
-      {
-        type = 'java';
-        request = 'attach';
-        name = "Debug (Attach) - Remote";
-        hostName = "127.0.0.1";
-        port = 5005;
-      },
-    }
 
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
