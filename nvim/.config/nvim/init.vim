@@ -45,7 +45,6 @@ set termguicolors
 
 set statusline+=%{get(b:,'gitsigns_status','')}
 
-
 let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
@@ -56,9 +55,6 @@ let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
 
 " ALE settings
-" '*': ['remove_trailing_lines', 'trim_whitespace'],
-let g:ale_java_javalsp_executable = 'jdtls'
-let g:ale_java_eclipselsp_path = '/home/bram/builds/jdtls'
 let g:ale_completion_autoimport = 1
 let g:ale_fixers = {
 \  'java': ['google_java_format', 'uncrustify']
@@ -128,11 +124,13 @@ let g:completion_trigger_keyword_length = 1 " default = 1
 " possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
 let g:completion_enable_snippet = 'UltiSnips'
 
+" Make CoC and ALE work nicely together.
+let g:ale_disable_lsp = 1
+
 " Plugins
 call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
-  Plug 'mfussenegger/nvim-dap'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'vimwiki/vimwiki'
   Plug 'junegunn/vim-easy-align'
@@ -147,7 +145,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'machakann/vim-highlightedyank'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'mfussenegger/nvim-jdtls'
   Plug 'nvim-lua/completion-nvim'
   Plug 'dense-analysis/ale'
   " Lualine plugins
@@ -183,15 +180,21 @@ call plug#end()
 
 let &t_ut=''
 
-" Coc global plugins for java
+" Coc settings
+let g:coc_status_error_sign = '🔥'
+let g:coc_status_warn_sign = '⚡'
 let g:coc_global_extensions = ['coc-java', 'coc-java-debug']
 
 " UltiSnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsListSnippets="<s-c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigge="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -277,10 +280,10 @@ augroup TRIM_ON_SAVE
   autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 
-augroup jdtls_lsp
+augroup java_lsp
   au!
-  au FileType java lua require('jdtls_setup').setup()
   au BufEnter,FileType java lua require('completion').on_attach()
+  au BufWritePost *.java silent !gradle compileJava
 augroup end
 
 lua << EOF
@@ -322,12 +325,13 @@ require('gitsigns').setup {
   current_line_blame = true,
   current_line_blame_delay = 1000,
   current_line_blame_position = 'eol',
-  sign_priority = 80,
+  sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
 }
+require('lspconfig').dockerls.setup{}
 require('lspconfig').vimls.setup{
   on_attach=require'completion'.on_attach,
   cmd = { "vim-language-server", "--stdio" },
@@ -495,14 +499,12 @@ require'lualine'.setup {
         'filename',
         file_status = true, -- displays file status (readonly status, modified status)
         path = 2 -- 0 = just filename, 1 = relative path, 2 = absolute path
-      },
-      cwd
+      }
     },
     lualine_x = {
       {
         "diagnostics",
-        sources = {"ale"},
-        sections = {'error', 'warn', 'info'},
+        sources = {"coc", "ale"},
         symbols = {error = '🔥', warn = '⚡', info = '💡'}
       },
       "encoding",
@@ -577,7 +579,7 @@ nmap <leader>gg :G<CR>
 nmap <leader>gp :G push<CR>
 
 " Using telescope
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ hidden = true }))<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
 
 " Search in open buffer
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🔎 ", grep_open_files = true})<cr>
@@ -595,11 +597,6 @@ nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles()<cr>
 nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps()<cr>
 nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history()<cr>
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash()<cr>
-
-
-" LSP remaps
-nmap gD <Cmd>lua vim.lsp.buf.definition()<CR>
-nmap <S-k> <Cmd>lua vim.lsp.buf.hover()<CR>
 
 " Zen mode using goyo
 nmap <leader>z :Goyo<CR>
@@ -623,6 +620,8 @@ nnoremap <C-l> <C-W>l
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
@@ -754,3 +753,121 @@ let g:mkdp_page_title = '「${name}」'
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
 
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+augroup mygroup
+  autocmd!
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>

@@ -45,7 +45,8 @@ export MANWIDTH=999
 export VISUAL='nvim'
 
 # Needs to be set by nvim-jdtsl
-export JAVA_HOME='/usr/lib/jvm/java-16-openjdk'
+export JAVA_HOME='/usr/lib/jvm/default'
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char

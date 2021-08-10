@@ -1,0 +1,30 @@
+{
+  "diagnostic.displayByAle": true,
+  "suggest.completionItemKindLabels": {
+      "method": "  ",
+      "function": "  ",
+      "variable": "麗",
+      "field": "  ",
+      "typeParameter": "<>",
+      "constant": "  ",
+      "class": " 璉",
+      "interface": " 蘒",
+      "struct": "  ",
+      "event": "  ",
+      "operator": "  ",
+      "module": "  ",
+      "property": "  ",
+      "enum": " 練",
+      "reference": "  ",
+      "keyword": "  ",
+      "file": "  ",
+      "folder": "  ",
+      "color": "  ",
+      "unit": " 塞 ",
+      "snippet": "  ",
+      "text": " 𝔸𝕓𝕔",
+      "constructor": "  ",
+      "value": " 🯱🯲🯳",
+      "enumMember": "  "
+    }
+}
