@@ -9,6 +9,7 @@ set expandtab tabstop=2 softtabstop=2
 set shiftwidth=2
 
 autocmd Filetype py setlocal tabstop=4 softtabstop=4 shiftwidth=4
+set hidden
 set nobackup
 set background=dark
 set expandtab
@@ -141,7 +142,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'branch': 'async_v2' }
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'machakann/vim-highlightedyank'
   Plug 'neovim/nvim-lspconfig'
@@ -445,6 +446,7 @@ require('lspconfig').sumneko_lua.setup {
   },
 }
 require('colorizer').setup()
+local actions = require("telescope.actions")
 require('telescope').setup{
   defaults = {
     file_sorter = require('telescope.sorters').get_fzy_sorter,
@@ -459,7 +461,17 @@ require('telescope').setup{
       '--with-filename',
       '--line-number',
       '--column',
-      '--smart-case'
+      '--smart-case',
+      '-.'
+    },
+    mappings = {
+      i = {
+        ["<C-q>"] = actions.smart_send_to_qflist,
+        ["<C-a>"] = actions.delete_buffer,
+      },
+      n = {
+        ["<C-a>"] = actions.delete_buffer,
+      },
     },
   },
   extensions = {
@@ -577,19 +589,17 @@ vnoremap > >gv
 " GIT
 nmap <leader>gg :G<CR>
 nmap <leader>gp :G push<CR>
+nmap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
 
 " Using telescope
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
-
-" Search in open buffer
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🔎 ", grep_open_files = true})<cr>
-
-" Use for searching in all files from cwd
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "📖 "})<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "🗃️ "})<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_prefix= "🗃️ ", hidden = true })<cr>
+nnoremap <leader>fG <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🚀 "})<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= "📖 "})<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= ">>> ", search = vim.fn.input("Grep For > ")})<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "🔎 "})<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags({prompt_prefix= "🤔 "})<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({depth = 3, hidden = true})<cr>
+nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({depth = 1, hidden = true})<cr>
 nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter()<cr>
 nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands()<cr>
 nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history()<cr>
@@ -597,6 +607,7 @@ nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles()<cr>
 nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps()<cr>
 nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history()<cr>
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash()<cr>
+nnoremap <leader>Q <cmd>lua require('telescope.builtin').quickfix({prompt_prefix="📜 " })<cr>
 
 " Zen mode using goyo
 nmap <leader>z :Goyo<CR>
@@ -819,8 +830,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
