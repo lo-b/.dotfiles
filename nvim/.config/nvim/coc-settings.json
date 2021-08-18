@@ -26,5 +26,19 @@
       "constructor": "  ",
       "value": " 🯱🯲🯳",
       "enumMember": "  "
-    }
+  },
+  "java.completion.favoriteStaticMembers": [
+    "org.assertj.core.api.Assertions.*",
+    "org.junit.Assert.*",
+    "org.junit.Assume.*",
+    "org.junit.jupiter.api.Assertions.*",
+    "org.junit.jupiter.api.Assumptions.*",
+    "org.junit.jupiter.api.DynamicContainer.*",
+    "org.junit.jupiter.api.DynamicTest.*",
+    "org.mockito.Mockito.*",
+    "org.mockito.ArgumentMatchers.*",
+    "org.mockito.Answers.*",
+    "org.springframework.test.web.servlet.result.MockMvcResultMatchers.*",
+    "org.hamcrest.Matchers.*"
+  ]
 }

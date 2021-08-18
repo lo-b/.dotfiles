@@ -60,6 +60,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Aliases
 alias nv='nvim'
+alias dc='docker-compose'
 alias syu='paru -Syyu'
 alias x='exa --icons'
 alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"

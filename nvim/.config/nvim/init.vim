@@ -46,6 +46,9 @@ set termguicolors
 
 set statusline+=%{get(b:,'gitsigns_status','')}
 
+set grepprg=rg\ --vimgrep\ --hidden
+set grepformat^=%f:%l:%c:%m
+
 let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
@@ -57,9 +60,6 @@ let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
 " ALE settings
 let g:ale_completion_autoimport = 1
-let g:ale_fixers = {
-\  'java': ['google_java_format', 'uncrustify']
-\}
 
 " Sign settings
 let g:ale_sign_priority = 90
@@ -148,28 +148,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'dense-analysis/ale'
-  " Lualine plugins
-  Plug 'hoob3rt/lualine.nvim'
+  Plug 'hoob3rt/lualine.nvim' " Lualine plugins
   Plug 'tweekmonster/startuptime.vim'
   Plug 'preservim/nerdtree'
-  " File explorer tree
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  " Colored color codes
-  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'Xuyuanp/nerdtree-git-plugin' " File explorer tree
+  Plug 'norcalli/nvim-colorizer.lua' " Colored color codes
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'matze/vim-move'
-  " Illuminate other usages of word
-  Plug 'RRethy/vim-illuminate'
+  Plug 'RRethy/vim-illuminate' " Illuminate other usages of word
   Plug 'mhinz/vim-startify'
   Plug 'ryanoasis/vim-devicons'
   Plug 'junegunn/goyo.vim'
-  " Maximize plugin to toggle fullscreen
   Plug 'szw/vim-maximizer'
-  " Devicons used by telescope
-  Plug 'kyazdani42/nvim-web-devicons'
-  " Trouble plugins
+  Plug 'kyazdani42/nvim-web-devicons' " Devicons used by telescope
   Plug 'folke/trouble.nvim', { 'branch': 'main' }
-  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/playground'
   Plug 'jiangmiao/auto-pairs'
   Plug 'dbeniamine/cheat.sh-vim'
   Plug 'lambdalisue/suda.vim'
@@ -181,10 +175,6 @@ call plug#end()
 
 let &t_ut=''
 
-" Coc settings
-let g:coc_status_error_sign = '🔥'
-let g:coc_status_warn_sign = '⚡'
-let g:coc_global_extensions = ['coc-java', 'coc-java-debug']
 
 " UltiSnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
@@ -192,8 +182,6 @@ let g:coc_global_extensions = ['coc-java', 'coc-java-debug']
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsListSnippets="<s-c-tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigge="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
@@ -281,14 +269,7 @@ augroup TRIM_ON_SAVE
   autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 
-augroup java_lsp
-  au!
-  au BufEnter,FileType java lua require('completion').on_attach()
-  au BufWritePost *.java silent !gradle compileJava
-augroup end
-
 lua << EOF
--- Setup viml
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = ' ', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -446,7 +427,7 @@ require('lspconfig').sumneko_lua.setup {
   },
 }
 require('colorizer').setup()
-local actions = require("telescope.actions")
+local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
     file_sorter = require('telescope.sorters').get_fzy_sorter,
@@ -541,7 +522,7 @@ require'lualine'.setup {
   extensions = {}
 }
 
-require("trouble").setup {
+require('trouble').setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
@@ -551,6 +532,24 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
+  },
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
   }
 }
 EOF
@@ -559,6 +558,13 @@ EOF
 """ REMAPS
 " Make `Y` behave to copy trailing text
 nnoremap Y y$
+
+" Global LSP Remaps
+nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap gd <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap gr <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
+
 
 " Stay centered when merging lines or going trough searches with n/N
 nnoremap n nzzzv
@@ -764,119 +770,3 @@ let g:mkdp_page_title = '「${name}」'
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <c-@> coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-augroup mygroup
-  autocmd!
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
