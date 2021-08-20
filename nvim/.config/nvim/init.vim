@@ -53,6 +53,8 @@ let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
 
+let g:python3_host_prog = '/usr/bin/python'
+
 " indentLine
 let g:indentLine_char = '🭳'
 let g:indent_blankline_filetype_exclude = ['help', 'startify']
@@ -313,8 +315,11 @@ require('gitsigns').setup {
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
 }
+require('lspconfig').pyright.setup{
+  on_attach=require'completion'.on_attach,
+}
 require('lspconfig').dockerls.setup{}
-require('lspconfig').vimls.setup{
+require('lspconfig').vimls.setup {
   on_attach=require'completion'.on_attach,
   cmd = { "vim-language-server", "--stdio" },
   filetypes = { "vim" },
@@ -342,30 +347,30 @@ require('lspconfig').vimls.setup{
 -- set builtin signs
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
-  "   (Text) ",
-  "   (Method)",
+  " 𝔸𝕓𝕔 (Text) ",
+  "   (Method)",
   "   (Function)",
-  "   (Constructor)",
-  " ﴲ  (Field)",
-  "[] (Variable)",
-  "   (Class)",
-  " ﰮ  (Interface)",
+  "  (Constructor)",
+  "   (Field)",
+  " 麗 (Variable)",
+  " 璉 (Class)",
+  " 蘒 (Interface)",
   "   (Module)",
-  " 襁 (Property)",
+  "  (Property)",
   "   (Unit)",
-  "   (Value)",
+  "🯱🯲🯳 (Value)",
   " 練 (Enum)",
   "   (Keyword)",
-  "   (Snippet)",
+  "   (Snippet)",
   "   (Color)",
   "   (File)",
-  "   (Reference)",
+  "   (Reference)",
   "   (Folder)",
-  "   (EnumMember)",
-  " ﲀ  (Constant)",
-  " ﳤ  (Struct)",
+  " 臭 (EnumMember)",
+  " 𝑐 (Constant)",
+  "  (Struct)",
   "   (Event)",
-  "   (Operator)",
+  "   (Operator)",
   "   (TypeParameter)",
 }
 
@@ -463,7 +468,7 @@ require('telescope').setup{
   }
 }
 require('telescope').load_extension('fzy_native')
-require'lualine'.setup {
+require('lualine').setup {
   options = {
     lower = false,
     icons_enabled = true,

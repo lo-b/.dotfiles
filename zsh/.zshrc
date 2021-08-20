@@ -72,5 +72,10 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 autopair-init
 
+# Easily activate python envs
+function activate-venv() {
+  source "$HOME/.venvs/$(ls ~/.venvs/ | fzf)/bin/activate"
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

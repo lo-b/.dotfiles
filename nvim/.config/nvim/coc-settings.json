@@ -6,7 +6,7 @@
       "variable": "麗",
       "field": "  ",
       "typeParameter": "<>",
-      "constant": "  ",
+      "constant": " 𝑐",
       "class": " 璉",
       "interface": " 蘒",
       "struct": "  ",
@@ -25,7 +25,7 @@
       "text": " 𝔸𝕓𝕔",
       "constructor": "  ",
       "value": " 🯱🯲🯳",
-      "enumMember": "  "
+      "enumMember": " 臭"
   },
   "java.completion.favoriteStaticMembers": [
     "org.assertj.core.api.Assertions.*",
