@@ -61,7 +61,11 @@ let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
 
 " ALE settings
-let g:ale_completion_autoimport = 1
+let g:ale_completion_enabled = 0
+let g:ale_fixers = {
+      \'javascript': ['eslint'],
+      \'typescript': ['eslint', 'prettier'],
+      \}
 
 " Sign settings
 let g:ale_sign_priority = 90
@@ -123,6 +127,8 @@ call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 
 " Completion settings
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_auto_signature = 1
 let g:completion_trigger_keyword_length = 1 " default = 1
 " possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
 let g:completion_enable_snippet = 'UltiSnips'
@@ -315,10 +321,15 @@ require('gitsigns').setup {
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
 }
+require('lspconfig').tsserver.setup{
+  on_attach=require'completion'.on_attach,
+}
 require('lspconfig').pyright.setup{
   on_attach=require'completion'.on_attach,
 }
-require('lspconfig').dockerls.setup{}
+require('lspconfig').dockerls.setup{
+  on_attach=require'completion'.on_attach,
+}
 require('lspconfig').vimls.setup {
   on_attach=require'completion'.on_attach,
   cmd = { "vim-language-server", "--stdio" },
@@ -347,31 +358,31 @@ require('lspconfig').vimls.setup {
 -- set builtin signs
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
-  " 𝔸𝕓𝕔 (Text) ",
-  "   (Method)",
-  "   (Function)",
-  "  (Constructor)",
-  "   (Field)",
-  " 麗 (Variable)",
-  " 璉 (Class)",
-  " 蘒 (Interface)",
-  "   (Module)",
-  "  (Property)",
-  "   (Unit)",
-  "🯱🯲🯳 (Value)",
-  " 練 (Enum)",
-  "   (Keyword)",
-  "   (Snippet)",
-  "   (Color)",
-  "   (File)",
-  "   (Reference)",
-  "   (Folder)",
-  " 臭 (EnumMember)",
-  " 𝑐 (Constant)",
-  "  (Struct)",
-  "   (Event)",
-  "   (Operator)",
-  "   (TypeParameter)",
+  " 𝔸𝕓𝕔", -- Text
+  "  ", -- Method
+  "  ", -- Function
+  "  ", -- Constructor
+  "   ", -- Field
+  " 麗 ", -- Variable
+  " 璉 ", -- Class
+  " 蘒 ", -- Interface
+  "   ", -- Module
+  "  ", -- Property
+  "   ", -- Unit
+  "🯱🯲🯳 ", -- Value
+  " 練 ", -- Enum
+  "   ", -- Keyword
+  "   ", -- Snippet
+  "   ", -- Color
+  "   ", -- File
+  "   ", -- Reference
+  "   ", -- Folder
+  " 臭 ", -- EnumMember
+  " 𝑐 ", -- Constant
+  "  ", -- Struct
+  "   ", -- Event
+  "   ", -- Operator
+  "   ", -- TypeParameter
 }
 
 -- Setup builtin LspDiagnosticSigns
