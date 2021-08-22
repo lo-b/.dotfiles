@@ -138,6 +138,7 @@ let g:ale_disable_lsp = 1
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+  Plug 'nvim-telescope/telescope-media-files.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -321,6 +322,19 @@ require('gitsigns').setup {
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
 }
+require'lspconfig'.texlab.setup{
+  on_attach=require'completion'.on_attach,
+  settings = {
+    texlab = {
+      build = {
+        args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
+        executable = "tectonic",
+        forwardSearchAfter = false,
+        onSave = true
+      },
+    }
+  }
+}
 require('lspconfig').tsserver.setup{
   on_attach=require'completion'.on_attach,
 }
@@ -472,6 +486,12 @@ require('telescope').setup{
     },
   },
   extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
+    },
     fzy_native = {
       override_genereic_sorter = false,
       override_file_sorter = true,
@@ -479,6 +499,7 @@ require('telescope').setup{
   }
 }
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('media_files')
 require('lualine').setup {
   options = {
     lower = false,
