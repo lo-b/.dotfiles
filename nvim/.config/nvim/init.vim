@@ -138,7 +138,6 @@ let g:ale_disable_lsp = 1
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-  Plug 'nvim-telescope/telescope-media-files.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -151,8 +150,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'branch': 'async_v2' }
+  Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'nvim-telescope/telescope-media-files.nvim'
   Plug 'machakann/vim-highlightedyank'
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
@@ -180,9 +180,14 @@ call plug#begin('~/.vim/plugged')
   " Snippets are separated from the engine. Add this if you want them:
   Plug 'honza/vim-snippets'
   Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
+  Plug 'akinsho/bufferline.nvim'
 call plug#end()
 
 let &t_ut=''
+
+" Vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 
 " UltiSnips
@@ -279,6 +284,35 @@ augroup TRIM_ON_SAVE
 augroup END
 
 lua << EOF
+require'bufferline'.setup{
+  options = {
+    indicator_icon = ' ▎',
+    buffer_close_icon = '',
+    modified_icon = '●',
+    close_icon = '🏷️',
+    left_trunc_marker = '',
+    right_trunc_marker = '',
+    separator_style = 'slant'
+  },
+  highlights = {
+    fill = {
+      guifg = '#313335',
+      guibg = '#313335'
+    },
+    tab_close = {
+      guibg = '#313335'
+    },
+    separator = {
+      guifg = '#313335',
+    },
+    separator_selected = {
+      guifg = '#313335',
+    },
+    separator_visible = {
+      guifg = '#313335',
+    },
+  },
+}
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = ' ', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -314,13 +348,18 @@ require('gitsigns').setup {
     follow_files = true
   },
   current_line_blame = true,
-  current_line_blame_delay = 1000,
-  current_line_blame_position = 'eol',
+  current_line_blame_opts = {
+    delay = 1000,
+    virt_text_pos = 'eol'
+    },
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
+}
+require'lspconfig'.rust_analyzer.setup{
+  on_attach=require'completion'.on_attach,
 }
 require'lspconfig'.texlab.setup{
   on_attach=require'completion'.on_attach,
@@ -372,7 +411,7 @@ require('lspconfig').vimls.setup {
 -- set builtin signs
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
-  " 𝔸𝕓𝕔", -- Text
+  "  ", -- Text
   "  ", -- Method
   "  ", -- Function
   "  ", -- Constructor
@@ -383,10 +422,10 @@ vim.lsp.protocol.CompletionItemKind = {
   "   ", -- Module
   "  ", -- Property
   "   ", -- Unit
-  "🯱🯲🯳 ", -- Value
+  "  ", -- Value
   " 練 ", -- Enum
   "   ", -- Keyword
-  "   ", -- Snippet
+  " 里", -- Snippet
   "   ", -- Color
   "   ", -- File
   "   ", -- Reference
@@ -639,18 +678,20 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_pr
 nnoremap <leader>fG <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🚀 "})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= "📖 "})<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= ">>> ", search = vim.fn.input("Grep For > ")})<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "🔎 "})<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "𧻓 "})<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags({prompt_prefix= "🤔 "})<cr>
-nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({depth = 1, hidden = true})<cr>
-nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter()<cr>
-nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands()<cr>
-nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles()<cr>
-nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps()<cr>
-nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history()<cr>
-nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash()<cr>
+nnoremap <leader>fH <cmd>lua require('telescope.builtin').man_pages({prompt_prefix= "  "})<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = " " })<cr>
+nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({prompt_prefix = "  ", depth = 1, hidden = true})<cr>
+nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = "  " })<cr>
+nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands({ prompt_prefix = "  " })<cr>
+nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history({ prompt_prefix = "  " })<cr>
+nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = "  " })<cr>
+nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = "  " })<cr>
+nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history({ prompt_prefix = "  " })<cr>
+nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = "  " })<cr>
 nnoremap <leader>Q <cmd>lua require('telescope.builtin').quickfix({prompt_prefix="📜 " })<cr>
+nnoremap <leader>ss <cmd>lua require('telescope.builtin').git_status({prompt_prefix="  " })<cr>
 
 " Zen mode using goyo
 nmap <leader>z :Goyo<CR>
@@ -723,7 +764,7 @@ let g:mkdp_auto_start = 0
 " set to 1, the nvim will auto close current preview window when change
 " from markdown buffer to another buffer
 " default: 1
-let g:mkdp_auto_close = 1
+let g:mkdp_auto_close = 0
 
 " set to 1, the vim will refresh markdown when save the buffer or
 " leave from insert mode, default 0 is auto refresh markdown as you edit or
@@ -801,7 +842,7 @@ let g:mkdp_port = ''
 
 " preview page title
 " ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
+let g:mkdp_page_title = '${name}'
 
 " recognized filetypes
 " these filetypes will have MarkdownPreview... commands
