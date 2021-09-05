@@ -5,3 +5,5 @@ let b:ale_fixers = ['autopep8', 'yapf']
 
 let b:ale_completion_autoimport = 1
 
+" Remap to create docstring
+nmap <silent> <leader>ds <Plug>(pydocstring)

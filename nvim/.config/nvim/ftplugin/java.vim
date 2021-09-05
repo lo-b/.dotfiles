@@ -7,6 +7,9 @@ let g:ale_fixers = {
 \}
 
 " Coc settings
+
+" Make CoC and ALE work nicely together.
+let g:ale_disable_lsp = 1
 let g:coc_status_error_sign = '🔥'
 let g:coc_status_warn_sign = '⚡'
 let g:coc_global_extensions = ['coc-java', 'coc-java-debug']
@@ -43,7 +46,10 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+" Overwrite normal vimspector launch with CoC debug
+nnoremap <leader>dd <cmd>CocCommand java.debug.vimspector.start<cr>
 
 " Use K to show documentation, use CoC when file type is java, or builtin one
 " otherwise (which sumneko_lua uses).

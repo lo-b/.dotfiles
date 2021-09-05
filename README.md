@@ -15,6 +15,7 @@ directory).
 Some general dependencies:
   - [fzf](https://github.com/junegunn/fzf)
   - [ripgrep](https://github.com/BurntSushi/ripgrep)
+  - [.bin](https://github.com/lo-b/.bin)
 
 Below are the prerequisites per (config) folder where necessary.
 

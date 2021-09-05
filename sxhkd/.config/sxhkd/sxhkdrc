@@ -4,7 +4,19 @@
 
 # terminal emulator
 super + t
-        kitty
+  kitty
+
+super + shift + e
+  rofi -show emoji -modi emoji
+
+super + y
+  nns.py
+
+super + ctrl + y
+  rofi -show drun -show-icons -icon-theme "Papirus" -terminal kitty -theme gruvbox-dark -font 'JetBrainsMono Nerd Font 15'
+
+super + shift + y
+  rofi -show window -show-icons -icon-theme "Papirus" -terminal kitty -theme gruvbox-dark -font 'JetBrainsMono Nerd Font 15'
 
 # program launcher
 super + @d

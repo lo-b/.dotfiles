@@ -1,5 +1,6 @@
 " To get info about settings use `:h <option>`.
 
+set textwidth=79
 set nocompatible
 filetype plugin on
 syntax on
@@ -59,12 +60,21 @@ let g:python3_host_prog = '/usr/bin/python'
 let g:indentLine_char = '🭳'
 let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
+" Vimtex settings
+let g:vimtex_format_enabled = 1
+
 
 " ALE settings
 let g:ale_completion_enabled = 0
+" You can now use it in g:ale_fixers
 let g:ale_fixers = {
       \'javascript': ['eslint'],
       \'typescript': ['eslint', 'prettier'],
+      \'tex': ['FormatTex'],
+      \}
+
+let g:ale_linters = {
+      \'tex': ['writegood', 'texlab'],
       \}
 
 " Sign settings
@@ -72,7 +82,6 @@ let g:ale_sign_priority = 90
 let g:ale_sign_error = '🔥'
 let g:ale_sign_info = '💡'
 let g:ale_sign_warning = '⚡'
-let g:ale_use_global_executables = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 
 " Hover settings
@@ -99,6 +108,23 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
+
+
+" Function to get all active buffers, used by nvr to (remotely) get all active
+" buffers of a nvim instance.
+function! GetActiveBuffers()
+    let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
+    let l:result = []
+    for l:item in l:blist
+        "skip unnamed buffers; also skip hidden buffers?
+        " if empty(l:item.name) || l:item.hidden
+        "     continue
+        " endif
+        call add(l:result, shellescape(l:item.name))
+    endfor
+    return l:result
+endfunction
+
 
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -133,11 +159,15 @@ let g:completion_trigger_keyword_length = 1 " default = 1
 " possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
 let g:completion_enable_snippet = 'UltiSnips'
 
-" Make CoC and ALE work nicely together.
-let g:ale_disable_lsp = 1
-
 " Plugins
 call plug#begin('~/.vim/plugged')
+  Plug 'lervag/vimtex'
+  " Tagbar to see file functions, classes, etc.
+  Plug 'liuchengxu/vista.vim'
+  " Should try to write functionality myself using treesitter and snippet?
+  Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+  Plug 'metakirby5/codi.vim'
+  Plug 'tpope/vim-characterize'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -176,7 +206,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jiangmiao/auto-pairs'
   Plug 'dbeniamine/cheat.sh-vim'
   Plug 'lambdalisue/suda.vim'
-  Plug 'sirver/ultisnips'
+  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
   " Snippets are separated from the engine. Add this if you want them:
   Plug 'honza/vim-snippets'
   Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
@@ -184,6 +214,40 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 let &t_ut=''
+
+
+" Vexmtex settings
+let g:vimtex_compiler_method = 'tectonic'
+let g:vimtex_compiler_tectonic = {
+    \ 'build_dir' : '',
+    \ 'options' : [
+    \   "--synctex",
+    \   "--keep-logs",
+    \ ],
+    \}
+let g:vimtex_view_method = 'zathura'
+
+
+" Group below does not work when placed in it's ftplugin file `tex.vim` ...
+augroup FormaxTexBuffer
+  au!
+  au BufWritePost *.tex call vimtex#compiler#start()
+augroup end
+
+
+
+" Custom latex formatter using latexindent docker image
+function! FormatTex(buffer)
+  silent execute '!latexindent /app/%'
+  silent execute ':e'
+endfunction
+
+execute ale#fix#registry#Add('texfmt', 'FormatTex', ['tex'], 'texfmt for tex')
+
+
+
+" Python formatter
+let g:pydocstring_formatter = 'google'
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
@@ -194,7 +258,7 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsExpandTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<s-c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
@@ -362,15 +426,32 @@ require'lspconfig'.rust_analyzer.setup{
   on_attach=require'completion'.on_attach,
 }
 require'lspconfig'.texlab.setup{
+  cmd = { "texlab" },
+  filetypes = { "tex", "bib" },
   on_attach=require'completion'.on_attach,
   settings = {
     texlab = {
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
       build = {
         args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
         executable = "tectonic",
         forwardSearchAfter = false,
         onSave = true
       },
+      chktex = {
+        onEdit = false,
+        onOpenAndSave = false
+      },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
+      forwardSearch = {
+        args = {}
+      },
+      latexFormatter = "latexindent",
+      latexindent = {
+        modifyLineBreaks = false
+      }
     }
   }
 }
@@ -384,7 +465,6 @@ require('lspconfig').dockerls.setup{
   on_attach=require'completion'.on_attach,
 }
 require('lspconfig').vimls.setup {
-  on_attach=require'completion'.on_attach,
   cmd = { "vim-language-server", "--stdio" },
   filetypes = { "vim" },
   init_options = {
@@ -638,7 +718,6 @@ nnoremap Y y$
 " Global LSP Remaps
 nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap gd <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap gr <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
 
 
@@ -672,26 +751,33 @@ vnoremap > >gv
 nmap <leader>gg :G<CR>
 nmap <leader>gp :G push<CR>
 nmap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = " " })<cr>
+nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = "  " })<cr>
+nnoremap <leader>ss <cmd>lua require('telescope.builtin').git_status({prompt_prefix="  " })<cr>
 
-" Using telescope
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_prefix= "🗃️ ", hidden = true })<cr>
+" Searching
 nnoremap <leader>fG <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🚀 "})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= "📖 "})<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= ">>> ", search = vim.fn.input("Grep For > ")})<cr>
+nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history({ prompt_prefix = "  " })<cr>
+nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands({ prompt_prefix = "  " })<cr>
+nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history({ prompt_prefix = "  " })<cr>
+
+" Moving around
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "𧻓 "})<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_prefix= "🗃️ ", hidden = true })<cr>
+nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({prompt_prefix = "  ", depth = 1, hidden = true})<cr>
+nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = "  " })<cr>
+
+" Help
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags({prompt_prefix= "🤔 "})<cr>
 nnoremap <leader>fH <cmd>lua require('telescope.builtin').man_pages({prompt_prefix= "  "})<cr>
-nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = " " })<cr>
-nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({prompt_prefix = "  ", depth = 1, hidden = true})<cr>
-nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = "  " })<cr>
-nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands({ prompt_prefix = "  " })<cr>
-nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history({ prompt_prefix = "  " })<cr>
-nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = "  " })<cr>
 nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = "  " })<cr>
-nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history({ prompt_prefix = "  " })<cr>
-nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = "  " })<cr>
+
+" Lsp
+nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = "  " })<cr>
 nnoremap <leader>Q <cmd>lua require('telescope.builtin').quickfix({prompt_prefix="📜 " })<cr>
-nnoremap <leader>ss <cmd>lua require('telescope.builtin').git_status({prompt_prefix="  " })<cr>
+nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references({prompt_prefix="🛠️ " })<cr>
 
 " Zen mode using goyo
 nmap <leader>z :Goyo<CR>
@@ -717,8 +803,6 @@ nnoremap <esc>^[ <esc>^[
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
 
 " Keybinds for drawing boxes in multiple languages
 autocmd BufEnter * nmap ,mc !!boxes -d pound-cmt<CR>
@@ -743,20 +827,20 @@ autocmd BufEnter .vimrc*,.exrc nmap ,xc !!boxes -d vim-cmt -r<CR>
 autocmd BufEnter .vimrc*,.exrc vmap ,xc !boxes -d vim-cmt -r<CR>
 
 " Debugger remaps
-nnoremap<leader>dd <cmd>CocCommand java.debug.vimspector.start<cr>
+nnoremap<leader>dd :call vimspector#Launch(v:true)<cr>
 nnoremap<leader>de <cmd>VimspectorReset<cr>
-
 nmap <leader>dl <Plug>VimspectorStepInto
 nmap <leader>dj <Plug>VimspectorStepOver
 nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorReset
+nmap <leader>d_ <Plug>VimspectorRestart
 nnoremap <leader>d<space> :call vimspector#Continue()<CR>
-
 nmap <leader>dp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcp <Plug>VimspectorToggleBreakpoint
 
-" Markdown configurations
+" Vista remap
+nmap <leader>v :Vista<CR>
 
+" Markdown configurations
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
 let g:mkdp_auto_start = 0
@@ -847,4 +931,7 @@ let g:mkdp_page_title = '${name}'
 " recognized filetypes
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
+
+" Emoji shortcuts
+ab :vim: 
 
