@@ -13,7 +13,11 @@ bspc config gapless_monocle      true
 # Use alt as the modifier to resize/move windows with the mouse
 bspc config pointer_modifier mod1
 
+bspc rule -a Zathura state=tiled
+
 wmname compiz
 
-$XDG_CONFIG_HOME/polybar/launch.sh
+$XDG_CONFIG_HOME/polybar/launch.sh &
+
+pgrep bspswallow || bspswallow &
 

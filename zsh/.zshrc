@@ -1,4 +1,4 @@
-neofetch neofetch --gtk3 off --gtk2 off --disable memory --disable resolution --kitty Downloads/onepunch.png --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 2
+neofetch neofetch --gtk3 on --disable resolution wm uptime memory --kitty images/wallpapers/groot-i-am-root.jpg --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 1
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -49,7 +49,7 @@ export JAVA_HOME='/usr/lib/jvm/default'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # nnn 'config'
-export NNN_PLUG='v:preview-tui'
+export NNN_PLUG='v:preview-tui;d:dragdrop'
 export NNN_FIFO=/tmp/nnn.fifo
 
 # Key bindings
@@ -101,7 +101,7 @@ n ()
     # stty lwrap undef
     # stty lnext undef
 
-    nnn "$@"
+    nnn -H "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
