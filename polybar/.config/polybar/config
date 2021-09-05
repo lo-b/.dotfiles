@@ -263,3 +263,6 @@ ramp-2 = ﲰ
 [settings]
 screenchange-reload = true
 pseudo-transparency = true
+
+; Set (n)vim filetype
+; vim:ft=dosini
