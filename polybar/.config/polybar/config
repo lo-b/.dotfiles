@@ -99,6 +99,13 @@ content-foreground = ${colors.shade8}
 content = ${glyph.gright}
 content-font = 0
 
+[module/right6]
+type = custom/text
+content-background = ${background}
+content-foreground = ${colors.shade8}
+content = 
+content-font = 0
+
 
 [module/space]
 type = custom/text
@@ -120,13 +127,13 @@ line-size = 2
 border-size = 6
 border-color = #00000000
 padding-left = 0
-padding-right = 0
+padding-right = 7
 module-margin-left = 0
 module-margin-right = 0
 font-0 = JetBrainsMono Nerd Font:pixelsize=15;3
 modules-left  = date left1 pulseaudio left2
 modules-center = bspwm space spotify-prev spotify-play-pause spotify-next spotify
-modules-right = right1 filesystem  right2 xkeyboard right3 memory right4 cpu right5 temperature
+modules-right = right1 filesystem  right2 xkeyboard right3 memory right4 cpu right5 temperature right6
 tray-position = right
 tray-padding = 2
 wm-restack = bspwm
@@ -138,6 +145,13 @@ enable-ipc = true
 ; Let polybar calculate dpi from dpi-x & -y
 dpi-x = 0
 dpi-y = 0
+tray-transparent = true
+tray-detached = true
+tray-offset-x = -4
+tray-offset-y = 2
+tray-offset = 0
+tray-scale = 1.0
+tray-maxsize = 20
 
 ;==========================================================
 ; Setup modules
