@@ -255,6 +255,7 @@ tail = true
 ; prefix symbol is shown before the text
 format-prefix = "  "
 format = <label>
+format-foreground = ${colors.shade0}
 exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
 ; Setting the minlength prevents the buttons from moving all over the place
 ; when going forward/backward through songs.
@@ -264,12 +265,14 @@ label-minlen = 30
 type = custom/script
 exec = echo "<previous-song-symbol>"
 format = 玲
+format-foreground = ${colors.shade0}
 click-left = playerctl previous spotify
 
 [module/spotify-play-pause]
 type = custom/ipc
 hook-0 = echo "  ﭥ  "
 hook-1 = echo "    "
+format-foreground = ${colors.shade0}
 initial = 1
 click-left = playerctl play-pause spotify
 
@@ -277,6 +280,7 @@ click-left = playerctl play-pause spotify
 type = custom/script
 exec = echo "next-song-symbol"
 format = 怜
+format-foreground = ${colors.shade0}
 click-left = playerctl next spotify
 
 ;==========================================================
