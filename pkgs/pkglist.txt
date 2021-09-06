@@ -76,6 +76,7 @@ patch
 pavucontrol
 picom-jonaburg-git
 pkgconf
+playerctl
 pmd
 polybar
 powerline-fonts-git
@@ -90,6 +91,7 @@ ripgrep
 rofi
 rofi-emoji
 rust-analyzer
+spotify
 stow
 sudo
 sxhkd
@@ -173,6 +175,7 @@ yarn
 zathura
 zathura-pdf-mupdf
 zip
+zscroll-git
 zsh
 zsh-autopair-git
 zsh-autosuggestions
