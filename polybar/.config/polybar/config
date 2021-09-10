@@ -148,7 +148,7 @@ dpi-y = 0
 tray-transparent = true
 tray-detached = true
 tray-offset-x = -4
-tray-offset-y = 2
+tray-offset-y = 0
 tray-offset = 0
 tray-scale = 1.0
 tray-maxsize = 20
@@ -174,7 +174,7 @@ interval = 25
 format-mounted-background = ${colors.shade3}
 format-mounted-foreground = ${colors.shade0}
 mount-0 = /
-label-mounted =  %mountpoint%: %percentage_used%%
+label-mounted =  %mountpoint%: %free% free | %percentage_used%% used
 label-unmounted = %mountpoint% not mounted
 
 [module/bspwm]

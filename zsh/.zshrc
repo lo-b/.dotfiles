@@ -51,6 +51,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # nnn 'config'
 export NNN_PLUG='v:preview-tui;d:dragdrop'
 export NNN_FIFO=/tmp/nnn.fifo
+export NNN_TRASH=1  # use trash-cli
 
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char

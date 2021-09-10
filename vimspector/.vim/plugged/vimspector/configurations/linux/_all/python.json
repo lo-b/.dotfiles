@@ -1,0 +1,16 @@
+{
+  "configurations": {
+    "pydebug": {
+      "adapter": "debugpy",
+      "configuration": {
+        "request": "launch",
+        "type": "python",
+        "cwd": "${fileDirname}",
+        "program": "${file}",
+        "stopOnEntry": true,
+        "console": "externalTerminal",
+        "debugOptions": []
+      }
+    }
+  }
+}

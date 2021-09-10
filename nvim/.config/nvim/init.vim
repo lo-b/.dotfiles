@@ -161,6 +161,8 @@ let g:completion_enable_snippet = 'UltiSnips'
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+  Plug 'pearofducks/ansible-vim'
+  Plug 'untitled-ai/jupyter_ascending.vim'
   Plug 'lervag/vimtex'
   " Tagbar to see file functions, classes, etc.
   Plug 'liuchengxu/vista.vim'
@@ -421,6 +423,9 @@ require('gitsigns').setup {
   status_formatter = nil, -- Use default
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
+}
+require'lspconfig'.ansiblels.setup{
+  on_attach=require'completion'.on_attach,
 }
 require'lspconfig'.rust_analyzer.setup{
   on_attach=require'completion'.on_attach,

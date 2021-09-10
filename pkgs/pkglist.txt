@@ -1,4 +1,7 @@
 alsa-utils
+ansible
+ansible-language-server
+ansible-lint
 autoconf
 automake
 autopep8
@@ -13,7 +16,10 @@ brave-bin
 bspwm
 checkstyle
 ctags
+cuda
+cudnn
 dhcpcd
+discord
 dmenu
 docker
 docker-compose
@@ -41,6 +47,7 @@ intellij-idea-ultimate-edition-jre
 jdk-openjdk
 jdk11-openjdk
 jq
+jupyter-notebook
 kitty
 libtool
 linux
@@ -56,6 +63,8 @@ man-pages
 materia-theme-git
 maven
 mlocate
+mullvad-vpn
+ncdu
 neofetch
 neomutt
 neovim
@@ -76,6 +85,7 @@ patch
 pavucontrol
 picom-jonaburg-git
 pkgconf
+pkgfile
 playerctl
 pmd
 polybar
@@ -90,6 +100,7 @@ reflector
 ripgrep
 rofi
 rofi-emoji
+rtorrent-ps
 rust-analyzer
 spotify
 stow
@@ -100,6 +111,7 @@ teams
 tectonic
 texinfo
 texlab
+trash-cli
 tree
 ttf-twemoji
 typescript-language-server
@@ -112,6 +124,7 @@ vim-language-server
 vim-plug
 volantes-cursors
 which
+whois
 wmname
 write-good
 xbindkeys
