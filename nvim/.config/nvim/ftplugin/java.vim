@@ -1,4 +1,5 @@
 augroup java_lsp
+  au!
   au BufEnter,FileType java lua require('completion').on_attach()
 augroup end
 
