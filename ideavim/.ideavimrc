@@ -1,0 +1,56 @@
+""" Map leader to space ---------------------
+let mapleader=" "
+
+
+""" Plugins  --------------------------------
+set surround
+set commentary
+set NERDTree
+set argtextobj
+set textobj-entire
+set highlightedyank
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+
+""" Sets  --------------------------------
+set number
+set relativenumber
+set showmode
+set so=5
+set incsearch
+
+" Vim's yank command doesn't yank to the system clipboard by default; it yanks
+" to the unnamed register.
+set clipboard+=unnamed
+
+
+""" Mappings --------------------------------
+map <leader>d <Action>(Debug)
+map <leader>r <Action>(RenameElement)
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>s <Action>(SelectInProjectView)
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <S-Space> <Action>(GotoNextError)
+
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>o <Action>(FileStructurePopup)
+map <leader>t :NERDTree<CR>
+map <leader>e <Action>(ShowErrorDescription)
+
+" Better tabbing by not deselecting after indent
+vnoremap < <gv
+vnoremap > >gv
+
+" Moving lines
+MoveStatementDown
+nnoremap <A-j> :action  MoveStatementDown<CR>
+nnoremap <A-k> :action MoveStatementUp<CR>
+inoremap <A-j> :action  MoveStatementDown<CR>
+inoremap <A-k> :action MoveStatementUp<CR>
+vnoremap <A-j> :action  MoveStatementDown<CR>
+vnoremap <A-k> :action MoveStatementUp<CR>

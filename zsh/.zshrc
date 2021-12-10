@@ -66,9 +66,10 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Aliases
 alias nv='nvim'
 alias dc='docker-compose'
-alias syu='paru -Syyu'
+alias syu='paru -Syu'
 alias x='exa --icons'
 alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
+alias ap='ansible-playbook'
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

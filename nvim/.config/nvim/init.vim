@@ -53,7 +53,6 @@ set grepformat^=%f:%l:%c:%m
 let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
-
 let g:python3_host_prog = '/usr/bin/python'
 
 " indentLine
@@ -152,13 +151,6 @@ call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
 call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 
-" Completion settings
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-let g:completion_enable_auto_signature = 1
-let g:completion_trigger_keyword_length = 1 " default = 1
-" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
-let g:completion_enable_snippet = 'UltiSnips'
-
 " Plugins
 call plug#begin('~/.vim/plugged')
   Plug 'pearofducks/ansible-vim'
@@ -187,9 +179,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope-media-files.nvim'
   Plug 'machakann/vim-highlightedyank'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
+  Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
+  Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
+  Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
+  Plug 'quangnguyen30192/cmp-nvim-ultisnips', { 'branch': 'main' }
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'onsails/lspkind-nvim'
   Plug 'dense-analysis/ale'
-  Plug 'hoob3rt/lualine.nvim' " Lualine plugins
+  Plug 'hoob3rt/lualine.nvim'
   Plug 'tweekmonster/startuptime.vim'
   Plug 'preservim/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin' " File explorer tree
@@ -229,6 +227,9 @@ let g:vimtex_compiler_tectonic = {
     \}
 let g:vimtex_view_method = 'zathura'
 
+" The quickfix window is never opened/closed automatically.
+let g:vimtex_quickfix_mode = 0
+
 
 " Group below does not work when placed in it's ftplugin file `tex.vim` ...
 augroup FormaxTexBuffer
@@ -259,7 +260,6 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 " UltiSnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<s-c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
@@ -350,6 +350,51 @@ augroup TRIM_ON_SAVE
 augroup END
 
 lua << EOF
+-- Setup nvim-cmp.
+local lspkind = require('lspkind')
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  formatting = {
+    format = lspkind.cmp_format {
+      with_text = true,
+      menu = {
+        buffer = "[buf]",
+        nvim_lsp = "[LSP]",
+        path = "[path]",
+        ultisnips = "[snip]",
+      },
+    },
+  },
+  mapping = {
+    ['<c-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<c-f>'] = cmp.mapping.scroll_docs(4),
+    ['<c-space>'] = cmp.mapping.complete(),
+    ['<c-e>'] = cmp.mapping.close(),
+    ["<c-y>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    },
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'ultisnips' }, -- For ultisnips users.
+    { name = 'buffer' },
+    { name = 'path' },
+  },
+  experimental = {
+    native_menu = false,
+
+    ghost_text = true,
+  }
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require'bufferline'.setup{
   options = {
     indicator_icon = ' ▎',
@@ -425,15 +470,15 @@ require('gitsigns').setup {
   use_internal_diff = true,  -- If luajit is present
 }
 require'lspconfig'.ansiblels.setup{
-  on_attach=require'completion'.on_attach,
+  capabilities = capabilities,
 }
 require'lspconfig'.rust_analyzer.setup{
-  on_attach=require'completion'.on_attach,
+  capabilities = capabilities,
 }
 require'lspconfig'.texlab.setup{
+  capabilities = capabilities,
   cmd = { "texlab" },
   filetypes = { "tex", "bib" },
-  on_attach=require'completion'.on_attach,
   settings = {
     texlab = {
       auxDirectory = ".",
@@ -461,15 +506,16 @@ require'lspconfig'.texlab.setup{
   }
 }
 require('lspconfig').tsserver.setup{
-  on_attach=require'completion'.on_attach,
+  capabilities = capabilities
 }
 require('lspconfig').pyright.setup{
-  on_attach=require'completion'.on_attach,
+  capabilities = capabilities
 }
 require('lspconfig').dockerls.setup{
-  on_attach=require'completion'.on_attach,
+  capabilities = capabilities
 }
 require('lspconfig').vimls.setup {
+  capabilities = capabilities,
   cmd = { "vim-language-server", "--stdio" },
   filetypes = { "vim" },
   init_options = {
@@ -490,37 +536,6 @@ require('lspconfig').vimls.setup {
     },
     vimruntime = ""
   }
-}
-
-
--- set builtin signs
--- symbols for autocomplete
-vim.lsp.protocol.CompletionItemKind = {
-  "  ", -- Text
-  "  ", -- Method
-  "  ", -- Function
-  "  ", -- Constructor
-  "   ", -- Field
-  " 麗 ", -- Variable
-  " 璉 ", -- Class
-  " 蘒 ", -- Interface
-  "   ", -- Module
-  "  ", -- Property
-  "   ", -- Unit
-  "  ", -- Value
-  " 練 ", -- Enum
-  "   ", -- Keyword
-  " 里", -- Snippet
-  "   ", -- Color
-  "   ", -- File
-  "   ", -- Reference
-  "   ", -- Folder
-  " 臭 ", -- EnumMember
-  " 𝑐 ", -- Constant
-  "  ", -- Struct
-  "   ", -- Event
-  "   ", -- Operator
-  "   ", -- TypeParameter
 }
 
 -- Setup builtin LspDiagnosticSigns
@@ -555,7 +570,6 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 require('lspconfig').sumneko_lua.setup {
-  on_attach=require'completion'.on_attach,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {
@@ -588,7 +602,7 @@ require('telescope').setup{
     prompt_prefix = "🔭 ",
     selection_caret = "👉 ",
     path_display = { 'smart' },
-    file_ignore_patterns = {"**.git"},
+    file_ignore_patterns = {"**/*%.git"},
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -713,6 +727,20 @@ require'nvim-treesitter.configs'.setup {
     },
   }
 }
+
+-- Disable most built-in nvim lsp diagnostics settings
+local function setup_diags()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+      virtual_text = false,
+      signs = false,
+      update_in_insert = false,
+      underline = false,
+    }
+  )
+end
+setup_diags()
 EOF
 
 
@@ -740,13 +768,6 @@ inoremap , ,<c-g>u
 " Jumplist mutations
 nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
-
-map <c-p> to manually trigger completion
-imap <silent> <c-p> <Plug>(completion_trigger)
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Indenting
 vnoremap < <gv

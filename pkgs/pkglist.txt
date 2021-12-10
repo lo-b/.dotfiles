@@ -18,6 +18,7 @@ checkstyle
 ctags
 cuda
 cudnn
+datagrip
 dhcpcd
 discord
 dmenu
@@ -34,6 +35,7 @@ fzf
 gcc
 gimp
 git
+git-filter-repo
 google-java-format
 gpick
 gradle
@@ -45,6 +47,7 @@ insomnia-bin
 intel-ucode
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
+ipe
 jdk-openjdk
 jdk11-openjdk
 jq
@@ -70,7 +73,6 @@ neofetch
 neomutt
 neovim
 neovim-remote
-nerd-fonts-iosevka
 nerd-fonts-jetbrains-mono
 nitrogen
 nnn-nerd
@@ -84,6 +86,7 @@ papirus-icon-theme
 paru
 patch
 pavucontrol
+pdftk
 peek
 picom-jonaburg-git
 pkgconf
@@ -98,23 +101,26 @@ pycharm-professional
 pyright
 python-pip
 python-pynvim
+redshift
 reflector
 ripgrep
 rofi
 rofi-emoji
 rtorrent-ps
 rust-analyzer
+sc-im
 spotify
 stow
 sudo
 sxhkd
 task
 teams
-tectonic
+tectonic-bin
 texinfo
 texlab
 trash-cli
 tree
+ttf-iosevka-nerd
 ttf-twemoji
 typescript-language-server
 ueberzug
@@ -135,7 +141,6 @@ xdg-utils
 xdotool
 xf86-video-intel
 xf86-video-vesa
-xflux
 xorg-bdftopcf
 xorg-docs
 xorg-font-util

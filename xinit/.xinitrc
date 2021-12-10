@@ -51,7 +51,7 @@ fi
 # remove ugly cross as default cursor
 xsetroot -cursor_name left_ptr
 
-xflux -l 51 -g 5 -k 2800 &
+redshift -l 51:5 -t 5700:2800 &
 picom &
 nitrogen --random --set-auto $HOME/images/wallpapers &
 xbindkeys
