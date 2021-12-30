@@ -18,7 +18,6 @@ checkstyle
 ctags
 cuda
 cudnn
-datagrip
 dhcpcd
 discord
 dmenu
@@ -98,6 +97,8 @@ powerline-fonts-git
 prettier
 pulseaudio
 pycharm-professional
+pyenv
+pyenv-virtualenv
 pyright
 python-pip
 python-pynvim
@@ -110,6 +111,7 @@ rtorrent-ps
 rust-analyzer
 sc-im
 spotify
+sqls-bin
 stow
 sudo
 sxhkd

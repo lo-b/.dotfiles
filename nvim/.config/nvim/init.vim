@@ -153,6 +153,7 @@ call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+  Plug 'ray-x/lsp_signature.nvim'
   Plug 'pearofducks/ansible-vim'
   Plug 'untitled-ai/jupyter_ascending.vim'
   Plug 'lervag/vimtex'
@@ -161,13 +162,14 @@ call plug#begin('~/.vim/plugged')
   " Should try to write functionality myself using treesitter and snippet?
   Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
   Plug 'metakirby5/codi.vim'
-  Plug 'tpope/vim-characterize'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'vimwiki/vimwiki'
   Plug 'junegunn/vim-easy-align'
   Plug 'doums/darcula'
+  Plug 'tpope/vim-dadbod'
+  Plug 'tpope/vim-characterize'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-surround'
@@ -469,6 +471,19 @@ require('gitsigns').setup {
   word_diff = false,
   use_internal_diff = true,  -- If luajit is present
 }
+require('lspconfig').sqls.setup{
+  settings = {
+    sqls = {
+      connections = {
+        {
+          alias = 'Shopping database',
+          driver = 'sqlite3',
+          dataSourceName = '/home/bram/dbs/sqlite/student-data.db',
+        },
+      },
+    },
+  },
+}
 require'lspconfig'.ansiblels.setup{
   capabilities = capabilities,
 }
@@ -509,7 +524,7 @@ require('lspconfig').tsserver.setup{
   capabilities = capabilities
 }
 require('lspconfig').pyright.setup{
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 require('lspconfig').dockerls.setup{
   capabilities = capabilities
@@ -701,7 +716,7 @@ require('trouble').setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
-    use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+    use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
 }
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
@@ -727,6 +742,7 @@ require'nvim-treesitter.configs'.setup {
     },
   }
 }
+require'lsp_signature'.setup()
 
 -- Disable most built-in nvim lsp diagnostics settings
 local function setup_diags()
