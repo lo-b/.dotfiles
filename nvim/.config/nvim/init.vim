@@ -179,6 +179,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'nvim-telescope/telescope-media-files.nvim'
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'machakann/vim-highlightedyank'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
@@ -653,6 +654,7 @@ require('telescope').setup{
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('media_files')
+require("telescope").load_extension('file_browser')
 require('lualine').setup {
   options = {
     lower = false,
@@ -808,7 +810,7 @@ nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history({ promp
 " Moving around
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "𧻓 "})<cr>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_prefix= "🗃️ ", hidden = true })<cr>
-nnoremap <leader>ft <cmd>lua require('telescope.builtin').file_browser({prompt_prefix = "  ", depth = 1, hidden = true})<cr>
+nnoremap <leader>ft :Telescope file_browser<cr>
 nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = "  " })<cr>
 
 " Help

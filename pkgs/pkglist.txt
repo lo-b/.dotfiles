@@ -27,6 +27,7 @@ dockerfile-language-server
 dragon-drag-and-drop
 exa
 fakeroot
+fd
 flake8
 flameshot
 flex
