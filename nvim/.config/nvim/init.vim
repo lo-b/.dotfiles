@@ -39,7 +39,7 @@ set shortmess+=c
 " Enable mouse settings
 set mouse=a
 
-set listchars=tab:->,trail:·
+set listchars=tab:»\ ,trail:·,eol:↲
 set list
 
 " nvim-colorizer
@@ -54,10 +54,6 @@ let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
 let g:python3_host_prog = '/usr/bin/python'
-
-" indentLine
-let g:indentLine_char = '🭳'
-let g:indent_blankline_filetype_exclude = ['help', 'startify']
 
 " Vimtex settings
 let g:vimtex_format_enabled = 1
@@ -195,7 +191,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin' " File explorer tree
   Plug 'norcalli/nvim-colorizer.lua' " Colored color codes
-  Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'matze/vim-move'
   Plug 'RRethy/vim-illuminate' " Illuminate other usages of word
   Plug 'mhinz/vim-startify'
@@ -470,7 +465,6 @@ require('gitsigns').setup {
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = false,
-  internal = true,  -- If luajit is present
 }
 require('lspconfig').sqls.setup{
   settings = {
@@ -825,6 +819,27 @@ nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references({prompt
 
 " Zen mode using goyo
 nmap <leader>z :Goyo<CR>
+
+" Keep highlighting consistent on entering/leaving goyo
+function! s:goyo_enter()
+  set nolist
+  set listchars=
+  hi NonText ctermfg=241 guifg=#606060
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  set listchars=tab:»\ ,trail:·,eol:↲
+  hi SignColumn ctermbg=236 guibg=#313335
+  hi NonText ctermfg=241 guifg=#606060
+  " ...
+  "
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+set listchars=tab:»\ ,trail:·,eol:↲
 
 " Maximizer
 nmap <leader>m :MaximizerToggle!<CR>
