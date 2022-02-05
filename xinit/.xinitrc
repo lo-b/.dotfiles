@@ -51,6 +51,9 @@ fi
 # remove ugly cross as default cursor
 xsetroot -cursor_name left_ptr
 
+# bind <Caps Lock> to <Esc>
+setxkbmap -option caps:escape
+
 redshift -l 51:5 -t 5700:2800 &
 picom &
 nitrogen --random --set-auto $HOME/images/wallpapers &
