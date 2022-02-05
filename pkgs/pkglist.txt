@@ -36,7 +36,10 @@ gcc
 gimp
 git
 git-filter-repo
+go
+go-tools
 google-java-format
+gopls
 gpick
 gradle
 gucharmap

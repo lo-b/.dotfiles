@@ -6,10 +6,9 @@ filetype plugin on
 syntax on
 
 
-set expandtab tabstop=2 softtabstop=2
-set shiftwidth=2
+set expandtab tabstop=4 softtabstop=4
+set shiftwidth=4
 
-autocmd Filetype py setlocal tabstop=4 softtabstop=4 shiftwidth=4
 set hidden
 set nobackup
 set background=dark
@@ -66,6 +65,7 @@ let g:ale_fixers = {
       \'javascript': ['eslint'],
       \'typescript': ['eslint', 'prettier'],
       \'tex': ['FormatTex'],
+      \'go': ['gofmt']
       \}
 
 let g:ale_linters = {
@@ -604,6 +604,7 @@ require('lspconfig').sumneko_lua.setup {
     },
   },
 }
+require('lspconfig').gopls.setup{}
 require('colorizer').setup()
 local actions = require('telescope.actions')
 require('telescope').setup{
