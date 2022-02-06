@@ -2,6 +2,7 @@ local opt = vim.opt
 local cmd = vim.cmd
 
 vim.g.mapleader = " "
+
 opt.textwidth=79
 opt.expandtab = true
 opt.tabstop = 4
@@ -19,8 +20,6 @@ opt.incsearch = true
 opt.scrolloff = 8
 opt.signcolumn = 'yes:3'
 opt.colorcolumn="80"
-cmd("syntax on")
-cmd("filetype plugin on")
 opt.clipboard:append('unnamedplus')
 opt.wrap = false
 opt.updatetime = 100
@@ -33,3 +32,8 @@ opt.termguicolors = true
 opt.statusline:append("%{get(b:,'gitsigns_status','')}")
 opt.grepprg = 'rg --vimgrep --hidden'
 opt.grepformat:prepend('%f:%l:%c:%m')
+
+cmd("syntax on")
+cmd("filetype plugin on")
+cmd("colorscheme darcula")
+cmd("highlight Normal guibg=none")

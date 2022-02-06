@@ -1,5 +1,5 @@
 " To get info about settings use `:h <option>`.
-lua require('bl.options')
+lua require("bl.options")
 
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
@@ -97,70 +97,7 @@ call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
 call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
 call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
-
-" Plugins
-call plug#begin('~/.vim/plugged')
-  Plug 'ray-x/lsp_signature.nvim'
-  Plug 'pearofducks/ansible-vim'
-  Plug 'untitled-ai/jupyter_ascending.vim'
-  Plug 'lervag/vimtex'
-  " Tagbar to see file functions, classes, etc.
-  Plug 'liuchengxu/vista.vim'
-  " Should try to write functionality myself using treesitter and snippet?
-  Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-  Plug 'metakirby5/codi.vim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'puremourning/vimspector'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-  Plug 'vimwiki/vimwiki'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'doums/darcula'
-  Plug 'tpope/vim-dadbod'
-  Plug 'tpope/vim-characterize'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-eunuch'
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'nvim-telescope/telescope-media-files.nvim'
-  Plug 'nvim-telescope/telescope-file-browser.nvim'
-  Plug 'machakann/vim-highlightedyank'
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
-  Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
-  Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
-  Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
-  Plug 'quangnguyen30192/cmp-nvim-ultisnips', { 'branch': 'main' }
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'onsails/lspkind-nvim'
-  Plug 'dense-analysis/ale'
-  Plug 'hoob3rt/lualine.nvim'
-  Plug 'tweekmonster/startuptime.vim'
-  Plug 'preservim/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin' " File explorer tree
-  Plug 'norcalli/nvim-colorizer.lua' " Colored color codes
-  Plug 'matze/vim-move'
-  Plug 'RRethy/vim-illuminate' " Illuminate other usages of word
-  Plug 'mhinz/vim-startify'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'junegunn/goyo.vim'
-  Plug 'szw/vim-maximizer'
-  Plug 'kyazdani42/nvim-web-devicons' " Devicons used by telescope
-  Plug 'folke/trouble.nvim', { 'branch': 'main' }
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'nvim-treesitter/playground'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'dbeniamine/cheat.sh-vim'
-  Plug 'lambdalisue/suda.vim'
-  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
-  " Snippets are separated from the engine. Add this if you want them:
-  Plug 'honza/vim-snippets'
-  Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
-  Plug 'akinsho/bufferline.nvim'
-call plug#end()
+lua require("bl.plugins")
 
 let &t_ut=''
 
@@ -273,9 +210,6 @@ let g:startify_lists = [
         \ ]
 
 let g:startify_custom_header = startify#center(startify#fortune#boxed())
-
-colorscheme darcula
-highlight Normal guibg=none
 
 " Darcula theme settings for ALE
 hi! link ALEError Error
@@ -658,13 +592,6 @@ require('lualine').setup {
   },
   tabline = {},
   extensions = {}
-}
-
-require('trouble').setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
 }
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",

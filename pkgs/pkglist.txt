@@ -81,6 +81,7 @@ nitrogen
 nnn-nerd
 nvidia
 nvidia-settings
+nvim-packer-git
 openssh
 oreo-cursors-git
 pacgraph
@@ -135,7 +136,6 @@ unzip
 urlview
 vim
 vim-language-server
-vim-plug
 volantes-cursors
 which
 whois
