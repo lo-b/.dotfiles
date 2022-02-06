@@ -1,55 +1,6 @@
 " To get info about settings use `:h <option>`.
+lua require('bl.options')
 
-set textwidth=79
-set nocompatible
-filetype plugin on
-syntax on
-
-
-set expandtab tabstop=4 softtabstop=4
-set shiftwidth=4
-
-set hidden
-set nobackup
-set background=dark
-set expandtab
-set smartindent
-set relativenumber
-set hlsearch
-
-" Use absolute line number instead of '0'.
-set nu
-set noerrorbells
-set incsearch
-set scrolloff=8
-
-set signcolumn=yes:3
-set colorcolumn=80
-set clipboard+=unnamedplus
-set nowrap
-set updatetime=100
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
-" Enable mouse settings
-set mouse=a
-
-set listchars=tab:»\ ,trail:·,eol:↲
-set list
-
-" nvim-colorizer
-set termguicolors
-
-set statusline+=%{get(b:,'gitsigns_status','')}
-
-set grepprg=rg\ --vimgrep\ --hidden
-set grepformat^=%f:%l:%c:%m
-
-let mapleader = " "
 let g:highlightedyank_highlight_duration = 500
 let g:completion_timer_cycle = 200 "default value is 80
 let g:python3_host_prog = '/usr/bin/python'
