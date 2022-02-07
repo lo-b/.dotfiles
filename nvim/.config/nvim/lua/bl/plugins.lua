@@ -34,7 +34,6 @@ return require("packer").startup(function(use)
   use "nvim-telescope/telescope-file-browser.nvim"
   use "machakann/vim-highlightedyank"
   use "neovim/nvim-lspconfig"
-  use "neovim/nvim-lspconfig"
   use "onsails/lspkind-nvim"
   use "dense-analysis/ale"
   use "hoob3rt/lualine.nvim"
@@ -67,7 +66,7 @@ return require("packer").startup(function(use)
   use "quangnguyen30192/cmp-nvim-ultisnips"
   -- TODO fix me
   use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
-  use "neoclide/coc.nvim"
+  use { "neoclide/coc.nvim", branch = "release" }
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {
    "folke/trouble.nvim",

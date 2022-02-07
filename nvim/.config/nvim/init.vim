@@ -199,68 +199,11 @@ EOF
 
 
 """ REMAPS
-" Make `Y` behave to copy trailing text
-nnoremap Y y$
-
-" Global LSP Remaps
-nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap gd <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
-
-
-" Stay centered when merging lines or going trough searches with n/N
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-" Undo breakpoints
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap ! !<c-g>u
-inoremap , ,<c-g>u
+lua require("bl.maps")
 
 " Jumplist mutations
 nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
-
-" Indenting
-vnoremap < <gv
-vnoremap > >gv
-
-" GIT
-nmap <leader>gg :G<CR>
-nmap <leader>gp :G push<CR>
-nmap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
-nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = " " })<cr>
-nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = "  " })<cr>
-nnoremap <leader>ss <cmd>lua require('telescope.builtin').git_status({prompt_prefix="  " })<cr>
-
-" Searching
-nnoremap <leader>fG <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= "🚀 "})<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= "📖 "})<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= ">>> ", search = vim.fn.input("Grep For > ")})<cr>
-nnoremap <leader>hh  <cmd>lua require('telescope.builtin').command_history({ prompt_prefix = "  " })<cr>
-nnoremap <leader>:  <cmd>lua require('telescope.builtin').commands({ prompt_prefix = "  " })<cr>
-nnoremap <leader>sh <cmd>lua require('telescope.builtin').search_history({ prompt_prefix = "  " })<cr>
-
-" Moving around
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers({prompt_prefix= "𧻓 "})<cr>
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({ prompt_prefix= "🗃️ ", hidden = true })<cr>
-nnoremap <leader>ft :Telescope file_browser<cr>
-nnoremap <leader>oo  <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = "  " })<cr>
-
-" Help
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags({prompt_prefix= "🤔 "})<cr>
-nnoremap <leader>fH <cmd>lua require('telescope.builtin').man_pages({prompt_prefix= "  "})<cr>
-nnoremap <leader>lk <cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = "  " })<cr>
-
-" Lsp
-nnoremap <leader>tt <cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = "  " })<cr>
-nnoremap <leader>Q <cmd>lua require('telescope.builtin').quickfix({prompt_prefix="📜 " })<cr>
-nnoremap <leader>gr <cmd>lua require('telescope.builtin').lsp_references({prompt_prefix="🛠️ " })<cr>
-
-" Zen mode using goyo
-nmap <leader>z :Goyo<CR>
 
 " Keep highlighting consistent on entering/leaving goyo
 function! s:goyo_enter()
@@ -280,30 +223,6 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-set listchars=tab:»\ ,trail:·,eol:↲
-
-" Maximizer
-nmap <leader>m :MaximizerToggle!<CR>
-
-" Fix for netrw-gx
-nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'), 1)<cr>
-
-" Trouble
-nnoremap <leader>t :TroubleToggle<CR>
-
-" Easier naviagtion in nvim windows than cumborsome defaults.
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-
-" Clear highlighting on escape in normal mode
-nnoremap <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
 
 " Keybinds for drawing boxes in multiple languages
 autocmd BufEnter * nmap ,mc !!boxes -d pound-cmt<CR>
@@ -326,20 +245,6 @@ autocmd BufEnter .vimrc*,.exrc nmap ,mc !!boxes -d vim-cmt<CR>
 autocmd BufEnter .vimrc*,.exrc vmap ,mc !boxes -d vim-cmt<CR>
 autocmd BufEnter .vimrc*,.exrc nmap ,xc !!boxes -d vim-cmt -r<CR>
 autocmd BufEnter .vimrc*,.exrc vmap ,xc !boxes -d vim-cmt -r<CR>
-
-" Debugger remaps
-nnoremap<leader>dd :call vimspector#Launch(v:true)<cr>
-nnoremap<leader>de <cmd>VimspectorReset<cr>
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
-nmap <leader>dp <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcp <Plug>VimspectorToggleBreakpoint
-
-" Vista remap
-nmap <leader>v :Vista<CR>
 
 " Markdown configurations
 " set to 1, nvim will open the preview window after entering the markdown buffer
@@ -435,4 +340,3 @@ let g:mkdp_filetypes = ['markdown']
 
 " Emoji shortcuts
 ab :vim: 
-
