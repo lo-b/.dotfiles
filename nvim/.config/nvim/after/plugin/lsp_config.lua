@@ -85,6 +85,12 @@ require('lspconfig').vimls.setup {
   }
 }
 
+-- viml setting
+vim.g.markdown_fenced_languages = {
+  'vim',
+  'help'
+}
+
 -- Setup builtin LspDiagnosticSigns
 local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🏷️" }
 
@@ -154,4 +160,5 @@ local function setup_diags()
     }
   )
 end
+
 setup_diags()
