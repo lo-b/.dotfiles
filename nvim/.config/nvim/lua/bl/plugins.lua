@@ -5,7 +5,10 @@ _ = vim.cmd [[packadd packer.nvim]]
 
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
-  use "ray-x/lsp_signature.nvim"
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = function() require("lsp_signature").setup() end
+  }
   use "pearofducks/ansible-vim"
   use "untitled-ai/jupyter_ascending.vim"
   use "lervag/vimtex"
@@ -38,7 +41,10 @@ return require("packer").startup(function(use)
   use "tweekmonster/startuptime.vim"
   use "preservim/nerdtree"
   use "Xuyuanp/nerdtree-git-plugin" -- File explorer tree
-  use "norcalli/nvim-colorizer.lua" -- Colored color codes
+  use {
+    "norcalli/nvim-colorizer.lua", -- Colored color codes/names
+    config = function() require("colorizer").setup() end
+  }
   use "matze/vim-move"
   use "RRethy/vim-illuminate" -- Illuminate other usages of word
   use "mhinz/vim-startify"
