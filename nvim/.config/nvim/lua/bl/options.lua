@@ -1,7 +1,9 @@
 local opt = vim.opt
 local cmd = vim.cmd
+local g = vim.g
 
-vim.g.mapleader = " "
+g.mapleader = " "
+g.python3_host_prog = '/usr/bin/python'
 
 opt.textwidth=79
 opt.expandtab = true
