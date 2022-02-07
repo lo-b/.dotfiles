@@ -69,16 +69,16 @@ return require("packer").startup(function(use)
   use { "neoclide/coc.nvim", branch = "release" }
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {
-   "folke/trouble.nvim",
-   cmd = "Trouble",
-   config = function()
-     -- Can use P to toggle auto movement
-     require("trouble").setup {
-       -- auto_preview = false,
-       -- auto_fold = true,
-       use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-     }
-   end,
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        use_diagnostic_signs = true
+      }
+    end
   }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use "lewis6991/gitsigns.nvim"

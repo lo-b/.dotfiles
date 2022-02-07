@@ -96,3 +96,6 @@ map("n", "<leader>d_", "<Plug>VimspectorRestart", options)
 map("n", "<leader>d<space>", ":call vimspector#Continue()<CR>", options)
 map("n", "<leader>dp", "<Plug>VimspectorToggleBreakpoint", options)
 map("n", "<leader>dcp", "<Plug>VimspectorToggleBreakpoint", options)
+
+map("n", "<space><space>x", "<Plug>JupyterExecute", options)
+map("n", "<space><space>X", "<Plug>JupyterExecuteAll", options)
