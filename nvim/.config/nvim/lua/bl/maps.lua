@@ -100,6 +100,10 @@ map("n", "<leader>dcp", "<Plug>VimspectorToggleBreakpoint", options)
 map("n", "<space><space>x", "<Plug>JupyterExecute", options)
 map("n", "<space><space>X", "<Plug>JupyterExecuteAll", options)
 
+-- Keep visual block selected after width shift.
+map("v", ">", ">gv", options)
+map("v", "<", "<gv", options)
+
 -- Jumplist mutations
 _ = vim.cmd [[
 nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
