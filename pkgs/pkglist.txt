@@ -36,7 +36,10 @@ gcc
 gimp
 git
 git-filter-repo
+go
+go-tools
 google-java-format
+gopls
 gpick
 gradle
 gucharmap
@@ -71,13 +74,14 @@ mullvad-vpn
 ncdu
 neofetch
 neomutt
-neovim
+neovim-nightly-bin
 neovim-remote
 nerd-fonts-jetbrains-mono
 nitrogen
 nnn-nerd
 nvidia
 nvidia-settings
+nvim-packer-git
 openssh
 oreo-cursors-git
 pacgraph
@@ -132,7 +136,6 @@ unzip
 urlview
 vim
 vim-language-server
-vim-plug
 volantes-cursors
 which
 whois
