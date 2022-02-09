@@ -55,18 +55,16 @@ return require("packer").startup(function(use)
   use "jiangmiao/auto-pairs"
   use "dbeniamine/cheat.sh-vim"
   use "lambdalisue/suda.vim"
-  -- Snippets are separated from the engine. Add this if you want them:
-  use "honza/vim-snippets"
   use "akinsho/bufferline.nvim"
   -- Completion
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-buffer"
-  use "quangnguyen30192/cmp-nvim-ultisnips"
-  -- TODO fix me
   use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
-  use { "neoclide/coc.nvim", branch = "release" }
+  -- When CoC is enabled, nvim-cmp should be disabled; enabling both results
+  -- in redrawing of omnicompletion (p)menu over cmp's completion.
+  use { "neoclide/coc.nvim", ft = "java", branch = "release" }
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {
     "folke/trouble.nvim",
@@ -82,5 +80,6 @@ return require("packer").startup(function(use)
   }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use "lewis6991/gitsigns.nvim"
-  use "sirver/ultisnips"
+  use "L3MON4D3/LuaSnip"
+  use "saadparwaiz1/cmp_luasnip"
 end)

@@ -74,7 +74,7 @@ mullvad-vpn
 ncdu
 neofetch
 neomutt
-neovim
+neovim-nightly-bin
 neovim-remote
 nerd-fonts-jetbrains-mono
 nitrogen

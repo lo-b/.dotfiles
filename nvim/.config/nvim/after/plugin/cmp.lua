@@ -1,10 +1,11 @@
 -- Setup nvim-cmp.
 local lspkind = require "lspkind"
 local cmp = require "cmp"
+
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   formatting = {
@@ -14,7 +15,7 @@ cmp.setup({
         buffer = "[buf]",
         nvim_lsp = "[LSP]",
         path = "[path]",
-        ultisnips = "[snip]",
+        luasnip = "[snip]",
       },
     },
   },
@@ -28,15 +29,10 @@ cmp.setup({
       select = true,
     },
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "ultisnips" }, -- For ultisnips users.
-    { name = "buffer" },
+    { name = "luasnip" }, -- For luasnip users.
     { name = "path" },
-  },
-  experimental = {
-    native_menu = false,
-
-    ghost_text = true,
-  }
+    { name = "buffer" },
+  })
 })

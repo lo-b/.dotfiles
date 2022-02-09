@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    loaded = true,
+    path = "/home/bram/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ale = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/ale",
@@ -104,19 +109,21 @@ _G.packer_plugins = {
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-nvim-ultisnips"] = {
-    loaded = true,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips",
-    url = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips"
-  },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["coc.nvim"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/start/coc.nvim",
+    path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["coc.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/bram/.local/share/nvim/site/pack/packer/opt/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
   },
   ["codi.vim"] = {
@@ -259,11 +266,6 @@ _G.packer_plugins = {
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
-  ultisnips = {
-    loaded = true,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/start/ultisnips",
-    url = "https://github.com/sirver/ultisnips"
-  },
   ["vim-characterize"] = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/vim-characterize",
@@ -326,11 +328,6 @@ _G.packer_plugins = {
     path = "/home/bram/.local/share/nvim/site/pack/packer/opt/vim-pydocstring",
     url = "https://github.com/heavenshell/vim-pydocstring"
   },
-  ["vim-snippets"] = {
-    loaded = true,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/start/vim-snippets",
-    url = "https://github.com/honza/vim-snippets"
-  },
   ["vim-startify"] = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/vim-startify",
@@ -364,14 +361,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\25use_diagnostic_signs\2\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
 -- Config for: nvim-colorizer.lua
 time([[Config for nvim-colorizer.lua]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
 time([[Config for nvim-colorizer.lua]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\25use_diagnostic_signs\2\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
 -- Config for: lsp_signature.nvim
 time([[Config for lsp_signature.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18lsp_signature\frequire\0", "config", "lsp_signature.nvim")
@@ -380,6 +377,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType java ++once lua require("packer.load")({'coc.nvim'}, { ft = "java" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-pydocstring'}, { ft = "python" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
