@@ -12,3 +12,11 @@ g.vimtex_compiler_tectonic = {
    '--synctex',
  },
 }
+
+-- Build tex files on file save.
+_ = vim.cmd [[
+  augroup CompileAfterSave
+    au!
+    au BufWritePost *.tex call vimtex#compiler#start()
+  augroup end
+]]
