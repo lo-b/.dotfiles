@@ -37,6 +37,26 @@ ls.snippets = {
       \section{<>}
       ]], i(1))),
 
+      s("sec*", fmta([[
+      \section*{<>}
+      ]], i(1))),
+
+      s("sub", fmta([[
+      \subsection{<>}
+      ]], i(1))),
+
+      s("sub*", fmta([[
+      \subsection*{<>}
+      ]], i(1))),
+
+      s("ssub", fmta([[
+      \subsubsection{<>}
+      ]], i(1))),
+
+      s("ssub*", fmta([[
+      \subsubsection*{<>}
+      ]], i(1))),
+
       s("!doc", fmta([[
       \documentclass{article}
 
@@ -57,6 +77,12 @@ ls.snippets = {
 
       % \usepackage{caption}
       % \usepackage{subcaption}
+      % \usepackage{fontspec}
+      % \setmainfont{Merriweather}
+
+      % Enables usage of 'H' to force fig placement
+      \usepackage{float}
+
       % \usepackage{subfiles} % Best loaded last in the preamble
 
       \title{<>}
