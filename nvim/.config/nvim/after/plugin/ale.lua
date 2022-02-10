@@ -10,7 +10,7 @@ g.ale_fixers = {
 }
 
 g.ale_linters = {
-  tex = {"writegood", "texlab"},
+  tex = {"vale", "texlab"},
 }
 
 -- Sign settings

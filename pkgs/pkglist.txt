@@ -134,13 +134,13 @@ ueberzug
 uncrustify
 unzip
 urlview
+vale-bin
 vim
 vim-language-server
 volantes-cursors
 which
 whois
 wmname
-write-good
 xbindkeys
 xclip
 xdg-utils
