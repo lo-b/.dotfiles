@@ -17,6 +17,6 @@ g.vimtex_compiler_tectonic = {
 _ = vim.cmd [[
   augroup CompileAfterSave
     au!
-    au BufWritePost *.tex call vimtex#compiler#start()
+    au BufWritePost *.tex :VimtexCompile
   augroup end
 ]]

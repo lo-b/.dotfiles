@@ -92,7 +92,7 @@ vim.g.markdown_fenced_languages = {
 }
 
 -- Setup builtin LspDiagnosticSigns
-local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🏷️" }
+local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🤨" }
 
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
@@ -119,6 +119,7 @@ require("lspconfig").sumneko_lua.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false, -- Prevent lua-language-server from prompting to configure working environment.
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
