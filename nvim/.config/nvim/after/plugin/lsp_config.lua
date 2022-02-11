@@ -143,3 +143,7 @@ local function setup_diags()
 end
 
 setup_diags()
+
+_ = vim.cmd([[
+  hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A]]
+)
