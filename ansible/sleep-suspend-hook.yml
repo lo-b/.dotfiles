@@ -1,0 +1,28 @@
+---
+- name: Create and enable service that runs i3lock script on lid close
+  hosts: localhost
+  connection: localhost
+  become: yes
+
+  tasks:
+    - name: Create systemd service
+      copy:
+        dest: "/etc/systemd/system/lock_suspend.service"
+        content: |
+          [Unit]
+          Description=Run i3lock script after suspend
+          Before=suspend.target sleep.target
+
+          [Service]
+          User=bram
+          Type=forking
+          Environment=DISPLAY=:0
+          ExecStart=/home/bram/.bin/lock.sh
+
+          [Install]
+          WantedBy=suspend.target sleep.target
+    - name: Enable service
+      systemd:
+        name: lock_suspend.service
+        enabled: yes
+
