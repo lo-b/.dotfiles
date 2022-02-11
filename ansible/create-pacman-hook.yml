@@ -1,0 +1,29 @@
+---
+- name: Create pacman hook to keep an up-to-date list of installed packages
+  hosts: localhost
+  connection: localhost
+  become: yes
+
+  tasks:
+    - name: Creates directory
+      file:
+        path: "/etc/pacman.d/hooks"
+        state: directory
+        owner: root
+    - name: create hook
+      copy:
+        dest: "/etc/pacman.d/hooks/syncpkglist.hook"
+        content: |
+          [Trigger]
+          Operation = Install
+          Operation = Remove
+          Type = Package
+          Target = *
+
+          [Action]
+          When = PostTransaction
+          Exec = /bin/sh -c '/usr/bin/paru -Qqe > /home/bram/.dotfiles/pkgs/pkglist.txt'
+      register: "output"
+
+    - debug: var=output.stdout_lines
+
