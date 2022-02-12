@@ -29,6 +29,9 @@ super + Escape
 super + b
 	brave
 
+super + x
+    lock.sh
+
 #
 # bspwm hotkeys
 #
