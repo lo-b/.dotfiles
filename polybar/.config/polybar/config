@@ -306,6 +306,11 @@ battery = BAT0
 adapter = AC
 poll-interval = 5
 
+label-full = " %percentage%%"
+format-full = <ramp-capacity> <label-full>
+format-full-padding = 1
+format-full-background = ${colors.shade9}
+
 label-charging = %percentage%%
 format-charging = <animation-charging> <label-charging>
 format-charging-padding = 1
