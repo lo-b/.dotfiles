@@ -32,6 +32,11 @@ super + b
 super + x
     lock.sh
 
+XF86MonBrightnessUp
+    xbacklight -inc 10
+
+XF86MonBrightnessDown
+    xbacklight -dec 10
 #
 # bspwm hotkeys
 #

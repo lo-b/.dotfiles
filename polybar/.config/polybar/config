@@ -37,6 +37,7 @@ shade6 = #b16286
 shade7 = #cc241d
 shade8 = #fb4934
 shade9 = #d65d0e
+shade10 = #ef8019
 
 ;==========================================================
 ; Left and right modules that act as deparators to get tag-like effect
@@ -58,10 +59,17 @@ content-foreground = ${colors.shade2}
 content = ${glyph.gleft}
 content-font = 0
 
+[module/left3]
+type = custom/text
+content-background = ${colors.shade10}
+content-foreground = ${colors.shade9}
+content = ${glyph.gleft}
+content-font = 0
+
 [module/leftlast]
 type = custom/text
 content-background = ${background}
-content-foreground = ${colors.shade9}
+content-foreground = ${colors.shade10}
 content = ${glyph.gleft}
 content-font = 0
 
@@ -133,7 +141,8 @@ padding-right = 10
 module-margin-left = 0
 module-margin-right = 0
 font-0 = JetBrainsMono Nerd Font:pixelsize=15;3
-modules-left  = date left1 pulseaudio left2 battery leftlast
+font-1 = Twemoji:style=Regular:scale=5;3
+modules-left  = date left1 pulseaudio left2 battery left3 backlight leftlast
 modules-center = bspwm space spotify-prev spotify-play-pause spotify-next spotify
 modules-right = right1 filesystem  right2 xkeyboard right3 memory right4 cpu right5 temperature right6
 tray-position = right
@@ -336,6 +345,19 @@ animation-charging-4 = 
 animation-charging-5 = 
 
 animation-charging-framerate = 750
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp>
+format-background = ${colors.shade10}
+format-padding = 1
+
+ramp-0 = 🌑
+ramp-1 = 🌒
+ramp-2 = 🌓
+ramp-3 = 🌔
+ramp-4 = 🌕
 
 ;==========================================================
 ; Application settings
