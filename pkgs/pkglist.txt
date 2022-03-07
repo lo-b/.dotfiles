@@ -70,7 +70,6 @@ man-pages
 materia-theme-git
 maven
 mlocate
-mullvad-vpn
 ncdu
 neofetch
 neomutt
