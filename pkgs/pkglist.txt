@@ -83,6 +83,7 @@ nvidia-settings
 nvim-packer-git
 openssh
 oreo-cursors-git
+p7zip
 pacgraph
 pacutils
 papirus-icon-theme
