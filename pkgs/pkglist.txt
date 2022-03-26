@@ -24,6 +24,7 @@ docker
 docker-compose
 dockerfile-language-server
 dragon-drag-and-drop
+entr
 exa
 fakeroot
 fd
@@ -68,7 +69,6 @@ man-pages
 materia-theme-git
 maven
 mlocate
-mullvad-vpn
 ncdu
 neofetch
 neomutt
@@ -83,6 +83,7 @@ nvidia
 nvidia-settings
 nvim-packer-git
 oreo-cursors-git
+p7zip
 pacgraph
 pacutils
 papirus-icon-theme

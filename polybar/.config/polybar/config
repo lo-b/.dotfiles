@@ -260,9 +260,9 @@ click-right = pavucontrol
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
-base-temperature = 40
-warn-temperature = 85
+thermal-zone = 10
+base-temperature = 50
+warn-temperature = 90
 format-background = ${colors.shade8}
 format-foreground = ${colors.shade0}
 format-warn-background = ${colors.shade8}
