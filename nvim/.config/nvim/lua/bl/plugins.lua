@@ -83,4 +83,15 @@ return require("packer").startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "L3MON4D3/LuaSnip"
   use "saadparwaiz1/cmp_luasnip"
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
 end)

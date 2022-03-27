@@ -35,6 +35,7 @@ fzf
 gcc
 gimp
 git-filter-repo
+github-cli
 gnome-keyring
 go-tools
 google-java-format
