@@ -40,8 +40,8 @@ require("lspconfig").texlab.setup{
       auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
-        args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-        executable = "tectonic",
+      args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = "latexmk",
         forwardSearchAfter = false,
         onSave = true
       },

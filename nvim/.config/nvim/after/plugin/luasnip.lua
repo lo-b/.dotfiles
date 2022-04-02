@@ -19,7 +19,7 @@ local fmta = require("luasnip.extras.fmt").fmta
 local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 
-ls.snippets = {
+ls.add_snippets(nil, {
     all = {},
 
     lua = {
@@ -57,6 +57,16 @@ ls.snippets = {
       \subsubsection*{<>}
       ]], i(1))),
 
+      s("it", fmta([[
+      \textit{<>}
+      ]], i(1))),
+
+      s("itemize", fmta([[
+      \begin{itemize}
+        \item <>
+      \end{itemize}
+      ]], i(1))),
+
       s("!doc", fmta([[
       \documentclass{article}
 
@@ -73,7 +83,7 @@ ls.snippets = {
       % \addbibresource{../sources.bib}
 
       % \usepackage{graphicx}
-      % \graphicspath{ {../assets/} }
+      % \graphicspath{ {assets/} }
 
       % \usepackage{caption}
       % \usepackage{subcaption}
@@ -133,7 +143,7 @@ ls.snippets = {
       \end{figure}
       ]], { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8), })),
     }
-}
+})
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
   if ls.expand_or_jumpable() then

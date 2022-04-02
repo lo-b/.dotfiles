@@ -6,7 +6,19 @@ _ = vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
+  use {
     "ray-x/lsp_signature.nvim",
+    disabled = true,
     config = function() require("lsp_signature").setup() end
   }
   use "pearofducks/ansible-vim"

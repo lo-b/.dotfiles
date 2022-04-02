@@ -15,6 +15,7 @@ boxes
 brave-bin
 bspwm
 checkstyle
+cmus
 ctags
 cuda
 cudnn
@@ -25,9 +26,12 @@ docker
 docker-compose
 dockerfile-language-server
 dragon-drag-and-drop
+entr
 exa
+exfat-utils
 fakeroot
 fd
+firefox
 flake8
 flameshot
 flex
@@ -36,6 +40,7 @@ gcc
 gimp
 git
 git-filter-repo
+github-cli
 go
 go-tools
 google-java-format
@@ -78,6 +83,7 @@ neovim-remote
 nerd-fonts-jetbrains-mono
 nitrogen
 nnn-nerd
+noto-fonts-cjk
 nvidia
 nvidia-settings
 nvim-packer-git
@@ -122,9 +128,20 @@ sudo
 sxhkd
 task
 teams
-tectonic-bin
 texinfo
 texlab
+texlive-bibtexextra
+texlive-core
+texlive-fontsextra
+texlive-formatsextra
+texlive-games
+texlive-humanities
+texlive-latexextra
+texlive-music
+texlive-pictures
+texlive-pstricks
+texlive-publishers
+texlive-science
 trash-cli
 tree
 ttf-iosevka-nerd
@@ -143,6 +160,7 @@ volantes-cursors
 which
 whois
 wmname
+xbanish
 xbindkeys
 xclip
 xdg-utils

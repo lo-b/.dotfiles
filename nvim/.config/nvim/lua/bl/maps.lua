@@ -36,7 +36,7 @@ map("n", "<leader>gg", ":G<CR>", options)
 map("n", "<leader>gp", ":G push<CR>", options)
 
 -- Zen mode using goyo
-map("n", "<leader>z", ":Goyo<CR>", options)
+map("n", "<leader>z", ":Goyo 80%+25%x80%-25%<CR>", options)
 
 -- Make `Y` behave to copy trailing text
 map("n", "Y", "y$", options)
