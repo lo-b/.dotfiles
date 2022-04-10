@@ -38,7 +38,7 @@ shade7  = #cc241d
 shade8  = #fb4934
 
 ;==========================================================
-; Left and right modules that act as deparators to get tag-like effect
+; Left and right modules that act as separators to get tag-like effect
 [glyph]
 gleft = 
 gright = 
@@ -152,6 +152,7 @@ tray-offset-y = 0
 tray-offset = 0
 tray-scale = 1.0
 tray-maxsize = 20
+bottom = 1
 
 ;==========================================================
 ; Setup modules
@@ -173,7 +174,7 @@ type = internal/fs
 interval = 25
 format-mounted-background = ${colors.shade3}
 format-mounted-foreground = ${colors.shade0}
-mount-0 = /
+mount-0 = /home
 label-mounted =  %mountpoint%: %free% free | %percentage_used%% used
 label-unmounted = %mountpoint% not mounted
 

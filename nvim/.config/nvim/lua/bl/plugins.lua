@@ -67,7 +67,7 @@ return require("packer").startup(function(use)
   use "jiangmiao/auto-pairs"
   use "dbeniamine/cheat.sh-vim"
   use "lambdalisue/suda.vim"
-  use "akinsho/bufferline.nvim"
+  use { "akinsho/bufferline.nvim", branch = "main" }
   -- Completion
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"

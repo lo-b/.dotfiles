@@ -112,6 +112,7 @@ pyenv
 pyenv-virtualenv
 pyright
 python-pip
+python-pipreqs
 python-pynvim
 redshift
 reflector
