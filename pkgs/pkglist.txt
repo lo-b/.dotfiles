@@ -14,6 +14,7 @@ boxes
 brave-bin
 bspwm
 checkstyle
+cmus
 ctags
 cuda
 cudnn
@@ -26,8 +27,10 @@ dockerfile-language-server
 dragon-drag-and-drop
 entr
 exa
+exfat-utils
 fakeroot
 fd
+firefox
 flake8
 flameshot
 flex
@@ -80,6 +83,7 @@ network-manager-applet
 networkmanager
 nitrogen
 nnn-nerd
+noto-fonts-cjk
 nvidia
 nvidia-settings
 nvim-packer-git
@@ -107,6 +111,7 @@ pyenv
 pyenv-virtualenv
 pyright
 python-pip
+python-pipreqs
 python-pynvim
 redshift
 reflector
@@ -128,6 +133,18 @@ teams
 tectonic
 texinfo
 texlab
+texlive-bibtexextra
+texlive-core
+texlive-fontsextra
+texlive-formatsextra
+texlive-games
+texlive-humanities
+texlive-latexextra
+texlive-music
+texlive-pictures
+texlive-pstricks
+texlive-publishers
+texlive-science
 trash-cli
 tree
 ttf-iosevka-nerd

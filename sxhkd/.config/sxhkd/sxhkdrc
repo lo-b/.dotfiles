@@ -2,6 +2,14 @@
 # wm independent hotkeys
 #
 
+# start capture of selected area
+super + p
+    flameshot gui
+
+# copy full screen to clipboard
+super + P
+    flameshot full -c
+
 # terminal emulator
 super + t
   kitty

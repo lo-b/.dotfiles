@@ -23,7 +23,3 @@
           [Action]
           When = PostTransaction
           Exec = /bin/sh -c '/usr/bin/paru -Qqe > /home/bram/.dotfiles/pkgs/pkglist.txt'
-      register: "output"
-
-    - debug: var=output.stdout_lines
-

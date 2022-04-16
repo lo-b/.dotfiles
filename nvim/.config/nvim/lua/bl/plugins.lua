@@ -6,6 +6,17 @@ _ = vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
+  use {
     "ray-x/lsp_signature.nvim",
     disable = true,
     config = function() require("lsp_signature").setup() end
@@ -56,7 +67,7 @@ return require("packer").startup(function(use)
   use "jiangmiao/auto-pairs"
   use "dbeniamine/cheat.sh-vim"
   use "lambdalisue/suda.vim"
-  use "akinsho/bufferline.nvim"
+  use { "akinsho/bufferline.nvim", branch = "main" }
   -- Completion
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"

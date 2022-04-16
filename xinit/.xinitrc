@@ -57,6 +57,6 @@ setxkbmap -option caps:escape
 redshift -l 51:5 -t 5700:2800 &
 picom &
 nitrogen --random --set-auto $HOME/images/wallpapers &
+xbanish -i mod4 &
 xbindkeys
 exec bspwm
-

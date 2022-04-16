@@ -40,8 +40,8 @@ require("lspconfig").texlab.setup{
       auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
-        args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-        executable = "tectonic",
+      args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = "latexmk",
         forwardSearchAfter = false,
         onSave = true
       },
@@ -143,3 +143,7 @@ local function setup_diags()
 end
 
 setup_diags()
+
+_ = vim.cmd([[
+  hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A]]
+)
