@@ -58,6 +58,7 @@ intellij-idea-ultimate-edition-jre
 ipe
 jdk-openjdk
 jdk11-openjdk
+jdk17-openjdk
 jq
 jupyter-notebook
 kitty
