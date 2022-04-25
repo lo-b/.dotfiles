@@ -79,7 +79,7 @@ mlocate
 ncdu
 neofetch
 neomutt
-neovim-nightly-bin
+neovim
 neovim-remote
 nerd-fonts-jetbrains-mono
 nitrogen
