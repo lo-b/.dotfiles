@@ -21,6 +21,6 @@ $XDG_CONFIG_HOME/polybar/launch.sh &
 
 pgrep bspswallow || bspswallow &
 
-brave &
+firefox &
 spotify &
 nm-applet &

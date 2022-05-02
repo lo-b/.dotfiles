@@ -57,6 +57,7 @@ intellij-idea-ultimate-edition-jre
 ipe
 jdk-openjdk
 jdk11-openjdk
+jdk17-openjdk
 jq
 jupyter-notebook
 kitty
@@ -76,7 +77,7 @@ mlocate
 ncdu
 neofetch
 neomutt
-neovim-nightly-bin
+neovim
 neovim-remote
 nerd-fonts-jetbrains-mono
 network-manager-applet
