@@ -9,15 +9,14 @@ cmp.setup({
     end,
   },
   formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        path = "[path]",
-        luasnip = "[snip]",
-      },
-    },
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+      before = function (entry, vim_item)
+        -- ...
+        return vim_item
+      end,
+    }),
   },
   mapping = {
     ["<c-n>"] = cmp.mapping.select_next_item(),
@@ -55,14 +54,14 @@ _ = vim.cmd [[
 -- VSCode-like menu colors
 _ = vim.cmd [[
   highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
-  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
   highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
-  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
   highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
   highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
 ]]

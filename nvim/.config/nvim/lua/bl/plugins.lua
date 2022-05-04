@@ -50,8 +50,12 @@ return require("packer").startup(function(use)
   use "dense-analysis/ale"
   use "hoob3rt/lualine.nvim"
   use "tweekmonster/startuptime.vim"
-  use "preservim/nerdtree"
-  use "Xuyuanp/nerdtree-git-plugin" -- File explorer tree
+  use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      }
+  }
   use {
     "norcalli/nvim-colorizer.lua", -- Colored color codes/names
     config = function() require("colorizer").setup() end
@@ -68,6 +72,7 @@ return require("packer").startup(function(use)
   use "dbeniamine/cheat.sh-vim"
   use "lambdalisue/suda.vim"
   use { "akinsho/bufferline.nvim", branch = "main" }
+  use "akinsho/toggleterm.nvim"
   -- Completion
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
