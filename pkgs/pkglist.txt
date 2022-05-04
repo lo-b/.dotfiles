@@ -12,7 +12,6 @@ binutils
 bison
 bottom
 boxes
-brave-bin
 bspwm
 checkstyle
 cmus
@@ -59,6 +58,7 @@ ipe
 jdk-openjdk
 jdk11-openjdk
 jdk17-openjdk
+jdk8-openjdk
 jq
 jupyter-notebook
 kitty
