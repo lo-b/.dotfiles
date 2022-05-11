@@ -5,7 +5,7 @@ require("telescope").setup{
     prompt_prefix = "🔭 ",
     selection_caret = "👉 ",
     path_display = { "smart" },
-    file_ignore_patterns = {"**/*%.git", "**/*.pdf"},
+    file_ignore_patterns = {"**/*%.git/", "**/*.pdf"},
     vimgrep_arguments = {
       "rg",
       "--color=never",
