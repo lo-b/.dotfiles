@@ -1,3 +1,4 @@
+air
 alsa-utils
 ansible
 ansible-language-server
@@ -42,6 +43,7 @@ git-filter-repo
 github-cli
 go
 go-tools
+google-cloud-sdk
 google-java-format
 gopls
 gpick
@@ -150,6 +152,7 @@ ttf-iosevka-nerd
 ttf-liberation
 ttf-merriweather
 ttf-twemoji
+ttf-windows
 typescript-language-server
 ueberzug
 uncrustify
