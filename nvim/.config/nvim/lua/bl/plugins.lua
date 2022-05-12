@@ -18,7 +18,7 @@ return require("packer").startup(function(use)
   }
   use {
     "ray-x/lsp_signature.nvim",
-    disabled = true,
+    opt = true,
     config = function() require("lsp_signature").setup() end
   }
   use "pearofducks/ansible-vim"

@@ -74,15 +74,15 @@ map("n", "<leader>sh", "<cmd>lua require('telescope.builtin').search_history({ p
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers({prompt_prefix= '𧻓 '})<cr>", options)
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🗃️ ', hidden = true })<cr>", options)
 map("n", "<leader>ft", ":Telescope file_browser<cr>", options)
-map("n", "<leader>oo", " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '  ' })<cr>", options)
+map("n", "<leader>oo", " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '👴 ' })<cr>", options)
 
 -- Telescope help
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags({prompt_prefix= '🤔 '})<cr>", options)
-map("n", "<leader>fH", "<cmd>lua require('telescope.builtin').man_pages({prompt_prefix= '  '})<cr>", options)
-map("n", "<leader>lk", "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = '  ' })<cr>", options)
+map("n", "<leader>fH", "<cmd>lua require('telescope.builtin').man_pages({prompt_prefix= '📃 '})<cr>", options)
+map("n", "<leader>lk", "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = 'ℹ️ ' })<cr>", options)
 
 -- Telescope lsp
-map("n", "<leader>tt", "<cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = '  ' })<cr>", options)
+map("n", "<leader>tt", "<cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = '🌳 ' })<cr>", options)
 map("n", "<leader>Q", "<cmd>lua require('telescope.builtin').quickfix({prompt_prefix='📜 ' })<cr>", options)
 map("n", "<leader>gr", "<cmd>lua require('telescope.builtin').lsp_references({prompt_prefix='🛠️ ' })<cr>", options)
 
