@@ -11,7 +11,6 @@ biber
 bison
 bottom
 boxes
-brave-bin
 bspwm
 checkstyle
 cmus
@@ -41,6 +40,7 @@ git-filter-repo
 github-cli
 gnome-keyring
 go-tools
+google-cloud-sdk
 google-java-format
 gopls
 gpick
