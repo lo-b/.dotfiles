@@ -115,3 +115,5 @@ map("n", "<leader>a", ":ALEToggle<CR>", options)
 
 -- NvimTree
 map("n", "<leader>e", ":NvimTreeToggle<CR>", options)
+map("n", "<leader>tf", ":NvimTreeFindFile<CR>", options)
+map("n", "<leader>tr", ":NvimTreeRefresh<CR>", options)
