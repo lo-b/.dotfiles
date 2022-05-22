@@ -21,9 +21,6 @@ Repo containing my configuration files.
 
 Below are the prerequisites and setup per (config) folder where necessary.
 
->💡 On Arch, pereferably install packages and language servers using _pacman_ instead of
-'npm-installing', using scripts, etc.
-
 ## Neovim
 
 After stowing `nvim` (see [Usage](#Usage)), installing the LSP servers below
@@ -43,7 +40,7 @@ and running `:PlugInstall` in neovim, supported languages & files should be:
 
 Make sure you have the following dependencies:
 
-  - [Vim plug](https://github.com/junegunn/vim-plug)
+  - [Packer](https://github.com/wbthomason/packer.nvim)
   - [pynvim](https://github.com/neovim/pynvim)
   - [nerd-fonts-jetbrains-mono](https://www.nerdfonts.com/font-downloads)
 ### Intellisense
@@ -52,16 +49,12 @@ For intellisense to work, install the following language servers that implement
 the LSP protocol:
   - [vimls](https://github.com/iamcco/vim-language-server)
   - [dockerls](https://github.com/rcjsuen/dockerfile-language-server-nodejs)
-  - [Ansible language server](https://github.com/ansible/ansible-language-server)
+  - [ansible language server](https://github.com/ansible/ansible-language-server)
   - [texlab](https://github.com/latex-lsp/texlab)
-    >❗ TexLab only implements the LSP; to be able to build `.tex` files install
-    _Tectonic_ and _biber_ to be able to create references and citations.
   - [tsserver](https://github.com/typescript-language-server/typescript-language-server)
   - [pyright](https://github.com/microsoft/pyright)
   - [sumneko/lua-language-server](https//github.com/sumneko/lua-language-server)
   - [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
-  - For java [CoC](https://github.com/neoclide/coc.nvim) is used since native
-    LSP didn't work with debugging.
 
 # Usage
 
