@@ -98,6 +98,7 @@ ls.add_snippets(nil, {
       % \usepackage[backend=biber, style=apa]{biblatex}
       % \addbibresource{sources.bib}
 
+      % \usepackage[hidelinks]{hyperref}
       % \usepackage{graphicx}
       % \graphicspath{ {assets/} }
 
