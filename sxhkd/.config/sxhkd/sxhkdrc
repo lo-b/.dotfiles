@@ -142,3 +142,9 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# increase/decrease transparency
+super + shift + Down
+	picom-trans -c -o -10
+super + shift + Up
+	picom-trans -c -o +10
