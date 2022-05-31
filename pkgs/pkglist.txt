@@ -26,6 +26,7 @@ docker-compose
 dockerfile-language-server
 dragon-drag-and-drop
 entr
+espeak
 exa
 exfat-utils
 fakeroot
@@ -60,11 +61,13 @@ jdk-openjdk
 jdk11-openjdk
 jdk17-openjdk
 jdk8-openjdk
+jdtls
 jq
 jupyter-notebook
 kitty
 linux
 linux-firmware
+lombok-common
 lsdesktopf
 lua-language-server
 lxappearance
@@ -75,6 +78,7 @@ man-db
 man-pages
 materia-theme-git
 maven
+mediainfo
 mlocate
 ncdu
 neofetch

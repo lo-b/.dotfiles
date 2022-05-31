@@ -94,11 +94,6 @@ _G.packer_plugins = {
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
-  ["cheat.sh-vim"] = {
-    loaded = true,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/start/cheat.sh-vim",
-    url = "https://github.com/dbeniamine/cheat.sh-vim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -118,13 +113,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
-  },
-  ["coc.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/bram/.local/share/nvim/site/pack/packer/opt/coc.nvim",
-    url = "https://github.com/neoclide/coc.nvim"
   },
   ["codi.vim"] = {
     loaded = true,
@@ -178,6 +166,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/bram/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/home/bram/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -377,6 +370,10 @@ time([[Config for octo.nvim]], false)
 time([[Config for nvim-colorizer.lua]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
 time([[Config for nvim-colorizer.lua]], false)
+-- Config for: octo.nvim
+time([[Config for octo.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
+time([[Config for octo.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads

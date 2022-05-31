@@ -27,6 +27,18 @@ ls.add_snippets(nil, {
     },
 
     tex = {
+      s("ttp", fmta([[
+      \begin{titlepage}
+          \maketitle
+          \vspace{1.5cm}
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{<>}
+          \end{figure}
+          \thispagestyle{empty}
+      \end{titlepage}
+      ]], {i(1)})),
+
       s("begin", fmta([[
       \begin{<>}
         <>
@@ -61,6 +73,10 @@ ls.add_snippets(nil, {
       \textit{<>}
       ]], i(1))),
 
+      s("ttt", fmta([[
+      \texttt{<>}
+      ]], i(1))),
+
       s("itemize", fmta([[
       \begin{itemize}
         \item <>
@@ -79,20 +95,21 @@ ls.add_snippets(nil, {
        top=20mm,
        }
 
-      % \usepackage[backend=biber]{biblatex}
-      % \addbibresource{../sources.bib}
+      % \usepackage[backend=biber, style=apa]{biblatex}
+      % \addbibresource{sources.bib}
 
+      % \usepackage[hidelinks]{hyperref}
       % \usepackage{graphicx}
       % \graphicspath{ {assets/} }
 
       % \usepackage{caption}
       % \usepackage{subcaption}
-      % \usepackage{fontspec}
-      % \setmainfont{Merriweather}
+      % \usepackage[default,oldstyle,scale=0.95]{opensans}
 
       % Enables usage of 'H' to force fig placement
       \usepackage{float}
 
+      % \usepackage{multicol}
       % \usepackage{subfiles} % Best loaded last in the preamble
 
       \title{<>}
@@ -109,11 +126,17 @@ ls.add_snippets(nil, {
 
       <>
 
+
+      % \clearpage
+      % \printbibliography[
+      %     heading=bibintoc,
+      % ]
+
       \end{document}
       ]], { i(1), i(2) })),
 
       s("!sf", fmta([[
-      \documentclass[../<>.tex]{subfiles}
+      \documentclass[../<>]{subfiles}
       \graphicspath{{\subfix{../<>/}}}
       \begin{document}
 

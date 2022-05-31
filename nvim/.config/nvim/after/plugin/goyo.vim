@@ -8,7 +8,9 @@ endfunction
 
 function! s:goyo_leave()
   set listchars=tab:»\ ,trail:·,eol:↲
+  set colorcolumn=80
   hi SignColumn ctermbg=236 guibg=#313335
+  hi ColorColumn ctermbg=236 guibg=#2F2F2F
   hi NonText ctermfg=241 guifg=#606060
   " ...
   "

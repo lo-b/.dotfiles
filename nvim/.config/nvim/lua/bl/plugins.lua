@@ -69,7 +69,6 @@ return require("packer").startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- Devicons used by telescope
   use "nvim-treesitter/playground"
   use "jiangmiao/auto-pairs"
-  use "dbeniamine/cheat.sh-vim"
   use "lambdalisue/suda.vim"
   use { "akinsho/bufferline.nvim", branch = "main" }
   use "akinsho/toggleterm.nvim"
@@ -79,9 +78,7 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-buffer"
   use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
-  -- When CoC is enabled, nvim-cmp should be disabled; enabling both results
-  -- in redrawing of omnicompletion (p)menu over cmp's completion.
-  use { "neoclide/coc.nvim", ft = "java", branch = "release" }
+  use 'mfussenegger/nvim-jdtls'
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {
     "folke/trouble.nvim",
