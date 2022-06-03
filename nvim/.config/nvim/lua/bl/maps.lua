@@ -1,5 +1,5 @@
 local map = vim.api.nvim_set_keymap
-options = { noremap = true, silent = true }
+local options = { noremap = true, silent = true }
 
 map("v", "<", "<gc", options)
 map("v", ">", ">gc", options)
@@ -67,8 +67,8 @@ map("n", "<leader>hh", "<cmd>lua require('telescope.builtin').command_history({ 
 map("n", "<leader>fG", "<cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= '🚀 '})<cr>", options)
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= '📖 '})<cr>", options)
 map("n", "<leader>fs", "<cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= '>>> ', search = vim.fn.input('Grep For > ')})<cr>", options)
-map("n", "<leader>:", " <cmd>lua require('telescope.builtin').commands({ prompt_prefix = '  ' })<cr>", options)
-map("n", "<leader>sh", "<cmd>lua require('telescope.builtin').search_history({ prompt_prefix = '  ' })<cr>", options)
+map("n", "<leader>:", " <cmd>lua require('telescope.builtin').commands({ prompt_prefix = '🤖 ' })<cr>", options)
+map("n", "<leader>sh", "<cmd>lua require('telescope.builtin').search_history({ prompt_prefix = '⌛ ' })<cr>", options)
 
 -- Telescope moving around
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers({prompt_prefix= '𧻓 '})<cr>", options)
@@ -109,9 +109,6 @@ _ = vim.cmd [[
 nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
 ]]
-
--- ALE toggle
-map("n", "<leader>a", ":ALEToggle<CR>", options)
 
 -- NvimTree
 map("n", "<leader>e", ":NvimTreeToggle<CR>", options)

@@ -32,7 +32,6 @@ require("lualine").setup {
     lualine_x = {
       {
         "diagnostics",
-        sources = {"coc", "ale"},
         symbols = {error = '🔥', warn = '⚡', info = '💡'}
       },
       "encoding",

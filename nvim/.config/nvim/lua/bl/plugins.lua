@@ -47,7 +47,12 @@ return require("packer").startup(function(use)
   use "machakann/vim-highlightedyank"
   use "neovim/nvim-lspconfig"
   use "onsails/lspkind-nvim"
-  use "dense-analysis/ale"
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim"
+    },
+  }
   use "hoob3rt/lualine.nvim"
   use "tweekmonster/startuptime.vim"
   use {

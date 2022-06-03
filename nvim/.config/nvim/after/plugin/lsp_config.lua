@@ -100,7 +100,7 @@ vim.g.markdown_fenced_languages = {
   "help"
 }
 
--- Setup builtin LspDiagnosticSigns
+-- Setup builtin LspDiagnosticSigns (used by trouble)
 local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🤨" }
 
 for type, icon in pairs(signs) do
@@ -137,21 +137,6 @@ require("lspconfig").sumneko_lua.setup {
     },
   },
 }
-
--- Disable most built-in nvim lsp diagnostics settings
-local function setup_diags()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-      virtual_text = false,
-      signs = false,
-      update_in_insert = false,
-      underline = false,
-    }
-  )
-end
-
-setup_diags()
 
 _ = vim.cmd([[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A]]
