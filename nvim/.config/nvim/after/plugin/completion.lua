@@ -3,6 +3,11 @@ local lspkind = require "lspkind"
 local cmp = require "cmp"
 
 cmp.setup({
+  -- nvim-cmp by defaults disables autocomplete for prompt buffers
+  enabled = function ()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+      or require("cmp_dap").is_dap_buffer()
+  end,
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
@@ -35,6 +40,7 @@ cmp.setup({
     { name = "luasnip" }, -- For luasnip users.
     { name = "path" },
     { name = "buffer" },
+    { name = "dap" },
   })
 })
 

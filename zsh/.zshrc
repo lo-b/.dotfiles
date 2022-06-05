@@ -57,7 +57,7 @@ export NNN_TRASH=1  # use trash-cli
 # JDTLS exports
 export JDTLS_HOME=/usr/share/java/jdtls/
 export LOMBOK_JAR=/usr/lib/lombok-common/lombok.jar
-export WORKSPACE=/path/to/workspace # Defaults to $HOME/workspace
+export WORKSPACE=/home/bram/.jdtls-workspaces/ # Defaults to $HOME/workspace
 
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char

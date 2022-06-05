@@ -1,5 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 _ = vim.cmd [[packadd packer.nvim]]
 
@@ -24,11 +22,15 @@ return require("packer").startup(function(use)
   use "pearofducks/ansible-vim"
   use "untitled-ai/jupyter_ascending.vim"
   use "lervag/vimtex"
-  -- Tagbar to see file functions, classes, etc.
   use "liuchengxu/vista.vim"
-  -- Should try to write functionality myself using treesitter and snippet?
   use "metakirby5/codi.vim"
-  use "puremourning/vimspector"
+  use "mfussenegger/nvim-dap"
+  use "mfussenegger/nvim-dap-python"
+  use "mfussenegger/nvim-jdtls"
+  use "rcarriga/cmp-dap"
+  use "rcarriga/nvim-dap-ui"
+  use "theHamsta/nvim-dap-virtual-text"
+  use "nvim-telescope/telescope-dap.nvim"
   use "vimwiki/vimwiki"
   use "junegunn/vim-easy-align"
   use "doums/darcula"
@@ -77,26 +79,13 @@ return require("packer").startup(function(use)
   use "lambdalisue/suda.vim"
   use { "akinsho/bufferline.nvim", branch = "main" }
   use "akinsho/toggleterm.nvim"
-  -- Completion
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-buffer"
   use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
-  use 'mfussenegger/nvim-jdtls'
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        use_diagnostic_signs = true
-      }
-    end
-  }
+  use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use "lewis6991/gitsigns.nvim"
   use "L3MON4D3/LuaSnip"

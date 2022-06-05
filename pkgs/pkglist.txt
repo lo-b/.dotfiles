@@ -94,6 +94,7 @@ noto-fonts-cjk
 nvidia
 nvidia-settings
 nvim-packer-git
+nvtop
 openssh
 oreo-cursors-git
 p7zip
