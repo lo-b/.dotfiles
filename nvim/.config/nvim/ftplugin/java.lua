@@ -2,6 +2,14 @@
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = '/home/bram/.jdtls-workspaces/' .. project_name
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local util = require("vim.lsp.util")
+
+local formatting_callback = function(client, bufnr)
+  vim.keymap.set("n", "<leader>F", function()
+    local params = util.make_formatting_params({})
+    client.request("textDocument/formatting", params, nil, bufnr)
+  end, { buffer = bufnr })
+end
 
 -- Find root of project
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
@@ -12,6 +20,9 @@ end
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
+  on_attach = function (client, bufnr)
+    formatting_callback(client, bufnr)
+  end,
   capabilities = capabilities,
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line

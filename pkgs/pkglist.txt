@@ -133,6 +133,7 @@ sc-im
 spotify
 sqls-bin
 stow
+stylua
 sudo
 sxhkd
 task
@@ -151,6 +152,7 @@ texlive-pictures
 texlive-pstricks
 texlive-publishers
 texlive-science
+tllocalmgr-git
 trash-cli
 tree
 ttf-iosevka-nerd
