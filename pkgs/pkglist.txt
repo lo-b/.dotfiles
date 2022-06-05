@@ -50,6 +50,7 @@ gopls
 gpick
 gradle
 gucharmap
+hadolint-bin
 handlr
 htop
 imagemagick

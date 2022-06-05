@@ -12,6 +12,7 @@ local sources = {
   null_ls.builtins.formatting.google_java_format,
   null_ls.builtins.formatting.rustfmt,
   null_ls.builtins.formatting.black,
+  null_ls.builtins.diagnostics.hadolint
 }
 
 require("null-ls").setup({
