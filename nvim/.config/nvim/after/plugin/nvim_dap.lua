@@ -3,26 +3,38 @@ if not has_dap then
   return
 end
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapBreakpointCondition', {text='C', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapLogPoint', {text='L', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapStopped', {text='🤚', texthl='', linehl='', numhl=''})
+vim.fn.sign_define(
+  "DapBreakpoint",
+  { text = "🛑", texthl = "", linehl = "", numhl = "" }
+)
+vim.fn.sign_define(
+  "DapBreakpointCondition",
+  { text = "C", texthl = "", linehl = "", numhl = "" }
+)
+vim.fn.sign_define(
+  "DapLogPoint",
+  { text = "L", texthl = "", linehl = "", numhl = "" }
+)
+vim.fn.sign_define(
+  "DapStopped",
+  { text = "🤚", texthl = "", linehl = "", numhl = "" }
+)
 
 require("nvim-dap-virtual-text").setup {
-    enabled = true,
-    enabled_commands = true,
-    highlight_changed_variables = true,
-    highlight_new_as_changed = false,
-    show_stop_reason = true,
-    commented = false,
-    only_first_definition = true,
-    all_references = false,
-    filter_references_pattern = '<module',
-    -- experimental features:
-    virt_text_pos = 'eol',
-    all_frames = false,
-    virt_lines = false,
-    virt_text_win_col = nil
+  enabled = true,
+  enabled_commands = true,
+  highlight_changed_variables = true,
+  highlight_new_as_changed = false,
+  show_stop_reason = true,
+  commented = false,
+  only_first_definition = true,
+  all_references = false,
+  filter_references_pattern = "<module",
+  -- experimental features:
+  virt_text_pos = "eol",
+  all_frames = false,
+  virt_lines = false,
+  virt_text_win_col = nil,
 }
 
 dap.configurations.python = {
@@ -42,7 +54,7 @@ dap_python.setup("/usr/bin/python", {
   include_configs = true,
 })
 
-require("dapui").setup({
+require("dapui").setup {
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {
     expand = { "<CR>", "<2-LeftMouse>" },
@@ -52,7 +64,7 @@ require("dapui").setup({
     repl = "r",
     toggle = "t",
   },
-  expand_lines = vim.fn.has("nvim-0.7"),
+  expand_lines = vim.fn.has "nvim-0.7",
   sidebar = {
     elements = {
       {
@@ -82,8 +94,8 @@ require("dapui").setup({
   windows = { indent = 1 },
   render = {
     max_type_length = nil,
-  }
-})
+  },
+}
 
 local map = vim.keymap.set
 local options = { silent = true }
@@ -93,7 +105,7 @@ map("n", "<leader>dj", require("dap").step_over, options)
 map("n", "<leader>dl", require("dap").step_into, options)
 map("n", "<leader>dk", require("dap").step_out, options)
 map("n", "<leader>dp", require("dap").toggle_breakpoint, options)
-map("n", "<leader>dcp",function()
+map("n", "<leader>dcp", function()
   require("dap").set_breakpoint(vim.fn.input "[DAP] Condition > ")
 end, options)
 map("n", "<leader>dr", require("dap").repl.open, options)
@@ -102,7 +114,7 @@ map("n", "<leader>dm", require("dap-python").test_method, options)
 map("n", "<leader>dc", require("dap-python").test_class, options)
 map("n", "<leader>ds", require("dap-python").debug_selection, options)
 
-local dapui = require("dapui")
+local dapui = require "dapui"
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end

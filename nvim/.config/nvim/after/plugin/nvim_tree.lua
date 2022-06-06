@@ -1,6 +1,6 @@
 -- setup with all defaults
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
-require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -28,7 +28,7 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     },
   },
   renderer = {
-   group_empty = true,
+    group_empty = true,
     indent_markers = {
       enable = false,
       icons = {
@@ -89,7 +89,14 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         enable = true,
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
         exclude = {
-          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+          filetype = {
+            "notify",
+            "packer",
+            "qf",
+            "diff",
+            "fugitive",
+            "fugitiveblame",
+          },
           buftype = { "nofile", "terminal", "help" },
         },
       },

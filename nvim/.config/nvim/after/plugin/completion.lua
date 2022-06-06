@@ -2,9 +2,9 @@
 local lspkind = require "lspkind"
 local cmp = require "cmp"
 
-cmp.setup({
+cmp.setup {
   -- nvim-cmp by defaults disables autocomplete for prompt buffers
-  enabled = function ()
+  enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
       or require("cmp_dap").is_dap_buffer()
   end,
@@ -14,14 +14,14 @@ cmp.setup({
     end,
   },
   formatting = {
-    format = lspkind.cmp_format({
+    format = lspkind.cmp_format {
       mode = "symbol_text",
       maxwidth = 50,
-      before = function (entry, vim_item)
+      before = function(entry, vim_item)
         -- ...
         return vim_item
       end,
-    }),
+    },
   },
   mapping = {
     ["<c-n>"] = cmp.mapping.select_next_item(),
@@ -35,14 +35,14 @@ cmp.setup({
       select = true,
     },
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = "nvim_lsp" },
     { name = "luasnip" }, -- For luasnip users.
     { name = "path" },
     { name = "buffer" },
     { name = "dap" },
-  })
-})
+  },
+}
 
 -- Remove white space on save.
 _ = vim.cmd [[
