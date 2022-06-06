@@ -15,6 +15,9 @@ end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local sources = {
+  null_ls.builtins.code_actions.shellcheck.with {
+    filetypes = { "sh", "zsh" },
+  },
   null_ls.builtins.completion.luasnip,
   null_ls.builtins.completion.spell,
   null_ls.builtins.formatting.stylua.with {
@@ -25,6 +28,10 @@ local sources = {
   null_ls.builtins.formatting.google_java_format,
   null_ls.builtins.formatting.rustfmt,
   null_ls.builtins.formatting.black,
+  null_ls.builtins.formatting.shfmt.with {
+    filetypes = { "sh", "zsh" },
+    extra_args = { "-i", "2", "-ci", "-bn" },
+  },
   null_ls.builtins.diagnostics.hadolint,
   null_ls.builtins.diagnostics.vint,
 }

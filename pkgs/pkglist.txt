@@ -7,6 +7,7 @@ autoconf
 automake
 autopep8
 base
+bash-language-server
 bat
 biber
 binutils
@@ -131,6 +132,8 @@ rofi-emoji
 rtorrent-ps
 rust-analyzer
 sc-im
+shellcheck
+shfmt
 spotify
 sqls-bin
 stow
