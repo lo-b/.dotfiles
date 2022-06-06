@@ -1,4 +1,3 @@
-
 export npm_config_prefix="$HOME/.local"
 export PATH
 export PYENV_ROOT="$HOME/.pyenv"

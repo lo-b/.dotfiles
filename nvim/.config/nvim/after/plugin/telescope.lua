@@ -1,11 +1,11 @@
-local actions = require("telescope.actions")
-require("telescope").setup{
+local actions = require "telescope.actions"
+require("telescope").setup {
   defaults = {
     file_sorter = require("telescope.sorters").get_fzy_sorter,
     prompt_prefix = "🔭 ",
     selection_caret = "👉 ",
     path_display = { "smart" },
-    file_ignore_patterns = {"**/*%.git/", "**/*.pdf"},
+    file_ignore_patterns = { "**/*%.git/", "**/*.pdf" },
     vimgrep_arguments = {
       "rg",
       "--color=never",
@@ -14,7 +14,7 @@ require("telescope").setup{
       "--line-number",
       "--column",
       "--smart-case",
-      "-."
+      "-.",
     },
     mappings = {
       i = {
@@ -27,18 +27,21 @@ require("telescope").setup{
     },
   },
   extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {},
+    },
     media_files = {
-      -- filetypes whitelist
-      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
-      find_cmd = "rg" -- find command (defaults to `fd`)
+      filetypes = { "png", "webp", "jpg", "jpeg" },
+      find_cmd = "rg",
     },
     fzy_native = {
       override_genereic_sorter = false,
       override_file_sorter = true,
-    }
-  }
+    },
+  },
 }
-require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("media_files")
-require("telescope").load_extension("file_browser")
+require("telescope").load_extension "fzy_native"
+require("telescope").load_extension "media_files"
+require("telescope").load_extension "file_browser"
+require("telescope").load_extension "dap"
+require("telescope").load_extension "ui-select"

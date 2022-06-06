@@ -1,5 +1,3 @@
-neofetch neofetch --gtk3 on --disable resolution wm uptime memory --kitty images/wallpapers/groot-i-am-root.jpg --crop_mode fill --gpu_type dedicated --size 300 --colors 11 8 7 11 11 8 --xoffset 1 --yoffset 1
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -51,13 +49,12 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # nnn 'config'
 export NNN_PLUG='v:preview-tui;d:dragdrop'
 export NNN_FIFO=/tmp/nnn.fifo
-export NNN_TRASH=1  # use trash-cli
-
+export NNN_TRASH=1 # use trash-cli
 
 # JDTLS exports
 export JDTLS_HOME=/usr/share/java/jdtls/
 export LOMBOK_JAR=/usr/lib/lombok-common/lombok.jar
-export WORKSPACE=/path/to/workspace # Defaults to $HOME/workspace
+export WORKSPACE=/home/bram/.jdtls-workspaces/ # Defaults to $HOME/workspace
 
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char
@@ -84,37 +81,31 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 autopair-init
 
-# Easily activate python envs
-function activate-venv() {
-  source "$HOME/.venvs/$(ls ~/.venvs/ | fzf)/bin/activate"
-}
-
 # cd to nnn directory on quit
-n ()
-{
-    # Block nesting of nnn in subshells
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-        echo "nnn is already running"
-        return
-    fi
+n() {
+  # Block nesting of nnn in subshells
+  if [ -n "$NNNLVL" ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+    echo "nnn is already running"
+    return
+  fi
 
-    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, remove the "export" as in:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+  # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+  # To cd on quit only on ^G, remove the "export" as in:
+  #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+  export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
 
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
+  # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+  # stty start undef
+  # stty stop undef
+  # stty lwrap undef
+  # stty lnext undef
 
-    nnn -H "$@"
+  nnn -H "$@"
 
-    if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-    fi
+  if [ -f "$NNN_TMPFILE" ]; then
+    . "$NNN_TMPFILE"
+    rm -f "$NNN_TMPFILE" >/dev/null
+  fi
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

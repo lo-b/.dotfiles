@@ -10,10 +10,10 @@ require("bufferline").setup {
   highlights = {
     fill = {
       guifg = "#313335",
-      guibg = "#313335"
+      guibg = "#313335",
     },
     tab_close = {
-      guibg = "#313335"
+      guibg = "#313335",
     },
     separator = {
       guifg = "#313335",

@@ -68,7 +68,7 @@ g.mkdp_preview_options = {
   sequence_diagrams = {},
   flowchart_diagrams = {},
   content_editable = "v:false",
-  disable_filename = 0
+  disable_filename = 0,
 }
 
 -- use a custom markdown style must be absolute path
@@ -80,7 +80,7 @@ g.mkdp_markdown_css = ""
 g.mkdp_highlight_css = ""
 
 -- use a custom port to start server or random for empty
-g.mkdp_port = ''
+g.mkdp_port = ""
 
 -- preview page title
 -- ${name} will be replace with the file name

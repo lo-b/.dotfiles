@@ -1,33 +1,45 @@
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require'lspconfig'.jdtls.setup{
-  capabilities = capabilities
+local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
+require("lspconfig").bashls.setup {
+  capabilities = capabilities,
+  filetypes = { "sh", "zsh" },
 }
-require("lspconfig").volar.setup{
-  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+require("lspconfig").volar.setup {
+  filetypes = {
+    "typescript",
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "vue",
+    "json",
+  },
 }
-require("lspconfig").tailwindcss.setup{
-  capabilities = capabilities
-}
-require("lspconfig").gopls.setup{
-  capabilities = capabilities
-}
-require("lspconfig").ansiblels.setup{
+require("lspconfig").tailwindcss.setup {
   capabilities = capabilities,
 }
-require("lspconfig").rust_analyzer.setup{
+require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
-require("lspconfig").tsserver.setup{
-  capabilities = capabilities
-}
-require("lspconfig").pyright.setup{
+require("lspconfig").ansiblels.setup {
+  filetypes = { "yaml.ansible", "yaml" },
   capabilities = capabilities,
 }
-require("lspconfig").dockerls.setup{
-  capabilities = capabilities
+require("lspconfig").rust_analyzer.setup {
+  capabilities = capabilities,
 }
-require("lspconfig").sqls.setup{
+require("lspconfig").tsserver.setup {
+  capabilities = capabilities,
+}
+require("lspconfig").pyright.setup {
+  capabilities = capabilities,
+}
+require("lspconfig").dockerls.setup {
+  capabilities = capabilities,
+}
+require("lspconfig").sqls.setup {
   settings = {
     sqls = {
       connections = {
@@ -40,7 +52,7 @@ require("lspconfig").sqls.setup{
     },
   },
 }
-require("lspconfig").texlab.setup{
+require("lspconfig").texlab.setup {
   capabilities = capabilities,
   cmd = { "texlab" },
   filetypes = { "tex", "bib" },
@@ -49,26 +61,26 @@ require("lspconfig").texlab.setup{
       auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
-      args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
         forwardSearchAfter = false,
-        onSave = true
+        onSave = true,
       },
       chktex = {
         onEdit = false,
-        onOpenAndSave = false
+        onOpenAndSave = false,
       },
       diagnosticsDelay = 300,
       formatterLineLength = 80,
       forwardSearch = {
-        args = {}
+        args = {},
       },
       latexFormatter = "latexindent",
       latexindent = {
-        modifyLineBreaks = false
-      }
-    }
-  }
+        modifyLineBreaks = false,
+      },
+    },
+  },
 }
 require("lspconfig").vimls.setup {
   capabilities = capabilities,
@@ -76,32 +88,43 @@ require("lspconfig").vimls.setup {
   filetypes = { "vim" },
   init_options = {
     diagnostic = {
-      enable = true
+      enable = true,
     },
     indexes = {
       count = 3,
       gap = 100,
-      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
-      runtimepath = true
+      projectRootPatterns = {
+        "runtime",
+        "nvim",
+        ".git",
+        "autoload",
+        "plugin",
+      },
+      runtimepath = true,
     },
     iskeyword = "@,48-57,_,192-255,-#",
     runtimepath = "",
     suggest = {
       fromRuntimepath = true,
-      fromVimruntime = true
+      fromVimruntime = true,
     },
-    vimruntime = ""
-  }
+    vimruntime = "",
+  },
 }
 
 -- viml setting
 vim.g.markdown_fenced_languages = {
   "vim",
-  "help"
+  "help",
 }
 
--- Setup builtin LspDiagnosticSigns
-local signs = { Error = "🔥", Warning = "⚡", Hint = "💡", Information = "🤨" }
+-- Setup builtin LspDiagnosticSigns (used by trouble)
+local signs = {
+  Error = "🔥",
+  Warning = "⚡",
+  Hint = "💡",
+  Information = "🤨",
+}
 
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
@@ -115,6 +138,11 @@ table.insert(runtime_path, "lua/?/init.lua")
 require("lspconfig").sumneko_lua.setup {
   settings = {
     Lua = {
+      format = {
+        -- This following will not prevent sumneko from showing up when
+        -- formatting and having to select a server
+        enable = false,
+      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
@@ -123,7 +151,7 @@ require("lspconfig").sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {"vim"},
+        globals = { "vim" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -136,23 +164,9 @@ require("lspconfig").sumneko_lua.setup {
       },
     },
   },
+  capabilities = capabilities,
 }
 
--- Disable most built-in nvim lsp diagnostics settings
-local function setup_diags()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-      virtual_text = false,
-      signs = false,
-      update_in_insert = false,
-      underline = false,
-    }
-  )
-end
-
-setup_diags()
-
-_ = vim.cmd([[
-  hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A]]
-)
+_ = vim.cmd [[
+  hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A
+]]

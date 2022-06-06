@@ -20,14 +20,15 @@ local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 
 ls.add_snippets(nil, {
-    all = {},
-
-    lua = {
-      s("req", fmt("local {} = require('{}')", { i(1, "my_mod"), rep(1) }))
-    },
-
-    tex = {
-      s("ttp", fmta([[
+  all = {},
+  lua = {
+    s("req", fmt("local {} = require('{}')", { i(1, "my_mod"), rep(1) })),
+  },
+  tex = {
+    s(
+      "ttp",
+      fmta(
+        [[
       \begin{titlepage}
           \maketitle
           \vspace{1.5cm}
@@ -37,53 +38,119 @@ ls.add_snippets(nil, {
           \end{figure}
           \thispagestyle{empty}
       \end{titlepage}
-      ]], {i(1)})),
+      ]],
+        { i(1) }
+      )
+    ),
 
-      s("begin", fmta([[
+    s(
+      "begin",
+      fmta(
+        [[
       \begin{<>}
         <>
       \end{<>}
-      ]], { i(1), i(2), rep(1) })),
+      ]],
+        { i(1), i(2), rep(1) }
+      )
+    ),
 
-      s("sec", fmta([[
+    s(
+      "sec",
+      fmta(
+        [[
       \section{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("sec*", fmta([[
+    s(
+      "sec*",
+      fmta(
+        [[
       \section*{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("sub", fmta([[
+    s(
+      "sub",
+      fmta(
+        [[
       \subsection{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("sub*", fmta([[
+    s(
+      "sub*",
+      fmta(
+        [[
       \subsection*{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("ssub", fmta([[
+    s(
+      "ssub",
+      fmta(
+        [[
       \subsubsection{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("ssub*", fmta([[
+    s(
+      "ssub*",
+      fmta(
+        [[
       \subsubsection*{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("it", fmta([[
+    s(
+      "it",
+      fmta(
+        [[
       \textit{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("ttt", fmta([[
+    s(
+      "ttt",
+      fmta(
+        [[
       \texttt{<>}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("itemize", fmta([[
+    s(
+      "itemize",
+      fmta(
+        [[
       \begin{itemize}
         \item <>
       \end{itemize}
-      ]], i(1))),
+      ]],
+        i(1)
+      )
+    ),
 
-      s("!doc", fmta([[
+    s(
+      "!doc",
+      fmta(
+        [[
       \documentclass{article}
 
       \usepackage[utf8]{inputenc}
@@ -133,9 +200,15 @@ ls.add_snippets(nil, {
       % ]
 
       \end{document}
-      ]], { i(1), i(2) })),
+      ]],
+        { i(1), i(2) }
+      )
+    ),
 
-      s("!sf", fmta([[
+    s(
+      "!sf",
+      fmta(
+        [[
       \documentclass[../<>]{subfiles}
       \graphicspath{{\subfix{../<>/}}}
       \begin{document}
@@ -143,9 +216,15 @@ ls.add_snippets(nil, {
       <>
 
       \end{document}
-      ]], {i(1), i(2, "assets"), i(3)})),
+      ]],
+        { i(1), i(2, "assets"), i(3) }
+      )
+    ),
 
-      s("mfig", fmta([[
+    s(
+      "mfig",
+      fmta(
+        [[
       \begin{figure}
            \centering
            \begin{subfigure}[b]{0.4\textwidth}
@@ -164,8 +243,11 @@ ls.add_snippets(nil, {
               \caption{<>}
               \label{fig:<>}
       \end{figure}
-      ]], { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8), })),
-    }
+      ]],
+        { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
+      )
+    ),
+  },
 })
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
@@ -187,4 +269,8 @@ vim.keymap.set("i", "<c-l>", function()
 end)
 
 -- Shorcut to source luasnips file; reloads snippets.
-vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
+vim.keymap.set(
+  "n",
+  "<leader><leader>s",
+  "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>"
+)
