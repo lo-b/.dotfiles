@@ -136,6 +136,7 @@ map(
   "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🗃️ ', hidden = true })<cr>",
   options
 )
+map("n", "<leader>fm", ":Telescope media_files<cr>", options)
 map("n", "<leader>ft", ":Telescope file_browser<cr>", options)
 map(
   "n",
@@ -191,6 +192,10 @@ map("n", "<space><space>X", "<Plug>JupyterExecuteAll", options)
 -- Keep visual block selected after width shift.
 map("v", ">", ">gv", options)
 map("v", "<", "<gv", options)
+
+-- Enable/disable vimtex diagnostics
+map("n", "<space>a", ":lua vim.diagnostic.disable()<cr>", options)
+map("n", "<space>A", ":lua vim.diagnostic.enable()<cr>", options)
 
 -- Jumplist mutations
 _ = vim.cmd [[

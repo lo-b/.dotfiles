@@ -10,6 +10,7 @@ function! s:goyo_leave()
   set colorcolumn=80
   hi SignColumn guibg=none
   hi LineNr guibg=none
+  hi VertSplit guifg=#606060
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
