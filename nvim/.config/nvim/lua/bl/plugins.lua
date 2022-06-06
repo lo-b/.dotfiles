@@ -4,20 +4,22 @@ _ = vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use {
-    'pwntester/octo.nvim',
+    "pwntester/octo.nvim",
     requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'kyazdani42/nvim-web-devicons',
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "kyazdani42/nvim-web-devicons",
     },
-    config = function ()
-      require"octo".setup()
-    end
+    config = function()
+      require("octo").setup()
+    end,
   }
   use {
     "ray-x/lsp_signature.nvim",
     opt = true,
-    config = function() require("lsp_signature").setup() end
+    config = function()
+      require("lsp_signature").setup()
+    end,
   }
   use "pearofducks/ansible-vim"
   use "untitled-ai/jupyter_ascending.vim"
@@ -46,26 +48,29 @@ return require("packer").startup(function(use)
   use "nvim-telescope/telescope-fzy-native.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
   use "nvim-telescope/telescope-file-browser.nvim"
+  use "nvim-telescope/telescope-ui-select.nvim"
   use "machakann/vim-highlightedyank"
   use "neovim/nvim-lspconfig"
   use "onsails/lspkind-nvim"
   use {
     "jose-elias-alvarez/null-ls.nvim",
     requires = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
   }
   use "hoob3rt/lualine.nvim"
   use "tweekmonster/startuptime.vim"
   use {
-      'kyazdani42/nvim-tree.lua',
-      requires = {
-        'kyazdani42/nvim-web-devicons', -- optional, for file icon
-      }
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+      "kyazdani42/nvim-web-devicons", -- optional, for file icon
+    },
   }
   use {
     "norcalli/nvim-colorizer.lua", -- Colored color codes/names
-    config = function() require("colorizer").setup() end
+    config = function()
+      require("colorizer").setup()
+    end,
   }
   use "matze/vim-move"
   use "RRethy/vim-illuminate" -- Illuminate other usages of word
@@ -84,9 +89,13 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-buffer"
   use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
-  use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
+  use {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    run = "cd app && yarn install",
+  }
   use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
   use "lewis6991/gitsigns.nvim"
   use "L3MON4D3/LuaSnip"
   use "saadparwaiz1/cmp_luasnip"

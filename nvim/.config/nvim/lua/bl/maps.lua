@@ -8,18 +8,21 @@ map("v", ">", ">gc", options)
 map("n", "<leader>m", ":MaximizerToggle!<CR>", options)
 
 -- Fix for netrw-gx
-map("n", "gx", ":execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'), 1)<cr>", options)
+map(
+  "n",
+  "gx",
+  ":execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'), 1)<cr>",
+  options
+)
 
 -- Trouble
 map("n", "<leader>t", ":TroubleToggle<CR>", options)
-
 
 -- Vista remap
 map("n", "<leader>v", ":Vista<CR>", options)
 
 -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 map("v", "<Enter>", "<Plug>(EasyAlign)", options)
-
 
 -- Easier naviagtion in nvim windows than cumborsome defaults.
 map("n", "<C-h>", "<C-W>h", options)
@@ -58,33 +61,128 @@ map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", options)
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", options)
 
 -- Telescope git remaps
-map("n", "<leader>gc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", options)
-map("n", "<leader>gb", "<cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = '🌿 ' })<cr>", options)
-map("n", "<leader>gs", "<cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = '🧪 ' })<cr>", options)
-map("n", "<leader>ss", "<cmd>lua require('telescope.builtin').git_status({prompt_prefix='📰 ' })<cr>", options)
+map(
+  "n",
+  "<leader>gc",
+  "<cmd>lua require('telescope.builtin').git_commits()<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>gb",
+  "<cmd>lua require('telescope.builtin').git_branches({ prompt_prefix = '🌿 ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>gs",
+  "<cmd>lua require('telescope.builtin').git_stash({ prompt_prefix = '🧪 ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>ss",
+  "<cmd>lua require('telescope.builtin').git_status({prompt_prefix='📰 ' })<cr>",
+  options
+)
 -- Telescope searching
-map("n", "<leader>hh", "<cmd>lua require('telescope.builtin').command_history({ prompt_prefix = '⏪ ' })<cr>", options)
-map("n", "<leader>fG", "<cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= '🚀 '})<cr>", options)
-map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= '📖 '})<cr>", options)
-map("n", "<leader>fs", "<cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= '>>> ', search = vim.fn.input('Grep For > ')})<cr>", options)
-map("n", "<leader>:", " <cmd>lua require('telescope.builtin').commands({ prompt_prefix = '🤖 ' })<cr>", options)
-map("n", "<leader>sh", "<cmd>lua require('telescope.builtin').search_history({ prompt_prefix = '⌛ ' })<cr>", options)
+map(
+  "n",
+  "<leader>hh",
+  "<cmd>lua require('telescope.builtin').command_history({ prompt_prefix = '⏪ ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>fG",
+  "<cmd>lua require('telescope.builtin').live_grep({ prompt_prefix= '🚀 '})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>fg",
+  "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ prompt_prefix= '📖 '})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>fs",
+  "<cmd>lua require('telescope.builtin').grep_string({ prompt_prefix= '>>> ', search = vim.fn.input('Grep For > ')})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>:",
+  " <cmd>lua require('telescope.builtin').commands({ prompt_prefix = '🤖 ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>sh",
+  "<cmd>lua require('telescope.builtin').search_history({ prompt_prefix = '⌛ ' })<cr>",
+  options
+)
 
 -- Telescope moving around
-map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers({prompt_prefix= '📚 '})<cr>", options)
-map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🗃️ ', hidden = true })<cr>", options)
+map(
+  "n",
+  "<leader>fb",
+  "<cmd>lua require('telescope.builtin').buffers({prompt_prefix= '📚 '})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>ff",
+  "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🗃️ ', hidden = true })<cr>",
+  options
+)
 map("n", "<leader>ft", ":Telescope file_browser<cr>", options)
-map("n", "<leader>oo", " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '👴 ' })<cr>", options)
+map(
+  "n",
+  "<leader>oo",
+  " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '👴 ' })<cr>",
+  options
+)
 
 -- Telescope help
-map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags({prompt_prefix= '🤔 '})<cr>", options)
-map("n", "<leader>fH", "<cmd>lua require('telescope.builtin').man_pages({prompt_prefix= '📃 '})<cr>", options)
-map("n", "<leader>lk", "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = 'ℹ️ ' })<cr>", options)
+map(
+  "n",
+  "<leader>fh",
+  "<cmd>lua require('telescope.builtin').help_tags({prompt_prefix= '🤔 '})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>fH",
+  "<cmd>lua require('telescope.builtin').man_pages({prompt_prefix= '📃 '})<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>lk",
+  "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = 'ℹ️ ' })<cr>",
+  options
+)
 
 -- Telescope lsp
-map("n", "<leader>tt", "<cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = '🌳 ' })<cr>", options)
-map("n", "<leader>Q", "<cmd>lua require('telescope.builtin').quickfix({prompt_prefix='📜 ' })<cr>", options)
-map("n", "<leader>gr", "<cmd>lua require('telescope.builtin').lsp_references({prompt_prefix='🛠️ ' })<cr>", options)
+map(
+  "n",
+  "<leader>tt",
+  "<cmd>lua require('telescope.builtin').treesitter({ prompt_prefix = '🌳 ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>Q",
+  "<cmd>lua require('telescope.builtin').quickfix({prompt_prefix='📜 ' })<cr>",
+  options
+)
+map(
+  "n",
+  "<leader>gr",
+  "<cmd>lua require('telescope.builtin').lsp_references({prompt_prefix='🛠️ ' })<cr>",
+  options
+)
 
 -- JupyterAscending vim for jupyter notebooks
 map("n", "<space><space>x", "<Plug>JupyterExecute", options)

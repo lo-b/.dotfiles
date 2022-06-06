@@ -3,16 +3,7 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
--- Prevent multiple formatting options and select single server to format to
-local util = require("vim.lsp.util")
-local formatting_callback = function(client, bufnr)
-  vim.keymap.set("n", "<leader>F", function()
-    local params = util.make_formatting_params({})
-    client.request("textDocument/formatting", params, nil, bufnr)
-  end, { buffer = bufnr })
-end
-
-require("lspconfig").volar.setup({
+require("lspconfig").volar.setup {
   filetypes = {
     "typescript",
     "javascript",
@@ -21,43 +12,30 @@ require("lspconfig").volar.setup({
     "vue",
     "json",
   },
-})
-require("lspconfig").tailwindcss.setup({
+}
+require("lspconfig").tailwindcss.setup {
   capabilities = capabilities,
-})
-require("lspconfig").gopls.setup({
-  on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end,
+}
+require("lspconfig").gopls.setup {
   capabilities = capabilities,
-})
-require("lspconfig").ansiblels.setup({
-  filetypes = {"yaml.ansible", "yaml"},
-  on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end,
+}
+require("lspconfig").ansiblels.setup {
+  filetypes = { "yaml.ansible", "yaml" },
   capabilities = capabilities,
-})
-require("lspconfig").rust_analyzer.setup({
-  on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end,
+}
+require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
-})
-require("lspconfig").tsserver.setup({
+}
+require("lspconfig").tsserver.setup {
   capabilities = capabilities,
-})
-require("lspconfig").pyright.setup({
-  -- using `formatting_callback` does not work here, set keymap below instead
-  on_attach = function(client, bufnr)
-    vim.keymap.set('n', '<space>F', vim.lsp.buf.formatting, { noremap = true, silent = true, buffer = bufnr })
-  end,
+}
+require("lspconfig").pyright.setup {
   capabilities = capabilities,
-})
-require("lspconfig").dockerls.setup({
+}
+require("lspconfig").dockerls.setup {
   capabilities = capabilities,
-})
-require("lspconfig").sqls.setup({
+}
+require("lspconfig").sqls.setup {
   settings = {
     sqls = {
       connections = {
@@ -69,11 +47,8 @@ require("lspconfig").sqls.setup({
       },
     },
   },
-})
-require("lspconfig").texlab.setup({
-  on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end,
+}
+require("lspconfig").texlab.setup {
   capabilities = capabilities,
   cmd = { "texlab" },
   filetypes = { "tex", "bib" },
@@ -102,8 +77,8 @@ require("lspconfig").texlab.setup({
       },
     },
   },
-})
-require("lspconfig").vimls.setup({
+}
+require("lspconfig").vimls.setup {
   capabilities = capabilities,
   cmd = { "vim-language-server", "--stdio" },
   filetypes = { "vim" },
@@ -131,7 +106,7 @@ require("lspconfig").vimls.setup({
     },
     vimruntime = "",
   },
-})
+}
 
 -- viml setting
 vim.g.markdown_fenced_languages = {
@@ -156,12 +131,14 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require("lspconfig").sumneko_lua.setup({
-  on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end,
+require("lspconfig").sumneko_lua.setup {
   settings = {
     Lua = {
+      format = {
+        -- This following will not prevent sumneko from showing up when
+        -- formatting and having to select a server
+        enable = false,
+      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
@@ -184,8 +161,8 @@ require("lspconfig").sumneko_lua.setup({
     },
   },
   capabilities = capabilities,
-})
+}
 
-_ = vim.cmd([[
+_ = vim.cmd [[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A
-]])
+]]

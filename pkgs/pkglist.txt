@@ -169,6 +169,7 @@ urlview
 vale-bin
 vim
 vim-language-server
+vint
 volantes-cursors
 which
 whois
