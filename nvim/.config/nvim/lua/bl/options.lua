@@ -3,7 +3,7 @@ local cmd = vim.cmd
 local g = vim.g
 
 g.python3_host_prog = "/usr/bin/python"
-
+g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
 opt.pumblend = 10
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"

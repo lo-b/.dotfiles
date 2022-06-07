@@ -52,6 +52,7 @@ return require("packer").startup {
     use "nvim-telescope/telescope-ui-select.nvim"
     use "machakann/vim-highlightedyank"
     use "neovim/nvim-lspconfig"
+    use "github/copilot.vim"
     use "onsails/lspkind-nvim"
     use {
       "jose-elias-alvarez/null-ls.nvim",
