@@ -12,7 +12,7 @@ require("lualine").setup {
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      "branch",
+      { "branch", icon = "" },
       {
         "diff",
         colored = true, -- displays diff status in color if set to true
@@ -47,8 +47,8 @@ require("lualine").setup {
         colored = true, -- displays filetype icon in color if set to `true`
       },
     },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
+    lualine_y = { { "progress", icon = "" } },
+    lualine_z = { { "location", icon = "" } },
   },
   inactive_sections = {
     lualine_a = {},

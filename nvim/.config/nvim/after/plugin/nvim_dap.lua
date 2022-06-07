@@ -5,7 +5,7 @@ end
 
 vim.fn.sign_define(
   "DapBreakpoint",
-  { text = "🛑", texthl = "", linehl = "", numhl = "" }
+  { text = " ", texthl = "Error", linehl = "", numhl = "" }
 )
 vim.fn.sign_define(
   "DapBreakpointCondition",

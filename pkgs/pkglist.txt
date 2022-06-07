@@ -29,6 +29,7 @@ dockerfile-language-server
 dragon-drag-and-drop
 entr
 espeak
+evince
 exa
 exfat-utils
 fakeroot
