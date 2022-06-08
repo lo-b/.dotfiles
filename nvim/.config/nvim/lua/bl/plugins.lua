@@ -26,7 +26,6 @@ return require("packer").startup {
     use "untitled-ai/jupyter_ascending.vim"
     use "lervag/vimtex"
     use "liuchengxu/vista.vim"
-    use "metakirby5/codi.vim"
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "mfussenegger/nvim-jdtls"
