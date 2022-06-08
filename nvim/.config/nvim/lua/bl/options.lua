@@ -44,10 +44,6 @@ cmd "syntax enable"
 cmd "filetype plugin on"
 cmd "colorscheme material"
 cmd [[
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-]]
-cmd [[
 let g:dashboard_custom_header = [
 \'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀',
 \'⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀',
