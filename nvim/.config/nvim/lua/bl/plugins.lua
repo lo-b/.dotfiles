@@ -36,7 +36,7 @@ return require("packer").startup {
     use "nvim-telescope/telescope-dap.nvim"
     use "vimwiki/vimwiki"
     use "junegunn/vim-easy-align"
-    use "doums/darcula"
+    use "marko-cerovac/material.nvim"
     use "tpope/vim-dadbod"
     use "tpope/vim-characterize"
     use "tpope/vim-fugitive"
@@ -83,7 +83,7 @@ return require("packer").startup {
     }
     use "matze/vim-move"
     use "RRethy/vim-illuminate" -- Illuminate other usages of word
-    use "mhinz/vim-startify"
+    use "glepnir/dashboard-nvim"
     use "ryanoasis/vim-devicons"
     use "junegunn/goyo.vim"
     use "szw/vim-maximizer"

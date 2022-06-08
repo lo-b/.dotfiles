@@ -4,6 +4,8 @@ local g = vim.g
 
 g.python3_host_prog = "/usr/bin/python"
 g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
+g.material_style = "darker"
+g.dashboard_default_executive = "telescope"
 opt.pumblend = 10
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"
@@ -40,20 +42,27 @@ opt.fillchars = { eob = " " }
 
 cmd "syntax enable"
 cmd "filetype plugin on"
-cmd "colorscheme darcula"
-cmd "hi GitSignsAdd guibg=none guifg=#587B0C"
-cmd "hi GitSignsChange guibg=none guifg=#0C7D9D"
-cmd "hi GitSignsDelete guibg=none guifg=#95161B"
-cmd "hi SignColumn guibg=none"
-cmd "hi LineNr guibg=none"
-cmd "hi TroubleIndent guibg=none"
-cmd "hi TroubleFoldIcon guibg=none"
-cmd "hi Normal guibg=none"
-
--- putting below in after/ftplugin does not work somehow
+cmd "colorscheme material"
 cmd [[
-augroup enableHelpSyntax
-  autocmd!
-  autocmd FileType help autocmd BufEnter <buffer> set syntax=help
-augroup END
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+]]
+cmd [[
+let g:dashboard_custom_header = [
+\'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⣸⣿⡏⠀⠀⠀⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⣿⣿⠁⠀⠀⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣷⡄',
+\'⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷',
+\'⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿',
+\'⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃',
+\'⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇⠀',
+\'⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠃⠀',
+\'⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀⢸⣿⡇⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀⣸⣿⠇⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀',
+\'⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
+\]
 ]]
