@@ -3,7 +3,14 @@ local cmd = vim.cmd
 local g = vim.g
 
 g.python3_host_prog = "/usr/bin/python"
-
+g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
+g.material_style = "darker"
+g.dashboard_default_executive = "telescope"
+g.dashboard_preview_command = "cat"
+g.dashboard_preview_pipeline = "lolcat --truecolor --seed 4 -F 0.05"
+g.dashboard_preview_file = "~/.config/nvim/banner.txt"
+vim.g.dashboard_preview_file_height = 7
+vim.g.dashboard_preview_file_width = 80
 opt.pumblend = 10
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"
@@ -40,20 +47,4 @@ opt.fillchars = { eob = " " }
 
 cmd "syntax enable"
 cmd "filetype plugin on"
-cmd "colorscheme darcula"
-cmd "hi GitSignsAdd guibg=none guifg=#587B0C"
-cmd "hi GitSignsChange guibg=none guifg=#0C7D9D"
-cmd "hi GitSignsDelete guibg=none guifg=#95161B"
-cmd "hi SignColumn guibg=none"
-cmd "hi LineNr guibg=none"
-cmd "hi TroubleIndent guibg=none"
-cmd "hi TroubleFoldIcon guibg=none"
-cmd "hi Normal guibg=none"
-
--- putting below in after/ftplugin does not work somehow
-cmd [[
-augroup enableHelpSyntax
-  autocmd!
-  autocmd FileType help autocmd BufEnter <buffer> set syntax=help
-augroup END
-]]
+cmd "colorscheme material"

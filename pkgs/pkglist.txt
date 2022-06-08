@@ -29,6 +29,7 @@ dockerfile-language-server
 dragon-drag-and-drop
 entr
 espeak
+evince
 exa
 exfat-utils
 fakeroot
@@ -69,6 +70,7 @@ jupyter-notebook
 kitty
 linux
 linux-firmware
+lolcat
 lombok-common
 lsdesktopf
 lua-language-server
@@ -96,6 +98,7 @@ noto-fonts-cjk
 nvidia
 nvidia-settings
 nvim-packer-git
+nvm
 nvme-cli
 nvtop
 oreo-cursors-git

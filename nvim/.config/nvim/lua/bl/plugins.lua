@@ -26,7 +26,6 @@ return require("packer").startup {
     use "untitled-ai/jupyter_ascending.vim"
     use "lervag/vimtex"
     use "liuchengxu/vista.vim"
-    use "metakirby5/codi.vim"
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "mfussenegger/nvim-jdtls"
@@ -36,7 +35,7 @@ return require("packer").startup {
     use "nvim-telescope/telescope-dap.nvim"
     use "vimwiki/vimwiki"
     use "junegunn/vim-easy-align"
-    use "doums/darcula"
+    use "marko-cerovac/material.nvim"
     use "tpope/vim-dadbod"
     use "tpope/vim-characterize"
     use "tpope/vim-fugitive"
@@ -52,11 +51,19 @@ return require("packer").startup {
     use "nvim-telescope/telescope-ui-select.nvim"
     use "machakann/vim-highlightedyank"
     use "neovim/nvim-lspconfig"
+    use "github/copilot.vim"
     use "onsails/lspkind-nvim"
     use {
       "jose-elias-alvarez/null-ls.nvim",
       requires = {
         "nvim-lua/plenary.nvim",
+      },
+    }
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-treesitter/nvim-treesitter" },
       },
     }
     use "hoob3rt/lualine.nvim"
@@ -75,7 +82,7 @@ return require("packer").startup {
     }
     use "matze/vim-move"
     use "RRethy/vim-illuminate" -- Illuminate other usages of word
-    use "mhinz/vim-startify"
+    use "glepnir/dashboard-nvim"
     use "ryanoasis/vim-devicons"
     use "junegunn/goyo.vim"
     use "szw/vim-maximizer"

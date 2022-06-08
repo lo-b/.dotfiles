@@ -171,7 +171,12 @@ bottom = 1
 type = internal/xkeyboard
 format-background = ${colors.shade5}
 format-foreground = ${colors.shade0}
-format-prefix = ﯔ
+
+; ======================= WARNING =========================
+; Invisible character after keyboard icon below. The icon
+; only 'grows' (shows full size) when it has a space and
+; another character -- that is not a space -- after it.
+format-prefix =  ‎
 format-prefix-foreground = ${colors.shade0}
 label-layout = %number%
 label-layout-padding = 1

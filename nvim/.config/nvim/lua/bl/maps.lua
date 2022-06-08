@@ -205,5 +205,6 @@ nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
 
 -- NvimTree
 map("n", "<leader>e", ":NvimTreeToggle<CR>", options)
+map("n", "<leader>E", ":NvimTreeFindFile<CR>", options)
 map("n", "<leader>tf", ":NvimTreeFindFile<CR>", options)
 map("n", "<leader>tr", ":NvimTreeRefresh<CR>", options)

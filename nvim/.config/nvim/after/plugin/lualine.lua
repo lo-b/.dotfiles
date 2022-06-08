@@ -2,7 +2,7 @@ require("lualine").setup {
   options = {
     lower = false,
     icons_enabled = true,
-    theme = "gruvbox",
+    theme = "material",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     padding = 3,
@@ -12,7 +12,16 @@ require("lualine").setup {
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      "branch",
+      {
+        "diagnostics",
+        symbols = {
+          error = "🔥",
+          warn = "⚡",
+          info = "💡",
+          hint = "🤔",
+        },
+      },
+      { "branch", icon = "" },
       {
         "diff",
         colored = true, -- displays diff status in color if set to true
@@ -31,15 +40,6 @@ require("lualine").setup {
       },
     },
     lualine_x = {
-      {
-        "diagnostics",
-        symbols = {
-          error = "🔥",
-          warn = "⚡",
-          info = "💡",
-          hint = "🤔",
-        },
-      },
       "encoding",
       "fileformat",
       {
@@ -47,8 +47,8 @@ require("lualine").setup {
         colored = true, -- displays filetype icon in color if set to `true`
       },
     },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
+    lualine_y = { { "progress", icon = "" } },
+    lualine_z = { { "location", icon = "" } },
   },
   inactive_sections = {
     lualine_a = {},
