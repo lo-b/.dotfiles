@@ -72,6 +72,7 @@ kitty
 libtool
 linux
 linux-firmware
+lolcat
 lombok-common
 lsdesktopf
 lua-language-server
