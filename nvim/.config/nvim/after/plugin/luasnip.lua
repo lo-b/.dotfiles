@@ -210,7 +210,7 @@ ls.add_snippets(nil, {
       fmta(
         [[
       \documentclass[../<>]{subfiles}
-      \graphicspath{{\subfix{../<>/}}}
+      \graphicspath{{../<>/}}
       \begin{document}
 
       <>

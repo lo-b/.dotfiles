@@ -160,6 +160,8 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 tllocalmgr-git
+tmux
+tmux-bash-completion-git
 trash-cli
 tree
 ttf-iosevka-nerd
