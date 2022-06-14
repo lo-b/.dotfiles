@@ -38,12 +38,6 @@ opt.fillchars = { eob = " " }
 g.python3_host_prog = "/usr/bin/python"
 g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
 g.material_style = "darker"
-g.dashboard_default_executive = "telescope"
-g.dashboard_preview_command = "cat"
-g.dashboard_preview_pipeline = "lolcat --truecolor --seed 4 -F 0.05"
-g.dashboard_preview_file = "~/.config/nvim/banner.txt"
-g.dashboard_preview_file_height = 7
-g.dashboard_preview_file_width = 80
 g.highlightedyank_highlight_duration = 500
 
 vim.cmd [[

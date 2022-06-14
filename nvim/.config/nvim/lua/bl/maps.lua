@@ -141,7 +141,7 @@ map("n", "<leader>ft", ":Telescope file_browser<cr>", options)
 map(
   "n",
   "<leader>oo",
-  " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '👴 ' })<cr>",
+  " <cmd>lua require('telescope.builtin').oldfiles({ prompt_prefix = '🔄 ' })<cr>",
   options
 )
 
