@@ -1,6 +1,3 @@
--- Only required if you have packer configured as `opt`
-_ = vim.cmd [[packadd packer.nvim]]
-
 return require("packer").startup {
   function(use)
     use "wbthomason/packer.nvim"
@@ -13,13 +10,6 @@ return require("packer").startup {
       },
       config = function()
         require("octo").setup()
-      end,
-    }
-    use {
-      "ray-x/lsp_signature.nvim",
-      opt = true,
-      config = function()
-        require("lsp_signature").setup()
       end,
     }
     use "pearofducks/ansible-vim"
@@ -90,7 +80,7 @@ return require("packer").startup {
     use "nvim-treesitter/playground"
     use "jiangmiao/auto-pairs"
     use "lambdalisue/suda.vim"
-    use { "akinsho/bufferline.nvim", branch = "main" }
+    use { "akinsho/bufferline.nvim", tag = "v2.*" }
     use "akinsho/toggleterm.nvim"
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"

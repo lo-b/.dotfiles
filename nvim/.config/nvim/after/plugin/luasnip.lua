@@ -210,7 +210,7 @@ ls.add_snippets(nil, {
       fmta(
         [[
       \documentclass[../<>]{subfiles}
-      \graphicspath{{\subfix{../<>/}}}
+      \graphicspath{{../<>/}}
       \begin{document}
 
       <>
@@ -245,6 +245,22 @@ ls.add_snippets(nil, {
       \end{figure}
       ]],
         { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
+      )
+    ),
+
+    s(
+      "fig",
+      fmta(
+        [[
+        \begin{figure}[H]
+          \centering
+          \captionsetup{width=.6\textwidth}
+          \includegraphics[scale=0.4]{<>}
+          \caption{<>}
+          \label{fig:<>}
+        \end{figure}
+        ]],
+        { i(1), i(2), i(3) }
       )
     ),
   },
