@@ -59,6 +59,7 @@ map("i", ",", ",<c-g>u", options)
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", options)
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", options)
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", options)
+map("n", "<leader>.", "<cmd>lua vim.lsp.buf.code_action()<cr>", options)
 
 -- Telescope git remaps
 map(

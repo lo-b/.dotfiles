@@ -41,6 +41,19 @@ return require("packer").startup {
     use "nvim-telescope/telescope-ui-select.nvim"
     use "machakann/vim-highlightedyank"
     use "neovim/nvim-lspconfig"
+    use {
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup {
+          text = {
+            spinner = "dots", -- animation shown when tasks are ongoing
+            done = "✔", -- character shown when all tasks are complete
+            commenced = "Started", -- message shown when task starts
+            completed = "Completed", -- message shown when task completes
+          },
+        }
+      end,
+    }
     use "github/copilot.vim"
     use "onsails/lspkind-nvim"
     use {

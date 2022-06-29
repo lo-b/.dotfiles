@@ -21,6 +21,7 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+require("lspconfig").svelte.setup {}
 require("lspconfig").bashls.setup {
   capabilities = capabilities,
   filetypes = { "sh", "zsh" },
@@ -157,8 +158,7 @@ require("lspconfig").sumneko_lua.setup {
   settings = {
     Lua = {
       format = {
-        -- This following will not prevent sumneko from showing up when
-        -- formatting and having to select a server
+        -- disable builtin formatting (use null-ls instead)
         enable = false,
       },
       runtime = {

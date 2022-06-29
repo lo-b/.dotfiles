@@ -27,6 +27,7 @@ dmenu
 docker
 docker-compose
 dockerfile-language-server
+dotnet-sdk
 dragon-drag-and-drop
 entr
 espeak
@@ -130,6 +131,7 @@ python-pipreqs
 python-pynvim
 redshift
 reflector
+rider
 ripgrep
 rofi
 rofi-emoji

@@ -33,10 +33,12 @@ local sources = {
     filetypes = { "sh", "zsh" },
     extra_args = { "-i", "2", "-ci", "-bn" },
   },
+  null_ls.builtins.formatting.prettier,
   null_ls.builtins.diagnostics.hadolint,
   null_ls.builtins.diagnostics.vint,
 }
 
+-- Enable format on save
 require("null-ls").setup {
   on_attach = function(client, bufnr)
     formatting_callback(client, bufnr)
