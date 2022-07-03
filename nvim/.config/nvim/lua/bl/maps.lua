@@ -186,6 +186,13 @@ map(
   options
 )
 
+map(
+  "n",
+  "<leader>sp",
+  "<cmd>lua require('telescope.builtin').spell_suggest(require('telescope.themes').get_dropdown({prompt_prefix='🛠️ ' }))<cr>",
+  options
+)
+
 -- JupyterAscending vim for jupyter notebooks
 map("n", "<space><space>x", "<Plug>JupyterExecute", options)
 map("n", "<space><space>X", "<Plug>JupyterExecuteAll", options)

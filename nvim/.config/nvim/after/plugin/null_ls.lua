@@ -33,7 +33,9 @@ local sources = {
     filetypes = { "sh", "zsh" },
     extra_args = { "-i", "2", "-ci", "-bn" },
   },
-  null_ls.builtins.formatting.prettier,
+  null_ls.builtins.formatting.prettier.with {
+    extra_filetypes = { "svelte" },
+  },
   null_ls.builtins.diagnostics.hadolint,
   null_ls.builtins.diagnostics.vint,
 }

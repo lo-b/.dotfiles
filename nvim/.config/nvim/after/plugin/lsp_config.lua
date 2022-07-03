@@ -21,7 +21,20 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
-require("lspconfig").svelte.setup {}
+require("lspconfig").emmet_ls.setup {
+  capabilities = capabilities,
+  filetypes = {
+    "html",
+    "typescriptreact",
+    "javascriptreact",
+    "css",
+    "less",
+    "svelte",
+  },
+}
+require("lspconfig").svelte.setup {
+  capabilities = capabilities,
+}
 require("lspconfig").bashls.setup {
   capabilities = capabilities,
   filetypes = { "sh", "zsh" },
@@ -51,6 +64,18 @@ require("lspconfig").rust_analyzer.setup {
 }
 require("lspconfig").tsserver.setup {
   capabilities = capabilities,
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = false
+  end,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "svelte",
+  },
 }
 require("lspconfig").pyright.setup {
   capabilities = capabilities,

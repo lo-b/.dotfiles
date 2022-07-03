@@ -54,7 +54,7 @@ return require("packer").startup {
         }
       end,
     }
-    use "github/copilot.vim"
+    use { "github/copilot.vim", opt = true }
     use "onsails/lspkind-nvim"
     use {
       "jose-elias-alvarez/null-ls.nvim",
@@ -110,6 +110,7 @@ return require("packer").startup {
     use "lewis6991/gitsigns.nvim"
     use "L3MON4D3/LuaSnip"
     use "saadparwaiz1/cmp_luasnip"
+    use "mattn/emmet-vim"
   end,
   config = {
     display = {
