@@ -19,7 +19,6 @@ return require("packer").startup {
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "mfussenegger/nvim-jdtls"
-    use "rcarriga/cmp-dap"
     use "rcarriga/nvim-dap-ui"
     use "theHamsta/nvim-dap-virtual-text"
     use "nvim-telescope/telescope-dap.nvim"
@@ -99,6 +98,8 @@ return require("packer").startup {
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-buffer"
+    use "rcarriga/cmp-dap"
+    use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
     use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
     use {
       "iamcco/markdown-preview.nvim",

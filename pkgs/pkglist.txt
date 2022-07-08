@@ -48,6 +48,7 @@ git-filter-repo
 github-cli
 go
 go-tools
+google-chrome
 google-cloud-sdk
 google-java-format
 gopls
@@ -87,6 +88,7 @@ man-pages
 materia-theme-git
 maven
 mediainfo
+mkcert
 mlocate
 ncdu
 neofetch
@@ -242,6 +244,7 @@ xorg-xwayland
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+yaml-language-server
 yapf
 yarn
 zathura
