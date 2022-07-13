@@ -28,6 +28,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
+#start gnome-keyring daemon
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+
 # remove ugly cross as default cursor
 xsetroot -cursor_name left_ptr
 

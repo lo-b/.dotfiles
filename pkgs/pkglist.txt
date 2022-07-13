@@ -13,7 +13,6 @@ biber
 bison
 bottom
 boxes
-brave-bin
 bspwm
 btop
 checkstyle
