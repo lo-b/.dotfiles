@@ -13,7 +13,8 @@ local formatting_callback = function(client, bufnr)
   end, { buffer = bufnr })
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
 local sources = {
   null_ls.builtins.code_actions.shellcheck.with {
     filetypes = { "sh", "zsh" },
@@ -45,9 +46,12 @@ require("null-ls").setup {
   on_attach = function(client, bufnr)
     formatting_callback(client, bufnr)
     if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+      vim.api.nvim_clear_autocmds {
+        group = lsp_formatting_augroup,
+        buffer = bufnr,
+      }
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
+        group = lsp_formatting_augroup,
         buffer = bufnr,
         callback = function()
           -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
@@ -58,3 +62,9 @@ require("null-ls").setup {
   end,
   sources = sources,
 }
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.env*" },
+  command = "set ft=config", -- Or myvimfun
+  group = set_ft_augroup,
+})

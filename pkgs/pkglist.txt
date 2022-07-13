@@ -72,6 +72,7 @@ jdtls
 jq
 jupyter-notebook
 kitty
+kubectl
 libtool
 linux
 linux-firmware
@@ -185,6 +186,7 @@ vim
 vim-language-server
 vint
 volantes-cursors
+vscode-json-languageserver
 which
 whois
 wmname
