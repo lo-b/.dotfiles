@@ -21,18 +21,43 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+require("lspconfig").jsonls.setup {
+  capabilities = capabilities,
+  cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },
+}
+require("lspconfig").yamlls.setup {
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "**/*compose.yaml",
+        kubernetes = "/*.k8s.yaml",
+      },
+    },
+  },
+}
+require("lspconfig").emmet_ls.setup {
+  capabilities = capabilities,
+  filetypes = {
+    "html",
+    "typescriptreact",
+    "javascriptreact",
+    "css",
+    "less",
+    "svelte",
+  },
+}
+require("lspconfig").svelte.setup {
+  capabilities = capabilities,
+}
 require("lspconfig").bashls.setup {
   capabilities = capabilities,
   filetypes = { "sh", "zsh" },
 }
 require("lspconfig").volar.setup {
   filetypes = {
-    "typescript",
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
     "vue",
-    "json",
   },
 }
 require("lspconfig").tailwindcss.setup {
@@ -42,7 +67,7 @@ require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
 require("lspconfig").ansiblels.setup {
-  filetypes = { "yaml.ansible", "yaml" },
+  filetypes = { "yaml.ansible" },
   capabilities = capabilities,
 }
 require("lspconfig").rust_analyzer.setup {
@@ -50,6 +75,18 @@ require("lspconfig").rust_analyzer.setup {
 }
 require("lspconfig").tsserver.setup {
   capabilities = capabilities,
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = false
+  end,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "svelte",
+  },
 }
 require("lspconfig").pyright.setup {
   capabilities = capabilities,
@@ -157,8 +194,7 @@ require("lspconfig").sumneko_lua.setup {
   settings = {
     Lua = {
       format = {
-        -- This following will not prevent sumneko from showing up when
-        -- formatting and having to select a server
+        -- disable builtin formatting (use null-ls instead)
         enable = false,
       },
       runtime = {

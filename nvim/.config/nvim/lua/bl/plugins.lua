@@ -19,7 +19,6 @@ return require("packer").startup {
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use "mfussenegger/nvim-jdtls"
-    use "rcarriga/cmp-dap"
     use "rcarriga/nvim-dap-ui"
     use "theHamsta/nvim-dap-virtual-text"
     use "nvim-telescope/telescope-dap.nvim"
@@ -41,7 +40,20 @@ return require("packer").startup {
     use "nvim-telescope/telescope-ui-select.nvim"
     use "machakann/vim-highlightedyank"
     use "neovim/nvim-lspconfig"
-    use "github/copilot.vim"
+    use {
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup {
+          text = {
+            spinner = "dots", -- animation shown when tasks are ongoing
+            done = "✔", -- character shown when all tasks are complete
+            commenced = "Started", -- message shown when task starts
+            completed = "Completed", -- message shown when task completes
+          },
+        }
+      end,
+    }
+    use { "github/copilot.vim", opt = true }
     use "onsails/lspkind-nvim"
     use {
       "jose-elias-alvarez/null-ls.nvim",
@@ -86,6 +98,8 @@ return require("packer").startup {
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-buffer"
+    use "rcarriga/cmp-dap"
+    use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
     use { "heavenshell/vim-pydocstring", ft = "python", run = "make install" }
     use {
       "iamcco/markdown-preview.nvim",
@@ -97,6 +111,7 @@ return require("packer").startup {
     use "lewis6991/gitsigns.nvim"
     use "L3MON4D3/LuaSnip"
     use "saadparwaiz1/cmp_luasnip"
+    use "mattn/emmet-vim"
   end,
   config = {
     display = {

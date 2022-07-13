@@ -26,6 +26,7 @@ dmenu
 docker
 docker-compose
 dockerfile-language-server
+dotnet-sdk
 dragon-drag-and-drop
 entr
 espeak
@@ -45,6 +46,7 @@ git-filter-repo
 github-cli
 gnome-keyring
 go-tools
+google-chrome
 google-cloud-sdk
 google-java-format
 gopls
@@ -68,6 +70,7 @@ jdk8-openjdk
 jq
 jupyter-notebook
 kitty
+kubectl
 linux
 linux-firmware
 lolcat
@@ -83,6 +86,7 @@ man-pages
 materia-theme-git
 maven
 mediainfo
+mkcert
 mlocate
 mons
 ncdu
@@ -128,9 +132,9 @@ pyright
 python-pip
 python-pipreqs
 python-pynvim
-qt5-qtspell
 redshift
 reflector
+rider
 ripgrep
 rofi
 rofi-emoji
@@ -184,6 +188,7 @@ vim-language-server
 vint
 vlc
 volantes-cursors
+vscode-json-languageserver
 which
 whois
 wmname
@@ -243,6 +248,7 @@ xorg-xwayland
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+yaml-language-server
 yapf
 yarn
 zathura
