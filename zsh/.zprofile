@@ -13,6 +13,12 @@ eval "$(pyenv virtualenv-init -)"
 
 source /home/bram/builds/google-cloud-sdk/google-cloud-sdk.sh
 
+# initialize gnome-keyring
+if [ -n "$DESKTOP_SESSION" ]; then
+  eval $(gnome-keyring-daemon --start)
+  export SSH_AUTH_SOCK
+fi
+
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx
 fi
