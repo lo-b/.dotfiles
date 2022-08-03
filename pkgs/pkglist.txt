@@ -17,6 +17,7 @@ boxes
 bspwm
 btop
 checkstyle
+cloc
 cmus
 ctags
 cuda
@@ -73,6 +74,7 @@ jq
 jupyter-notebook
 kitty
 kubectl
+libreoffice-fresh
 libtool
 linux
 linux-firmware
@@ -91,6 +93,7 @@ maven
 mediainfo
 mkcert
 mlocate
+mongosh-bin
 ncdu
 neofetch
 neomutt
@@ -185,6 +188,7 @@ vale-bin
 vim
 vim-language-server
 vint
+vlc
 volantes-cursors
 vscode-json-languageserver
 which
