@@ -85,7 +85,7 @@ return require("packer").startup {
     use "RRethy/vim-illuminate" -- Illuminate other usages of word
     use "glepnir/dashboard-nvim"
     use "ryanoasis/vim-devicons"
-    use "junegunn/goyo.vim"
+    use "folke/zen-mode.nvim"
     use "szw/vim-maximizer"
     use "kyazdani42/nvim-web-devicons" -- Devicons used by telescope
     use "nvim-treesitter/playground"
