@@ -22,7 +22,6 @@ return require("packer").startup {
     use "rcarriga/nvim-dap-ui"
     use "theHamsta/nvim-dap-virtual-text"
     use "nvim-telescope/telescope-dap.nvim"
-    use "vimwiki/vimwiki"
     use "junegunn/vim-easy-align"
     use "marko-cerovac/material.nvim"
     use "tpope/vim-dadbod"
@@ -86,7 +85,7 @@ return require("packer").startup {
     use "RRethy/vim-illuminate" -- Illuminate other usages of word
     use "glepnir/dashboard-nvim"
     use "ryanoasis/vim-devicons"
-    use "junegunn/goyo.vim"
+    use "folke/zen-mode.nvim"
     use "szw/vim-maximizer"
     use "kyazdani42/nvim-web-devicons" -- Devicons used by telescope
     use "nvim-treesitter/playground"
@@ -112,6 +111,7 @@ return require("packer").startup {
     use "L3MON4D3/LuaSnip"
     use "saadparwaiz1/cmp_luasnip"
     use "mattn/emmet-vim"
+    use "wakatime/vim-wakatime"
   end,
   config = {
     display = {

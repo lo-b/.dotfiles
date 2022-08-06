@@ -16,6 +16,7 @@ boxes
 bspwm
 btop
 checkstyle
+cloc
 cmus
 ctags
 cuda
@@ -71,6 +72,8 @@ jq
 jupyter-notebook
 kitty
 kubectl
+libreoffice-fresh
+libtool
 linux
 linux-firmware
 lolcat
@@ -89,6 +92,7 @@ mediainfo
 mkcert
 mlocate
 mons
+mongosh-bin
 ncdu
 neofetch
 neomutt
@@ -177,6 +181,7 @@ ttf-iosevka-nerd
 ttf-liberation
 ttf-merriweather
 ttf-twemoji
+ttf-windows
 typescript-language-server
 ueberzug
 uncrustify
