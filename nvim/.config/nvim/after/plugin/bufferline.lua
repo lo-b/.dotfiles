@@ -10,20 +10,20 @@ require("bufferline").setup {
   },
   highlights = {
     fill = {
-      guifg = "#313335",
-      guibg = "#313335",
+      fg = "#313335",
+      bg = "#313335",
     },
     tab_close = {
-      guibg = "#313335",
+      bg = "#313335",
     },
     separator = {
-      guifg = "#313335",
+      fg = "#313335",
     },
     separator_selected = {
-      guifg = "#313335",
+      fg = "#313335",
     },
     separator_visible = {
-      guifg = "#313335",
+      fg = "#313335",
     },
   },
 }
