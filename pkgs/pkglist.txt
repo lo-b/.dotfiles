@@ -58,6 +58,7 @@ gradle
 gucharmap
 hadolint-bin
 handlr
+heroic-games-launcher-bin
 htop
 imagemagick
 insomnia-bin
@@ -74,6 +75,8 @@ jq
 jupyter-notebook
 kitty
 kubectl
+legendary
+lib32-systemd
 libreoffice-fresh
 libtool
 linux
@@ -148,6 +151,7 @@ shellcheck
 shfmt
 spotify
 sqls-bin
+steam
 stow
 stylua
 sudo
