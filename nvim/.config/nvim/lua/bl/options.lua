@@ -43,5 +43,4 @@ g.highlightedyank_highlight_duration = 500
 vim.cmd [[
   syntax enable
   filetype plugin on
-  colorscheme material
 ]]

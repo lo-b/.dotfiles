@@ -34,7 +34,7 @@ map("n", "<C-l>", "<C-W>l", options)
 map("n", "<esc>", ":noh<return><esc>", options)
 map("n", "<esc>^[", "<esc>^[", options)
 
--- Fugative GIT
+-- Fugitive GIT
 map("n", "<leader>gg", ":G<CR>", options)
 map("n", "<leader>gp", ":G push<CR>", options)
 
