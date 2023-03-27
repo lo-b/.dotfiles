@@ -10,13 +10,13 @@ require "bl.maps"
 
 -- Function to get all active buffers, used by nvr to (remotely) get all active
 -- buffers of a nvim instance.
-vim.cmd [[
-function! GetActiveBuffers()
-    let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
-    let l:result = []
-    for l:item in l:blist
-        call add(l:result, shellescape(l:item.name))
-    endfor
-    return l:result
-endfunction
-]]
+-- vim.cmd [[
+-- function! GetActiveBuffers()
+--     let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
+--     let l:result = []
+--     for l:item in l:blist
+--         call add(l:result, shellescape(l:item.name))
+--     endfor
+--     return l:result
+-- endfunction
+-- ]]
