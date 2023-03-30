@@ -1,0 +1,28 @@
+---
+- name: Create udev rule to run bspwm script when an HDMI cable is plugged in or unplugged
+  hosts: localhost
+  vars:
+    # variable for the directory containing bspwm_setup_monitors script
+    home_dir: "/home/bram"
+  become: yes
+  tasks:
+    - name: Check if bspwm_setup_monitors exists
+      stat:
+        path: "{{ home_dir }}/.bin/bspwm_setup_monitors.sh"
+      register: file_stat
+      failed_when: file_stat.stat.exists == false
+
+    - name: Add udev rule to run bspwm_setup_monitors script, should be located in a .bin folder in the home
+      copy:
+        dest: /etc/udev/rules.d/99-hdmi.rules
+        content: |
+          KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="{{ home_dir }}/.Xauthority", RUN+="{{ home_dir }}/.bin/bspwm_setup_monitors.sh"
+      when: file_stat.stat.exists
+      notify:
+        - restart udev
+
+  handlers:
+    - name: restart udev
+      service:
+        name: systemd-udevd
+        state: restarted
