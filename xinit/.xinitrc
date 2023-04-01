@@ -42,4 +42,5 @@ picom &
 nitrogen --random --set-auto "$HOME/images/wallpapers/digital-art-minimalism-nature-hills.jpeg" &
 xbanish &
 xbindkeys
+blueman-applet &
 exec bspwm
