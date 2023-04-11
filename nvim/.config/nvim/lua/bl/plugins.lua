@@ -131,7 +131,7 @@ local plugins = {
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
-  "mattn/emmet-vim",
+  { "mattn/emmet-vim", lazy = true },
   "wakatime/vim-wakatime",
 }
 

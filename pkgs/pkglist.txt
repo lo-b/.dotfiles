@@ -9,6 +9,7 @@ autopep8
 azure-cli
 base
 base-devel
+bash-bats
 bash-language-server
 bat
 biber
@@ -35,6 +36,7 @@ entr
 espeak
 evince
 exa
+exercism
 exfat-utils
 fakeroot
 fd
@@ -74,7 +76,6 @@ jq
 jupyter-notebook
 kitty
 kubectl
-lib32-nvidia-utils
 linux
 linux-firmware
 lolcat
@@ -137,6 +138,7 @@ pyenv-virtualenv
 pyright
 python-pip
 python-pipreqs
+python-poetry
 python-pynvim
 redshift
 reflector
@@ -151,9 +153,9 @@ scrot
 seahorse
 shellcheck
 shfmt
+signal-desktop
 spotify
 sqls-bin
-steam
 stow
 streamlink
 stylua

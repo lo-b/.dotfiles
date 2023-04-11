@@ -94,7 +94,7 @@ require("lspconfig").pyright.setup {
 require("lspconfig").dockerls.setup {
   capabilities = capabilities,
 }
-require("lspconfig").sqls.setup {
+require("lspconfig").sqlls.setup {
   settings = {
     sqls = {
       connections = {
