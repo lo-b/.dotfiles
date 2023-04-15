@@ -23,6 +23,7 @@ ctags
 cuda
 cudnn
 debugedit
+dejagnu
 dhcpcd
 discord
 dmenu
@@ -30,12 +31,15 @@ docker
 docker-compose
 dockerfile-language-server
 dotnet-sdk
+doxygen
 dragon-drag-and-drop
 entr
 espeak
 evince
 exa
+exercism
 exfat-utils
+expect
 fakeroot
 fd
 firefox
@@ -61,6 +65,7 @@ hadolint-bin
 handlr
 htop
 imagemagick
+inetutils
 insomnia-bin
 intel-ucode
 intellij-idea-ultimate-edition
@@ -108,6 +113,7 @@ nvidia
 nvidia-settings
 nvim-packer-git
 nvm
+nvtop
 obs-studio
 openssh
 oreo-cursors-git
