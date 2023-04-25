@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+fpath=( ~/.zfunc "${fpath[@]}" )
+
 # History configuration
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -18,6 +20,13 @@ bindkey -v
 # Enable autocompletion
 autoload -Uz compinit
 compinit
+
+# terraform autocompletion
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+
+# cog autocompletions
+autoload -Uz _cog
 
 # Load module below for vim menu keybinds to work.
 zmodload zsh/complist
@@ -49,6 +58,9 @@ export JDTLS_HOME=/usr/share/java/jdtls/
 export LOMBOK_JAR=/usr/lib/lombok-common/lombok.jar
 export WORKSPACE=/home/bram/.jdtls-workspaces/ # Defaults to $HOME/workspace
 
+# GPG export for GitHub signing
+export GPG_TTY=$(tty)
+
 # Key bindings
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
@@ -65,8 +77,11 @@ eval "$(pyenv virtualenv-init -)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# nvm
+# node version manager (nvm)
 source /usr/share/nvm/init-nvm.sh
+
+# glab (GitLab CLI) autocompletion
+source <(glab completion -s zsh); compdef _glab glab
 
 # Aliases
 alias nv='nvim'
@@ -75,6 +90,7 @@ alias syu='paru -Syu'
 alias x='exa --icons'
 alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 alias ap='ansible-playbook'
+alias tf='terraform'
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

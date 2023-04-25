@@ -20,6 +20,9 @@ local sources = {
     filetypes = { "sh", "zsh" },
   },
   null_ls.builtins.code_actions.gitsigns,
+  null_ls.builtins.code_actions.eslint.with {
+    extra_filetypes = { "svelte" },
+  },
   null_ls.builtins.completion.luasnip,
   null_ls.builtins.completion.spell,
   null_ls.builtins.formatting.stylua.with {
@@ -37,8 +40,13 @@ local sources = {
   null_ls.builtins.formatting.prettier.with {
     extra_filetypes = { "svelte" },
   },
+  null_ls.builtins.formatting.terraform_fmt,
   null_ls.builtins.diagnostics.hadolint,
   null_ls.builtins.diagnostics.vint,
+  null_ls.builtins.diagnostics.eslint.with {
+    extra_filetypes = { "svelte" },
+  },
+  null_ls.builtins.diagnostics.terraform_validate,
 }
 
 -- Enable format on save
