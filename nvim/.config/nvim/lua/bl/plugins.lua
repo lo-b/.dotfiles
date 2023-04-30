@@ -43,7 +43,6 @@ local plugins = {
   "mfussenegger/nvim-jdtls",
   "rcarriga/nvim-dap-ui",
   "theHamsta/nvim-dap-virtual-text",
-  "nvim-telescope/telescope-dap.nvim",
   "junegunn/vim-easy-align",
   "tpope/vim-dadbod",
   "tpope/vim-characterize",
@@ -54,6 +53,7 @@ local plugins = {
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
+  "nvim-telescope/telescope-dap.nvim",
   "nvim-telescope/telescope-fzy-native.nvim",
   "nvim-telescope/telescope-media-files.nvim",
   "nvim-telescope/telescope-file-browser.nvim",
@@ -89,7 +89,6 @@ local plugins = {
     },
   },
   "hoob3rt/lualine.nvim",
-  "tweekmonster/startuptime.vim",
   {
     "kyazdani42/nvim-tree.lua",
     dependencies = {
@@ -104,7 +103,6 @@ local plugins = {
   },
   "matze/vim-move",
   "RRethy/vim-illuminate", -- Illuminate other usages of word
-  "glepnir/dashboard-nvim",
   "ryanoasis/vim-devicons",
   "folke/zen-mode.nvim",
   "szw/vim-maximizer",
@@ -135,6 +133,10 @@ local plugins = {
   "wakatime/vim-wakatime",
   "evanleck/vim-svelte",
   "hashivim/vim-terraform",
+  {
+    "knubie/vim-kitty-navigator",
+    build = "cp ./*.py ~/.config/kitty/",
+  },
 }
 
 local opts = {}

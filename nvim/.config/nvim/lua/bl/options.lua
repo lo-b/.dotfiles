@@ -25,7 +25,7 @@ opt.clipboard:append "unnamedplus"
 opt.wrap = false
 opt.updatetime = 100
 opt.completeopt = { "menuone", "noinsert", "noselect" }
-opt.shortmess:append "c"
+opt.shortmess:append "cI"
 opt.mouse = "a"
 opt.listchars = { tab = "» ", trail = "·", eol = "↲" }
 opt.list = true

@@ -130,9 +130,9 @@ pkgconf
 pkgfile
 playerctl
 pmd
+pnpm
 polybar
 powerline-fonts-git
-prettier
 pulseaudio
 pycharm-professional
 pyenv
@@ -180,9 +180,6 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 tllocalmgr-git
-tmux
-tmux-bash-completion-git
-tmuxp
 trash-cli
 tree
 ttf-iosevka-nerd

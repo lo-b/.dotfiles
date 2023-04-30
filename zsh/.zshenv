@@ -1,3 +1,3 @@
 typeset -U PATH path
-path=("$HOME/.local/bin" "$HOME/.bin/" "$path[@]")
+path=("$HOME/.local/bin" "$HOME/.bin/" "$HOME/.cargo/bin" "$path[@]")
 export PATH
