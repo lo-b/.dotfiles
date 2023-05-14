@@ -127,6 +127,7 @@ pkgconf
 pkgfile
 playerctl
 pmd
+pnpm
 polybar
 powerline-fonts-git
 powertop
