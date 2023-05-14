@@ -81,7 +81,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/nvm/init-nvm.sh
 
 # glab (GitLab CLI) autocompletion
-source <(glab completion -s zsh); compdef _glab glab
+# source <(glab completion -s zsh); compdef _glab glab
 
 # Aliases
 alias nv='nvim'
