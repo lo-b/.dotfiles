@@ -75,8 +75,8 @@ require("lspconfig").rust_analyzer.setup {
 }
 require("lspconfig").tsserver.setup {
   capabilities = capabilities,
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
+  on_attach = function(client, _)
+    client.server_capabilities.documentFormattingProvider = false
   end,
   filetypes = {
     "javascript",
@@ -220,6 +220,8 @@ require("lspconfig").lua_ls.setup {
   },
   capabilities = capabilities,
 }
+
+require("lspconfig").terraformls.setup {}
 
 _ = vim.cmd [[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A

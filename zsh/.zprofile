@@ -4,10 +4,10 @@ export XDG_DATA_HOME=${HOME}/.local/share
 export XDG_STATE_HOME=${HOME}/.local/state
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
+
+# pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
-
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

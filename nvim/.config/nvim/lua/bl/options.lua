@@ -25,7 +25,7 @@ opt.clipboard:append "unnamedplus"
 opt.wrap = false
 opt.updatetime = 100
 opt.completeopt = { "menuone", "noinsert", "noselect" }
-opt.shortmess:append "c"
+opt.shortmess:append "cI"
 opt.mouse = "a"
 opt.listchars = { tab = "» ", trail = "·", eol = "↲" }
 opt.list = true
@@ -34,6 +34,10 @@ opt.statusline:append "%{get(b:,'gitsigns_status','')}"
 opt.grepprg = "rg --vimgrep --hidden"
 opt.grepformat:prepend "%f:%l:%c:%m"
 opt.fillchars = { eob = " " }
+
+-- disable builtin file explorer netrw
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 g.python3_host_prog = "/usr/bin/python"
 g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
