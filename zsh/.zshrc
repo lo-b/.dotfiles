@@ -93,6 +93,9 @@ source /home/bram/.zsh-completion/dotnet.completion
 # azure CLI completion
 source /opt/azure-cli/az.completion
 
+# opt out of func telemetry 
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
 # Aliases
 alias nv='nvim'
 alias dc='docker-compose'
