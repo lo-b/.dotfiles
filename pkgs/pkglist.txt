@@ -5,6 +5,8 @@ ansible-lint
 autoconf
 automake
 autopep8
+azure-cli
+azure-functions-core-tools-bin
 base
 base-devel
 bash-language-server
@@ -93,6 +95,7 @@ m4
 make
 man-db
 man-pages
+mangohud
 materia-theme-git
 maven
 mediainfo
@@ -114,10 +117,12 @@ nvim-packer-git
 nvm
 nvtop
 obs-studio
+omnisharp-roslyn
 openssh
 oreo-cursors-git
 p7zip
 pacgraph
+pacman-contrib
 pacutils
 papirus-icon-theme
 paru
@@ -133,6 +138,7 @@ pmd
 pnpm
 polybar
 powerline-fonts-git
+prettier
 pulseaudio
 pycharm-professional
 pyenv
@@ -149,7 +155,6 @@ rofi
 rofi-emoji
 rust-analyzer
 sc-im
-shellcheck
 shfmt
 signal-desktop
 spotify
@@ -182,7 +187,6 @@ texlive-science
 tllocalmgr-git
 trash-cli
 tree
-ttf-iosevka-nerd
 ttf-jetbrains-mono-nerd
 ttf-liberation
 ttf-merriweather

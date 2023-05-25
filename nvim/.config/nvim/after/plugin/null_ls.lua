@@ -16,9 +16,12 @@ end
 local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
 local sources = {
-  null_ls.builtins.code_actions.shellcheck.with {
-    filetypes = { "sh", "zsh" },
-  },
+  -- This is BUGGIN' 🐛
+  -- Will spawn multiple shellcheck instances when opening a single file,
+  -- exhausting system resources. Disabled for now.
+  -- null_ls.builtins.code_actions.shellcheck.with {
+  --   filetypes = { "sh", "zsh" },
+  -- },
   null_ls.builtins.code_actions.gitsigns,
   null_ls.builtins.code_actions.eslint.with {
     extra_filetypes = { "svelte" },

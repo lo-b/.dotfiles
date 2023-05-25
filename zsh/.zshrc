@@ -83,6 +83,16 @@ source /usr/share/nvm/init-nvm.sh
 # glab (GitLab CLI) autocompletion
 source <(glab completion -s zsh); compdef _glab glab
 
+# dotnet env vars
+export DOTNET_ROOT=$HOME/.dotnet
+
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+
+source /home/bram/.zsh-completion/dotnet.completion
+
+# azure CLI completion
+source /opt/azure-cli/az.completion
+
 # Aliases
 alias nv='nvim'
 alias dc='docker-compose'

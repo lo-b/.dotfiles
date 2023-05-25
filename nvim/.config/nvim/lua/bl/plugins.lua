@@ -137,6 +137,8 @@ local plugins = {
     "knubie/vim-kitty-navigator",
     build = "cp ./*.py ~/.config/kitty/",
   },
+  "sindrets/diffview.nvim",
+  "Hoffs/omnisharp-extended-lsp.nvim",
 }
 
 local opts = {}
