@@ -28,6 +28,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
+xrdb ~/.Xresources
 # remove ugly cross as default cursor
 xsetroot -cursor_name left_ptr
 redshift -l 51:5 -t 5700:2800 &

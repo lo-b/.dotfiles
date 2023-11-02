@@ -86,7 +86,7 @@ source <(glab completion -s zsh); compdef _glab glab
 # dotnet env vars
 export DOTNET_ROOT=$HOME/.dotnet
 
-export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 source /home/bram/.zsh-completion/dotnet.completion
 

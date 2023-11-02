@@ -62,6 +62,7 @@ local plugins = {
   "neovim/nvim-lspconfig",
   {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     config = function()
       require("fidget").setup {
         text = {
