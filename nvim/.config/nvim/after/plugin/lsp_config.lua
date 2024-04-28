@@ -67,7 +67,7 @@ require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
 require("lspconfig").ansiblels.setup {
-  filetypes = { "yaml.ansible" },
+  filetypes = { "ansible" },
   capabilities = capabilities,
 }
 require("lspconfig").rust_analyzer.setup {

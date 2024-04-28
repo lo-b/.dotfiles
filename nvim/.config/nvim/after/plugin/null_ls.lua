@@ -15,6 +15,7 @@ end
 
 local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
+local set_ansible_ft = vim.api.nvim_create_augroup("SetAnsibleFileType", {})
 local sources = {
   -- This is BUGGIN' 🐛
   -- Will spawn multiple shellcheck instances when opening a single file,
@@ -44,12 +45,18 @@ local sources = {
     extra_filetypes = { "svelte" },
   },
   null_ls.builtins.formatting.terraform_fmt,
+  null_ls.builtins.formatting.yamlfmt.with {
+    extra_filetypes = { "yml", "ansible" }
+  },
   null_ls.builtins.diagnostics.hadolint,
   null_ls.builtins.diagnostics.vint,
   null_ls.builtins.diagnostics.eslint.with {
     extra_filetypes = { "svelte" },
   },
   null_ls.builtins.diagnostics.terraform_validate,
+  null_ls.builtins.diagnostics.ansiblelint.with {
+    extra_filetypes = { "ansible"}
+  }
 }
 
 -- Enable format on save
@@ -66,7 +73,7 @@ require("null-ls").setup {
         buffer = bufnr,
         callback = function()
           -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-          vim.lsp.buf.format()
+          vim.lsp.buf.format({ bufnr = bufnr })
         end,
       })
     end
@@ -76,6 +83,12 @@ require("null-ls").setup {
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.env*" },
-  command = "set ft=config", -- Or myvimfun
+  command = "set ft=config",
   group = set_ft_augroup,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "**/playbooks/*.{yaml,yml}" },
+  command = "set ft=ansible",
+  group = set_ansible_ft,
 })
