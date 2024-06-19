@@ -111,7 +111,6 @@ local plugins = {
   "nvim-treesitter/playground",
   "jiangmiao/auto-pairs",
   "lambdalisue/suda.vim",
-  { "akinsho/bufferline.nvim", version = "v2.*" },
   "akinsho/toggleterm.nvim",
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
@@ -122,8 +121,12 @@ local plugins = {
   { "heavenshell/vim-pydocstring", ft = "python", build = "make install" },
   {
     "iamcco/markdown-preview.nvim",
-    ft = "markdown",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   { "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },

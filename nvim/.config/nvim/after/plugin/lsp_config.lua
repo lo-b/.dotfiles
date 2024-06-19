@@ -66,6 +66,10 @@ require("lspconfig").tailwindcss.setup {
 require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
+require("lspconfig").jinja_lsp.setup {
+  filetypes = { "jinja", "jinja2" },
+  capabilities = capabilities,
+}
 require("lspconfig").ansiblels.setup {
   filetypes = { "ansible" },
   capabilities = capabilities,
@@ -88,7 +92,7 @@ require("lspconfig").tsserver.setup {
     "svelte",
   },
 }
-require("lspconfig").pyright.setup {
+require("lspconfig").pylyzer.setup {
   capabilities = capabilities,
 }
 require("lspconfig").dockerls.setup {

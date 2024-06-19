@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "**/playbooks/*.{yaml,yml}" },
+  pattern = { "**/{playbooks,tasks}/*.{yaml,yml}" },
   command = "set ft=ansible",
   group = set_ansible_ft,
 })

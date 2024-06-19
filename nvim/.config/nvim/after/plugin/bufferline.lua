@@ -1,4 +1,9 @@
-require("bufferline").setup {
+local has_bufferline, bufferline = pcall(require, "bufferline")
+if not has_bufferline then
+  return
+end
+
+bufferline.setup {
   options = {
     indicator = " ▎",
     buffer_close_icon = "",
