@@ -32,7 +32,10 @@ xrdb ~/.Xresources
 # remove ugly cross as default cursor
 xsetroot -cursor_name left_ptr
 redshift -l 51:5 -t 5700:2800 &
-picom &
+
+# NOTE: disabled picom due to tooltip/dropdown menu 
+# (menu that pops up after right clicking in firefox for example) sticking to the screen
+# picom &
 nitrogen --random --set-auto "$HOME/images/wallpapers/digital-art-minimalism-nature-hills.jpeg" &
 xbanish &
 xbindkeys
