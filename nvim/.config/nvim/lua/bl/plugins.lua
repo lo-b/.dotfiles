@@ -59,6 +59,8 @@ local plugins = {
   "nvim-telescope/telescope-file-browser.nvim",
   "nvim-telescope/telescope-ui-select.nvim",
   "machakann/vim-highlightedyank",
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig",
   {
     "j-hui/fidget.nvim",

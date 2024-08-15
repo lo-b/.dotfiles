@@ -21,6 +21,11 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = { "basedpyright" },
+})
+
 require("lspconfig").jsonls.setup {
   capabilities = capabilities,
   cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },
@@ -92,7 +97,7 @@ require("lspconfig").tsserver.setup {
     "svelte",
   },
 }
-require("lspconfig").pylyzer.setup {
+require("lspconfig").basedpyright.setup {
   capabilities = capabilities,
 }
 require("lspconfig").dockerls.setup {
