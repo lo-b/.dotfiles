@@ -131,6 +131,11 @@ local plugins = {
     ft = { "markdown" },
   },
   { "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false }
+  },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
