@@ -81,10 +81,8 @@ local plugins = {
   { "github/copilot.vim", lazy = true },
   "onsails/lspkind-nvim",
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "ThePrimeagen/refactoring.nvim",

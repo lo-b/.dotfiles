@@ -23,7 +23,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { "basedpyright" },
+    ensure_installed = { "basedpyright", "ruff" },
 })
 
 require("lspconfig").jsonls.setup {
@@ -98,6 +98,9 @@ require("lspconfig").tsserver.setup {
   },
 }
 require("lspconfig").basedpyright.setup {
+  capabilities = capabilities,
+}
+require("lspconfig").ruff.setup {
   capabilities = capabilities,
 }
 require("lspconfig").dockerls.setup {
@@ -203,7 +206,7 @@ require("lspconfig").lua_ls.setup {
   settings = {
     Lua = {
       format = {
-        -- disable builtin formatting (use null-ls instead)
+        -- disable builtin formatting
         enable = false,
       },
       runtime = {
@@ -355,6 +358,21 @@ require("lspconfig").omnisharp.setup {
   -- true
   analyze_open_documents_only = false,
 }
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
 
 _ = vim.cmd [[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A
