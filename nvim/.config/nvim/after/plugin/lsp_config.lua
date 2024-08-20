@@ -100,8 +100,14 @@ require("lspconfig").tsserver.setup {
 require("lspconfig").basedpyright.setup {
   capabilities = capabilities,
 }
+-- INFO: setup ruff linting using lspconfig to integrate code actions
 require("lspconfig").ruff.setup {
   capabilities = capabilities,
+  init_options = {
+    settings = {
+      logLevel = "warn",
+    }
+  }
 }
 require("lspconfig").dockerls.setup {
   capabilities = capabilities,

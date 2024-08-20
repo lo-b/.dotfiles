@@ -1,3 +1,11 @@
+local lint_progress = function()
+  local linters = require("lint").get_running()
+  if #linters == 0 then
+      return "󰦕"
+  end
+  return "󱉶 " .. table.concat(linters, ", ")
+end
+
 require("lualine").setup {
   options = {
     lower = false,
@@ -21,6 +29,7 @@ require("lualine").setup {
           hint = "🤔",
         },
       },
+      { lint_progress },
       { "branch", icon = "" },
       {
         "diff",

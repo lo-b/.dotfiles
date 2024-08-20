@@ -41,6 +41,10 @@ local plugins = {
   "lervag/vimtex",
   "liuchengxu/vista.vim",
   "mfussenegger/nvim-dap",
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+  },
   "mfussenegger/nvim-dap-python",
   "mfussenegger/nvim-jdtls",
   "rcarriga/nvim-dap-ui",
@@ -83,6 +87,10 @@ local plugins = {
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" }
   },
   {
     "ThePrimeagen/refactoring.nvim",
