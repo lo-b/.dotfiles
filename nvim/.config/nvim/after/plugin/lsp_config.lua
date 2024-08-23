@@ -23,9 +23,11 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { "basedpyright", "ruff" },
+    ensure_installed = { "basedpyright", "ruff", "bashls", "lua_ls", "taplo" },
 })
 
+-- TOML lsp
+require("lspconfig").taplo.setup {}
 require("lspconfig").jsonls.setup {
   capabilities = capabilities,
   cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },

@@ -145,6 +145,7 @@ local plugins = {
     opts = { signs = false }
   },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter-context" },
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
