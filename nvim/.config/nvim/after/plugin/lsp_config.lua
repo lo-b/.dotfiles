@@ -23,7 +23,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { "basedpyright", "ruff", "bashls", "lua_ls", "taplo" },
+    ensure_installed = {
+      "basedpyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
+    },
 })
 
 -- TOML lsp
@@ -73,13 +75,19 @@ require("lspconfig").tailwindcss.setup {
 require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
-require("lspconfig").jinja_lsp.setup {
-  filetypes = { "jinja", "jinja2" },
-  capabilities = capabilities,
-}
 require("lspconfig").ansiblels.setup {
   filetypes = { "ansible" },
   capabilities = capabilities,
+  settings = {
+    ansible = {
+      validation = {
+        lint = {
+          -- NOTE: linting will be set up using nvim-lint
+          enabled = false,
+        }
+      }
+    }
+  }
 }
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
@@ -380,6 +388,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
   desc = 'LSP: Disable hover capability from Ruff',
+})
+
+local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
+local set_ansible_ft = vim.api.nvim_create_augroup("SetAnsibleFileType", {})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.env*" },
+  command = "set ft=config",
+  group = set_ft_augroup,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "**/{playbooks,tasks}/*.{yaml,yml}" },
+  command = "set ft=ansible",
+  group = set_ansible_ft,
 })
 
 _ = vim.cmd [[
