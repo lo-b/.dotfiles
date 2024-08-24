@@ -1,0 +1,39 @@
+{
+  "$schema": "https://lnav.org/schemas/format-v1.schema.json",
+  "nvim_lsp": {
+    "description": "Format file generated from regex101 entry -- https://regex101.com/r/uwg6ZN/1",
+    "regex": {
+      "basic": {
+        "pattern": "\\[(?<level>INFO|WARN|ERROR|DEBUG)\\]\\[(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\]\\s+(?<file>[^\\s]+):(?<line>\\d+)\\s+(?<message>.+)"
+      }
+    },
+    "level-field": "level",
+    "level": {
+      "error": "ERROR",
+      "warning": "WARN"
+    },
+    "value": {
+      "file": {
+        "kind": "string",
+        "identifier": true
+      },
+      "level": {
+        "kind": "string",
+        "identifier": true
+      },
+      "line": {
+        "kind": "integer",
+        "identifier": true
+      },
+      "message": {
+        "kind": "quoted",
+        "identifier": true
+      }
+    },
+    "sample": [
+      {
+        "line": "[WARN][2024-04-28 16:26:26] .../lua/vim/lsp.lua:101\t\"method textDocument/definition is not supported by any of the servers registered for the current buffer\""
+      }
+    ]
+  }
+}
