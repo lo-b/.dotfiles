@@ -25,6 +25,7 @@ require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
       "basedpyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
+      "jsonls"
     },
 })
 
@@ -32,7 +33,8 @@ require('mason-lspconfig').setup({
 require("lspconfig").taplo.setup {}
 require("lspconfig").jsonls.setup {
   capabilities = capabilities,
-  cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },
+  -- NOTE: disable LSP provided formatting; use prettier thru conform instead
+  init_options = { provideFormatter = false },
 }
 require("lspconfig").yamlls.setup {
   capabilities = capabilities,
@@ -76,7 +78,7 @@ require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
 require("lspconfig").ansiblels.setup {
-  filetypes = { "ansible" },
+  filetypes = { "ansible", "yaml.ansible" },
   capabilities = capabilities,
   settings = {
     ansible = {
@@ -391,18 +393,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
-local set_ansible_ft = vim.api.nvim_create_augroup("SetAnsibleFileType", {})
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.env*" },
   command = "set ft=config",
   group = set_ft_augroup,
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "**/{playbooks,tasks}/*.{yaml,yml}" },
-  command = "set ft=ansible",
-  group = set_ansible_ft,
 })
 
 _ = vim.cmd [[
