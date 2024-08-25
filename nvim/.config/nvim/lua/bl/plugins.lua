@@ -121,7 +121,6 @@ local plugins = {
   "nvim-treesitter/playground",
   "jiangmiao/auto-pairs",
   "lambdalisue/suda.vim",
-  "akinsho/toggleterm.nvim",
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-path",
@@ -153,10 +152,6 @@ local plugins = {
   -- "mattn/emmet-vim",
   "evanleck/vim-svelte",
   "hashivim/vim-terraform",
-  {
-    "knubie/vim-kitty-navigator",
-    build = "cp ./*.py ~/.config/kitty/",
-  },
   "sindrets/diffview.nvim",
   "Hoffs/omnisharp-extended-lsp.nvim",
 }
