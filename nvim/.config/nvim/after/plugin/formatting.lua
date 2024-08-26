@@ -17,6 +17,7 @@ conform.setup({
   end,
   formatters_by_ft = {
     python = { "ruff_format", "ruff_organize_imports" },
-    json = { "prettier" }
+    json = { "prettier" },
+    markdown = { "prettier" },
   },
 })

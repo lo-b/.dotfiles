@@ -71,9 +71,6 @@ require("lspconfig").volar.setup {
     "vue",
   },
 }
-require("lspconfig").tailwindcss.setup {
-  capabilities = capabilities,
-}
 require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
@@ -108,9 +105,6 @@ require("lspconfig").tsserver.setup {
     "typescript.tsx",
     "svelte",
   },
-}
-require("lspconfig").basedpyright.setup {
-  capabilities = capabilities,
 }
 -- INFO: setup ruff linting using lspconfig to integrate code actions
 require("lspconfig").ruff.setup {
@@ -376,6 +370,30 @@ require("lspconfig").omnisharp.setup {
   -- true
   analyze_open_documents_only = false,
 }
+
+-- setup pyright based on whether a venv is active or not
+local basedpyright = require("lspconfig").basedpyright
+local active_venv = vim.env.VIRTUAL_ENV
+
+if active_venv == nil then
+  basedpyright.setup{}
+else
+  basedpyright.setup {
+    capabilities = capabilities,
+    filetypes = { "python" },
+    settings = {
+      basedpyright = {
+        analysis = {
+          include = { "**/*.py" },
+        },
+      },
+      python = {
+        -- point to python path of activate venv
+        pythonPath = vim.fs.joinpath(active_venv, "bin", "python"),
+      },
+    },
+  }
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
