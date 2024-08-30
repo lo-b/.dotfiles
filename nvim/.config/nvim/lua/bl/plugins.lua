@@ -129,6 +129,11 @@ local plugins = {
   { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
   { "heavenshell/vim-pydocstring", ft = "python", build = "make install" },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {},
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+  },
+  {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && yarn install",
@@ -153,7 +158,10 @@ local plugins = {
   "evanleck/vim-svelte",
   "hashivim/vim-terraform",
   "sindrets/diffview.nvim",
-  "Hoffs/omnisharp-extended-lsp.nvim",
+  {
+    "seblj/roslyn.nvim",
+    ft = "cs",
+  }
 }
 
 local opts = {}

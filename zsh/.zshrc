@@ -39,6 +39,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 export EDITOR='nvim'
+
 # Use nvim as pager for manpage
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -84,7 +85,7 @@ source /usr/share/nvm/init-nvm.sh
 source <(glab completion -s zsh); compdef _glab glab
 
 # dotnet env vars
-export DOTNET_ROOT=$HOME/.dotnet
+export DOTNET_ROOT=/usr/share/dotnet
 
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
