@@ -45,12 +45,16 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export VISUAL='nvim'
 
+# Golang env vars
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
 # Needs to be set by nvim-jdtsl
 export JAVA_HOME='/usr/lib/jvm/default'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # nnn 'config'
-export NNN_PLUG='v:preview-tui;d:dragdrop'
+export NNN_PLUG='v:preview-tui;d:dragdrop;i:imgview'
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_TRASH=1 # use trash-cli
 

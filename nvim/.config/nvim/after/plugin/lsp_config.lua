@@ -25,7 +25,7 @@ require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
       "basedpyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
-      "jsonls",
+      "jsonls", "lemminx", "bicep"
     },
 })
 
@@ -91,21 +91,7 @@ require("lspconfig").ansiblels.setup {
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
 }
-require("lspconfig").tsserver.setup {
-  capabilities = capabilities,
-  on_attach = function(client, _)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
-    "svelte",
-  },
-}
+require'lspconfig'.ts_ls.setup{}
 -- INFO: setup ruff linting using lspconfig to integrate code actions
 require("lspconfig").ruff.setup {
   capabilities = capabilities,
@@ -248,6 +234,8 @@ require("lspconfig").terraformls.setup {}
 require("roslyn").setup {
   capabilities = capabilities,
 }
+require("lspconfig").lemminx.setup {}
+require("lspconfig").bicep.setup {}
 
 -- setup pyright based on whether a venv is active or not
 local basedpyright = require("lspconfig").basedpyright

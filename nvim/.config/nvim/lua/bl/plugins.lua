@@ -51,6 +51,8 @@ local plugins = {
   "theHamsta/nvim-dap-virtual-text",
   "junegunn/vim-easy-align",
   "tpope/vim-dadbod",
+  "kristijanhusak/vim-dadbod-completion",
+  "kristijanhusak/vim-dadbod-ui",
   "tpope/vim-characterize",
   "tpope/vim-fugitive",
   "tpope/vim-commentary",
@@ -161,7 +163,15 @@ local plugins = {
   {
     "seblj/roslyn.nvim",
     ft = "cs",
-  }
+  },
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
 }
 
 local opts = {}

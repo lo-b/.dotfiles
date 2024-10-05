@@ -34,7 +34,7 @@ xsetroot -cursor_name left_ptr
 redshift -l 51:5 -t 5700:2800 &
 
 picom &
-nitrogen --random --set-auto "$HOME/images/wallpapers/digital-art-minimalism-nature-hills.jpeg" &
+nitrogen --random --set-auto "$HOME/Pictures/wallpapers/digital-art-minimalism-nature-hills.jpeg" &
 xbanish &
 xbindkeys
 exec bspwm

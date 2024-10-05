@@ -5,7 +5,7 @@ end
 
 vim.fn.sign_define(
   "DapBreakpoint",
-  { text = " ", texthl = "Error", linehl = "", numhl = "" }
+  { text = "🐞", texthl = "Error", linehl = "", numhl = "" }
 )
 vim.fn.sign_define(
   "DapBreakpointCondition",
@@ -53,6 +53,23 @@ dap_python.setup("/usr/bin/python", {
   console = "externalTerminal",
   include_configs = true,
 })
+
+dap.adapters.coreclr = {
+  type = "executable",
+  command = "/usr/bin/netcoredbg",
+  args = {'--interpreter=vscode'}
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+}
 
 require("dapui").setup {
   icons = { expanded = "▾", collapsed = "▸" },
