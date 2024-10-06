@@ -172,6 +172,7 @@ local plugins = {
       "tpope/vim-fugitive",
     },
   },
+  "rest-nvim/rest.nvim",
 }
 
 local opts = {}
