@@ -31,7 +31,9 @@ local plugins = {
       "kyazdani42/nvim-web-devicons",
     },
     config = function()
-      require("octo").setup()
+      require("octo").setup {
+        default_to_projects_v2 = true,
+      }
     end,
   },
   "pearofducks/ansible-vim",
@@ -39,12 +41,18 @@ local plugins = {
   "lervag/vimtex",
   "liuchengxu/vista.vim",
   "mfussenegger/nvim-dap",
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+  },
   "mfussenegger/nvim-dap-python",
   "mfussenegger/nvim-jdtls",
   "rcarriga/nvim-dap-ui",
   "theHamsta/nvim-dap-virtual-text",
   "junegunn/vim-easy-align",
   "tpope/vim-dadbod",
+  "kristijanhusak/vim-dadbod-completion",
+  "kristijanhusak/vim-dadbod-ui",
   "tpope/vim-characterize",
   "tpope/vim-fugitive",
   "tpope/vim-commentary",
@@ -59,9 +67,12 @@ local plugins = {
   "nvim-telescope/telescope-file-browser.nvim",
   "nvim-telescope/telescope-ui-select.nvim",
   "machakann/vim-highlightedyank",
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig",
   {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     config = function()
       require("fidget").setup {
         text = {
@@ -76,10 +87,12 @@ local plugins = {
   { "github/copilot.vim", lazy = true },
   "onsails/lspkind-nvim",
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" }
   },
   {
     "ThePrimeagen/refactoring.nvim",
@@ -110,8 +123,6 @@ local plugins = {
   "nvim-treesitter/playground",
   "jiangmiao/auto-pairs",
   "lambdalisue/suda.vim",
-  { "akinsho/bufferline.nvim", version = "v2.*" },
-  "akinsho/toggleterm.nvim",
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-path",
@@ -120,23 +131,48 @@ local plugins = {
   { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
   { "heavenshell/vim-pydocstring", ft = "python", build = "make install" },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {},
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+  },
+  {
     "iamcco/markdown-preview.nvim",
-    ft = "markdown",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   { "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false }
+  },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter-context" },
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
+  "nvim-neotest/nvim-nio",
   -- "mattn/emmet-vim",
-  "wakatime/vim-wakatime",
   "evanleck/vim-svelte",
   "hashivim/vim-terraform",
+  "sindrets/diffview.nvim",
   {
-    "knubie/vim-kitty-navigator",
-    build = "cp ./*.py ~/.config/kitty/",
+    "seblj/roslyn.nvim",
+    ft = "cs",
   },
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
+  "rest-nvim/rest.nvim",
 }
 
 local opts = {}

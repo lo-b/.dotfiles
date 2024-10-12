@@ -21,9 +21,20 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = {
+      "basedpyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
+      "jsonls", "lemminx", "bicep"
+    },
+})
+
+-- TOML lsp
+require("lspconfig").taplo.setup {}
 require("lspconfig").jsonls.setup {
   capabilities = capabilities,
-  cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },
+  -- NOTE: disable LSP provided formatting; use prettier thru conform instead
+  init_options = { provideFormatter = false },
 }
 require("lspconfig").yamlls.setup {
   capabilities = capabilities,
@@ -60,36 +71,35 @@ require("lspconfig").volar.setup {
     "vue",
   },
 }
-require("lspconfig").tailwindcss.setup {
-  capabilities = capabilities,
-}
 require("lspconfig").gopls.setup {
   capabilities = capabilities,
 }
 require("lspconfig").ansiblels.setup {
-  filetypes = { "yaml.ansible" },
+  filetypes = { "ansible", "yaml.ansible" },
   capabilities = capabilities,
+  settings = {
+    ansible = {
+      validation = {
+        lint = {
+          -- NOTE: linting will be set up using nvim-lint
+          enabled = false,
+        }
+      }
+    }
+  }
 }
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
 }
-require("lspconfig").tsserver.setup {
+require'lspconfig'.ts_ls.setup{}
+-- INFO: setup ruff linting using lspconfig to integrate code actions
+require("lspconfig").ruff.setup {
   capabilities = capabilities,
-  on_attach = function(client, _)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
-    "svelte",
-  },
-}
-require("lspconfig").pyright.setup {
-  capabilities = capabilities,
+  init_options = {
+    settings = {
+      logLevel = "warn",
+    }
+  }
 }
 require("lspconfig").dockerls.setup {
   capabilities = capabilities,
@@ -194,7 +204,7 @@ require("lspconfig").lua_ls.setup {
   settings = {
     Lua = {
       format = {
-        -- disable builtin formatting (use null-ls instead)
+        -- disable builtin formatting
         enable = false,
       },
       runtime = {
@@ -220,8 +230,59 @@ require("lspconfig").lua_ls.setup {
   },
   capabilities = capabilities,
 }
-
 require("lspconfig").terraformls.setup {}
+require("roslyn").setup {
+  capabilities = capabilities,
+}
+require("lspconfig").lemminx.setup {}
+require("lspconfig").bicep.setup {}
+
+-- setup pyright based on whether a venv is active or not
+local basedpyright = require("lspconfig").basedpyright
+local active_venv = vim.env.VIRTUAL_ENV
+
+if active_venv == nil then
+  basedpyright.setup{}
+else
+  basedpyright.setup {
+    capabilities = capabilities,
+    filetypes = { "python" },
+    settings = {
+      basedpyright = {
+        analysis = {
+          include = { "**/*.py" },
+        },
+      },
+      python = {
+        -- point to python path of activate venv
+        pythonPath = vim.fs.joinpath(active_venv, "bin", "python"),
+      },
+    },
+  }
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
+
+local set_ft_augroup = vim.api.nvim_create_augroup("SetEnvFileType", {})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.env*" },
+  command = "set ft=config",
+  group = set_ft_augroup,
+})
 
 _ = vim.cmd [[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A

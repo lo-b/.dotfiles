@@ -39,17 +39,22 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 export EDITOR='nvim'
+
 # Use nvim as pager for manpage
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export VISUAL='nvim'
+
+# Golang env vars
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
 
 # Needs to be set by nvim-jdtsl
 export JAVA_HOME='/usr/lib/jvm/default'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # nnn 'config'
-export NNN_PLUG='v:preview-tui;d:dragdrop'
+export NNN_PLUG='v:preview-tui;d:dragdrop;i:imgview'
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_TRASH=1 # use trash-cli
 
@@ -69,7 +74,7 @@ bindkey -M menuselect 'l' vi-forward-char
 
 # pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -82,6 +87,19 @@ source /usr/share/nvm/init-nvm.sh
 
 # glab (GitLab CLI) autocompletion
 # source <(glab completion -s zsh); compdef _glab glab
+
+# dotnet env vars
+export DOTNET_ROOT=/usr/share/dotnet
+
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+source /home/bram/.zsh-completion/dotnet.completion
+
+# azure CLI completion
+source /opt/azure-cli/az.completion
+
+# opt out of func telemetry 
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
 # Aliases
 alias nv='nvim'

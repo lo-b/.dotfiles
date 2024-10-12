@@ -16,7 +16,7 @@ map(
 )
 
 -- Trouble
-map("n", "<leader>t", ":TroubleToggle<CR>", options)
+map("n", "<leader>T", ":Trouble<CR>", options)
 
 -- Vista remap
 map("n", "<leader>v", ":Vista<CR>", options)
@@ -216,3 +216,9 @@ map("n", "<leader>e", ":NvimTreeToggle<CR>", options)
 map("n", "<leader>E", ":NvimTreeFindFile<CR>", options)
 map("n", "<leader>tf", ":NvimTreeFindFile<CR>", options)
 map("n", "<leader>tr", ":NvimTreeRefresh<CR>", options)
+
+-- oil
+-- open parent directory in current window
+map("n", "-", "<CMD>Oil<CR>", options)
+map("n", "<leader>-", ":lua require('oil').toggle_float()<CR>", options)
+

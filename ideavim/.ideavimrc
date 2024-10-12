@@ -39,8 +39,7 @@ map <S-Space> <Action>(GotoNextError)
 
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>o <Action>(FileStructurePopup)
-map <leader>t :NERDTree<CR>
-map <leader>e <Action>(ShowErrorDescription)
+map <leader>e :NERDTree<CR>
 
 " Better tabbing by not deselecting after indent
 vnoremap < <gv
