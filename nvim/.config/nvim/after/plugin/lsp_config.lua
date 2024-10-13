@@ -117,32 +117,22 @@ require("lspconfig").sqlls.setup {
     },
   },
 }
-require("lspconfig").texlab.setup {
-  capabilities = capabilities,
-  cmd = { "texlab" },
-  filetypes = { "tex", "bib" },
+-- Setup LaTeX LSP
+require("lspconfig").texlab.setup{
   settings = {
     texlab = {
-      auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-        executable = "latexmk",
-        forwardSearchAfter = false,
-        onSave = true,
+        executable = "tectonic",
+        args = {
+          "-X",
+          "build"
+        },
+        onSave = true, -- Automatically build on save
       },
-      chktex = {
-        onEdit = false,
-        onOpenAndSave = false,
-      },
-      diagnosticsDelay = 300,
-      formatterLineLength = 80,
       forwardSearch = {
-        args = {},
-      },
-      latexFormatter = "latexindent",
-      latexindent = {
-        modifyLineBreaks = false,
+        executable = "zathura",
+        args = {"--synctex-forward", "%l:1:%f", "%p"}
       },
     },
   },

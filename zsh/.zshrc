@@ -109,6 +109,7 @@ alias x='exa --icons'
 alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 alias ap='ansible-playbook'
 alias tf='terraform'
+alias bp='bat --theme=gruvbox-dark --paging always'
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

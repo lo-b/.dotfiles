@@ -201,7 +201,7 @@ map("n", "<space><space>X", "<Plug>JupyterExecuteAll", options)
 map("v", ">", ">gv", options)
 map("v", "<", "<gv", options)
 
--- Enable/disable vimtex diagnostics
+-- Enable/disable diagnostics
 map("n", "<space>a", ":lua vim.diagnostic.disable()<cr>", options)
 map("n", "<space>A", ":lua vim.diagnostic.enable()<cr>", options)
 

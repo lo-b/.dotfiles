@@ -55,17 +55,17 @@ vim.diagnostic.handlers.signs = {
 
 sign_define(
   "DiagnosticSignError",
-  { text = "🔥", texthl = "DiagnosticSignError" }
+  { texthl = "DiagnosticSignError" }
 )
 sign_define(
   "DiagnosticSignWarn",
-  { text = "⚡", texthl = "DiagnosticSignWarn" }
+  { texthl = "DiagnosticSignWarn" }
 )
 sign_define(
   "DiagnosticSignInfo",
-  { text = "💡", texthl = "DiagnosticSignInfo" }
+  { texthl = "DiagnosticSignInfo" }
 )
 sign_define(
   "DiagnosticSignHint",
-  { text = "🤔", texthl = "DiagnosticSignHint" }
+  { texthl = "DiagnosticSignHint" }
 )

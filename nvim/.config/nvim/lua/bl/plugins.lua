@@ -38,7 +38,6 @@ local plugins = {
   },
   "pearofducks/ansible-vim",
   "untitled-ai/jupyter_ascending.vim",
-  "lervag/vimtex",
   "liuchengxu/vista.vim",
   "mfussenegger/nvim-dap",
   {
