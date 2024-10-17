@@ -172,6 +172,7 @@ local plugins = {
     },
   },
   "rest-nvim/rest.nvim",
+  "https://github.com/sindrets/diffview.nvim"
 }
 
 local opts = {}
