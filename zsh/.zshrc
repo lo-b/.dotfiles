@@ -38,6 +38,11 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
+# NOTE: skill issue being unable to install latest nvim release using 'apt-get'
+# -- instead did a manual install and add it to path here
+export NVIM_PATH=$HOME/nvim-linux64/bin
+export PATH=$PATH:$NVIM_PATH
+
 export EDITOR='nvim'
 
 # Use nvim as pager for manpage
@@ -111,8 +116,8 @@ alias ap='ansible-playbook'
 alias tf='terraform'
 alias bp='bat --theme=gruvbox-dark --paging always'
 
-# powerlevel10k sourcing
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# powerlevel10k sourcing for WSL
+source $HOME/powerlevel10k/powerlevel10k.zsh-theme
 
 # Autopair completion
 source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
