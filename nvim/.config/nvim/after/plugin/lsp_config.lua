@@ -37,6 +37,13 @@ require("lspconfig").jsonls.setup {
   init_options = { provideFormatter = false },
 }
 require("lspconfig").yamlls.setup {
+  -- disable yamlls for Azure (DevOps) Pipeline files
+  on_attach = function(client, bufnr)
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    if filename:match('[%.]?azure%-pipelines%.y[a]?ml$') then
+      vim.cmd("LspStop yamlls")
+    end
+  end,
   capabilities = capabilities,
   settings = {
     yaml = {
@@ -226,6 +233,20 @@ require("roslyn").setup {
 }
 require("lspconfig").lemminx.setup {}
 require("lspconfig").bicep.setup {}
+require("lspconfig").azure_pipelines_ls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+          "/azure-pipeline*.y*l",
+          "/*.azure*",
+          "Azure-Pipelines/**/*.y*l",
+          "Pipelines/*.y*l",
+        },
+      },
+    },
+  },
+}
 
 -- setup pyright based on whether a venv is active or not
 local basedpyright = require("lspconfig").basedpyright
