@@ -76,12 +76,6 @@ bindkey -M menuselect 'l' vi-forward-char
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# node version manager (nvm)
-source /usr/share/nvm/init-nvm.sh
-
-# glab (GitLab CLI) autocompletion
-source <(glab completion -s zsh); compdef _glab glab
-
 # dotnet env vars
 export DOTNET_ROOT=/usr/share/dotnet
 
