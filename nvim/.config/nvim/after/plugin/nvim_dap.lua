@@ -96,20 +96,21 @@ end
 dap.configurations.go = {
   {
     type = "delve",
-    name = "launch - delve",
+    name = "Debug",
     request = "launch",
     program = "${file}"
   },
   {
     type = "delve",
-    name = "launch - delve (test)",
+    name = "Debug test", -- configuration for debugging test files
     request = "launch",
     mode = "test",
     program = "${file}"
   },
+  -- works with go.mod packages and sub packages 
   {
     type = "delve",
-    name = "launch - delve (mod)",
+    name = "Debug test (go.mod)",
     request = "launch",
     mode = "test",
     program = "./${relativeFileDirname}"

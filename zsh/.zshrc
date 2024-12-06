@@ -87,11 +87,6 @@ export DOTNET_ROOT=/usr/share/dotnet
 
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
-source /home/bram/.zsh-completion/dotnet.completion
-
-# azure CLI completion
-source /opt/azure-cli/az.completion
-
 # opt out of func telemetry 
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
