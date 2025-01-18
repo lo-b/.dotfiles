@@ -148,3 +148,29 @@ super + shift + Down
 	picom-trans -c -o -10
 super + shift + Up
 	picom-trans -c -o +10
+
+####MEDIA KEYS ####
+
+# Volume Up
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +2%
+
+# Volume Down
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -2%
+
+# Mute
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Play/Pause
+XF86AudioPlay
+    playerctl play-pause
+
+# Next Track
+XF86AudioNext
+    playerctl next
+
+# Previous Track
+XF86AudioPrev
+    playerctl previous
