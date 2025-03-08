@@ -4,7 +4,7 @@ local g = vim.g
 opt.pumblend = 10
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"
-opt.textwidth = 79
+opt.textwidth = 119
 opt.expandtab = true
 opt.tabstop = 4
 opt.softtabstop = 4
@@ -20,7 +20,7 @@ opt.errorbells = false
 opt.incsearch = true
 opt.scrolloff = 8
 opt.signcolumn = "yes:3"
-opt.colorcolumn = "80"
+opt.colorcolumn = "120"
 opt.clipboard:append "unnamedplus"
 opt.wrap = false
 opt.updatetime = 100
@@ -34,6 +34,8 @@ opt.statusline:append "%{get(b:,'gitsigns_status','')}"
 opt.grepprg = "rg --vimgrep --hidden"
 opt.grepformat:prepend "%f:%l:%c:%m"
 opt.fillchars = { eob = " ", diff = "╱" }
+opt.breakindent = true
+opt.linebreak = true
 
 -- disable builtin file explorer netrw
 g.loaded_netrw = 1

@@ -3,6 +3,10 @@ if not has_conform then
   return
 end
 
+conform.formatters.sql_formatter = {
+  command = "/home/bram/.local/share/nvim/mason/bin/sql-formatter",
+}
+
 conform.setup({
   notify_on_error = false,
   format_on_save = function(bufnr)
@@ -19,5 +23,6 @@ conform.setup({
     python = { "ruff_format", "ruff_organize_imports" },
     json = { "prettier" },
     markdown = { "prettier" },
+    sql = { "sql_formatter" },
   },
 })

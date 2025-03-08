@@ -17,9 +17,7 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -40,7 +38,7 @@ require("lspconfig").yamlls.setup {
   -- disable yamlls for Azure (DevOps) Pipeline files
   on_attach = function(client, bufnr)
     local filename = vim.api.nvim_buf_get_name(bufnr)
-    if filename:match('[%.]?azure%-pipelines%.y[a]?ml$') then
+    if filename:match('[%.]?azure%-pipelines%.y[a]?ml$') or filename:match('%.github/workflow') then
       vim.cmd("LspStop yamlls")
     end
   end,
@@ -55,6 +53,7 @@ require("lspconfig").yamlls.setup {
     },
   },
 }
+require'lspconfig'.gh_actions_ls.setup{}
 require("lspconfig").emmet_ls.setup {
   capabilities = capabilities,
   filetypes = {
@@ -98,7 +97,6 @@ require("lspconfig").ansiblels.setup {
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
 }
-require'lspconfig'.ts_ls.setup{}
 -- INFO: setup ruff linting using lspconfig to integrate code actions
 require("lspconfig").ruff.setup {
   capabilities = capabilities,
@@ -110,6 +108,22 @@ require("lspconfig").ruff.setup {
 }
 require("lspconfig").dockerls.setup {
   capabilities = capabilities,
+}
+require("lspconfig").sqls.setup{
+  on_attach = function(client, bufnr)
+    require('sqls').on_attach(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
+  settings = {
+    sqls = {
+      connections = {
+        {
+          driver = 'sqlite3',
+          dataSourceName = '/home/bram/db/peacefulares/peacefulares.sqlite3',
+        },
+      },
+    },
+  },
 }
 require("lspconfig").sqlls.setup {
   settings = {
@@ -247,6 +261,8 @@ require("lspconfig").azure_pipelines_ls.setup {
     },
   },
 }
+require'lspconfig'.templ.setup{}
+require'lspconfig'.htmx.setup{}
 
 -- setup pyright based on whether a venv is active or not
 local basedpyright = require("lspconfig").basedpyright

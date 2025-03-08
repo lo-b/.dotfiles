@@ -36,5 +36,6 @@ redshift -l 51:5 -t 5700:2800 &
 picom &
 nitrogen --random --set-auto "$HOME/Pictures/wallpapers/digital-art-minimalism-nature-hills.jpeg" &
 xbanish &
+nm-applet &
 xbindkeys
 exec bspwm

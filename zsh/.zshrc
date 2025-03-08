@@ -21,6 +21,13 @@ bindkey -v
 autoload -Uz compinit
 compinit
 
+# Azure CLI completion
+autoload -Uz "$HOME/.zfunc/_az"
+compdef _az az
+
+# Then tell the completion system to use _sbatch.pl to complete for sbatch.pl
+compdef _sbatch.pl sbatch.pl     
+
 # terraform autocompletion
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
@@ -93,6 +100,7 @@ alias tree="exa --icons -a -T -R -I '**/*workspace/\|**/*git'"
 alias ap='ansible-playbook'
 alias tf='terraform'
 alias bp='bat --theme=gruvbox-dark --paging always'
+alias clip='xclip -selection clipboard'
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -131,3 +139,7 @@ n() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+eval "$(zoxide init zsh)"
+
+# Turso
+export PATH="$PATH:/home/bram/.turso"

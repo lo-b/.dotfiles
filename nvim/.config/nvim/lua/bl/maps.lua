@@ -222,3 +222,5 @@ map("n", "<leader>tr", ":NvimTreeRefresh<CR>", options)
 map("n", "-", "<CMD>Oil<CR>", options)
 map("n", "<leader>-", ":lua require('oil').toggle_float()<CR>", options)
 
+-- ReST nvim
+map("n", "<leader>x", ":Rest run<CR>", options)

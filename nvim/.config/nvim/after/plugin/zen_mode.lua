@@ -1,13 +1,16 @@
 require("zen-mode").setup {
   window = {
     backdrop = 1,
-    width = 120,
+    width = 0.8,
     height = 1,
     options = {
-      signcolumn = "no",
-      colorcolumn = "",
-      number = false,
+      signcolumn = "yes",
+      colorcolumn="",
+      cursorcolumn = false,
+      number = true,
       relativenumber = false,
+      list=false,
+      wrap=true,
     },
   },
   plugins = {
@@ -15,13 +18,12 @@ require("zen-mode").setup {
       enabled = true,
       ruler = false,
       showcmd = false,
+      laststatus = 0,
     },
-    gitsigns = { enabled = true },
-    tmux = { enabled = true },
-    -- Kitty resizeing works in terminal but not from tmux(p)...
+    tmux = { enabled = false },
     kitty = {
       enabled = true,
-      font = "+4",
+      font = "+5",
     },
   },
 }
