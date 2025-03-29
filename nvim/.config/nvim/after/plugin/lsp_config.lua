@@ -261,8 +261,32 @@ require("lspconfig").azure_pipelines_ls.setup {
     },
   },
 }
-require'lspconfig'.templ.setup{}
-require'lspconfig'.htmx.setup{}
+require("lspconfig").templ.setup{}
+require("lspconfig").htmx.setup{}
+require("lspconfig").ts_ls.setup{
+  filetypes = {
+    "javascript",
+    "typescript",
+  },
+  settings = {
+    javascript = {
+      format = { enable = false },
+    },
+    typescript = {
+      format = { enable = false },
+    },
+  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+}
+require("lspconfig").eslint.setup{
+  filetypes = {
+    "javascript",
+    "typescript",
+  },
+}
 
 -- setup pyright based on whether a venv is active or not
 local basedpyright = require("lspconfig").basedpyright

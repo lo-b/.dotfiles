@@ -24,5 +24,6 @@ conform.setup({
     json = { "prettier" },
     markdown = { "prettier" },
     sql = { "sql_formatter" },
+    javascript = { "prettier" },
   },
 })
