@@ -134,7 +134,7 @@ map(
 map(
   "n",
   "<leader>ff",
-  "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🗃️ ', hidden = true })<cr>",
+  "<cmd>lua require('telescope.builtin').find_files({ prompt_prefix= '🔭 ', hidden = true })<cr>",
   options
 )
 map("n", "<leader>fm", ":Telescope media_files<cr>", options)
@@ -162,7 +162,7 @@ map(
 map(
   "n",
   "<leader>lk",
-  "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = 'ℹ️ ' })<cr>",
+  "<cmd>lua require('telescope.builtin').keymaps({ prompt_prefix = '🔑 ' })<cr>",
   options
 )
 
@@ -182,7 +182,7 @@ map(
 map(
   "n",
   "<leader>gr",
-  "<cmd>lua require('telescope.builtin').lsp_references({prompt_prefix='🛠️ ' })<cr>",
+  "<cmd>lua require('telescope.builtin').lsp_references({prompt_prefix='📌 ' })<cr>",
   options
 )
 
