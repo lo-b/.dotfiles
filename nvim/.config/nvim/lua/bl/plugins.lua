@@ -48,6 +48,12 @@ local plugins = {
   "mfussenegger/nvim-jdtls",
   "rcarriga/nvim-dap-ui",
   "theHamsta/nvim-dap-virtual-text",
+  {
+    "leoluz/nvim-dap-go",
+    config = function()
+      require('dap-go').setup()
+    end,
+  },
   "junegunn/vim-easy-align",
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",

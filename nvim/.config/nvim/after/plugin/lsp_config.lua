@@ -19,6 +19,16 @@ end
 -- Setup lspconfig.
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+local function organize_imports()
+    local params = {
+      command = "_typescript.organizeImports",
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = "",
+    }
+    -- FIX: replace with Client:exec_cmd
+    vim.lsp.buf.execute_command(params)
+  end
+
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -262,8 +272,28 @@ require("lspconfig").azure_pipelines_ls.setup {
   },
 }
 require("lspconfig").templ.setup{}
-require("lspconfig").htmx.setup{}
+-- FIX: Hover will not work for both lsp clients (htmx and templ) in a .templ file. 
+-- In particular, hover will only work for htmx LSP, hover over templ syntax will return nothing.
+-- Probably because htmx lsp is used to 'hover' templ syntax. Using LSPs separately works as expected; i.e. issues
+-- arise when using both together.
+require("lspconfig").htmx.setup{
+  filetypes = {
+    "templ"
+  },
+}
 require("lspconfig").ts_ls.setup{
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.server_capabilities.diagnostics = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+  commands = {
+    OrganizeImports = {
+      organize_imports,
+      description = "Organize Imports",
+    },
+  },
   filetypes = {
     "javascript",
     "typescript",
@@ -276,10 +306,6 @@ require("lspconfig").ts_ls.setup{
       format = { enable = false },
     },
   },
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end,
 }
 require("lspconfig").eslint.setup{
   filetypes = {
