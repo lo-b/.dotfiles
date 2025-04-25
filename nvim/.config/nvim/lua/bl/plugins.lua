@@ -246,6 +246,7 @@ local plugins = {
   "rest-nvim/rest.nvim",
   "https://github.com/sindrets/diffview.nvim",
   "nanotee/sqls.nvim",
+  { 'wakatime/vim-wakatime', lazy = false }
 }
 
 local opts = {}
