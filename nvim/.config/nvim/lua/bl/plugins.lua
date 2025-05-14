@@ -141,12 +141,6 @@ local plugins = {
   },
   "hoob3rt/lualine.nvim",
   {
-    "kyazdani42/nvim-tree.lua",
-    dependencies = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icon
-    },
-  },
-  {
     "norcalli/nvim-colorizer.lua", -- Colored color codes/names
     lazy = true,
     config = function()

@@ -211,12 +211,6 @@ nnoremap <expr> k (v:count >5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count >5 ? "m'" . v:count : "") . 'j'
 ]]
 
--- NvimTree
-map("n", "<leader>e", ":NvimTreeToggle<CR>", options)
-map("n", "<leader>E", ":NvimTreeFindFile<CR>", options)
-map("n", "<leader>tf", ":NvimTreeFindFile<CR>", options)
-map("n", "<leader>tr", ":NvimTreeRefresh<CR>", options)
-
 -- oil
 -- open parent directory in current window
 map("n", "-", "<CMD>Oil<CR>", options)
