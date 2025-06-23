@@ -32,7 +32,7 @@ local function organize_imports()
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
-      "basedpyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
+      "pyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
       "jsonls", "lemminx", "bicep"
     },
 })
@@ -107,46 +107,8 @@ require("lspconfig").ansiblels.setup {
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities,
 }
--- INFO: setup ruff linting using lspconfig to integrate code actions
-require("lspconfig").ruff.setup {
-  capabilities = capabilities,
-  init_options = {
-    settings = {
-      logLevel = "warn",
-    }
-  }
-}
 require("lspconfig").dockerls.setup {
   capabilities = capabilities,
-}
-require("lspconfig").sqls.setup{
-  on_attach = function(client, bufnr)
-    require('sqls').on_attach(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-  settings = {
-    sqls = {
-      connections = {
-        {
-          driver = 'sqlite3',
-          dataSourceName = '/home/bram/db/peacefulares/peacefulares.sqlite3',
-        },
-      },
-    },
-  },
-}
-require("lspconfig").sqlls.setup {
-  settings = {
-    sqls = {
-      connections = {
-        {
-          alias = "Shopping database",
-          driver = "sqlite3",
-          dataSourceName = "/home/bram/dbs/sqlite/student-data.db",
-        },
-      },
-    },
-  },
 }
 -- Setup LaTeX LSP
 require("lspconfig").texlab.setup{
@@ -256,7 +218,6 @@ require("roslyn").setup {
   capabilities = capabilities,
 }
 require("lspconfig").lemminx.setup {}
-require("lspconfig").bicep.setup {}
 require("lspconfig").azure_pipelines_ls.setup {
   settings = {
     yaml = {
@@ -313,30 +274,6 @@ require("lspconfig").eslint.setup{
     "typescript",
   },
 }
-
--- setup pyright based on whether a venv is active or not
-local basedpyright = require("lspconfig").basedpyright
-local active_venv = vim.env.VIRTUAL_ENV
-
-if active_venv == nil then
-  basedpyright.setup{}
-else
-  basedpyright.setup {
-    capabilities = capabilities,
-    filetypes = { "python" },
-    settings = {
-      basedpyright = {
-        analysis = {
-          include = { "**/*.py" },
-        },
-      },
-      python = {
-        -- point to python path of activate venv
-        pythonPath = vim.fs.joinpath(active_venv, "bin", "python"),
-      },
-    },
-  }
-end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
