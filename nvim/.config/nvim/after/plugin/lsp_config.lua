@@ -29,6 +29,22 @@ local function organize_imports()
     vim.lsp.buf.execute_command(params)
   end
 
+-- Converts JSON schema files matching a pattern into JSONLS schema configuration objects
+-- @param pattern: glob pattern to match schema files (e.g., "*.schema.json")
+-- @return: array of schema objects for JSONLS setup, each with fileMatch and url keys
+local function glob_json_schemas(pattern)
+  local schemas = {}
+  local files = vim.fn.glob(pattern, false, true)
+  for _, file in ipairs(files) do
+    local name = vim.fn.fnamemodify(file, ":t:r"):gsub("%.schema$", "")
+    table.insert(schemas, {
+      fileMatch = { name .. ".json" },
+      url = "file://" .. vim.fn.fnamemodify(file, ":p")
+    })
+  end
+  return schemas
+end
+
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -43,6 +59,12 @@ require("lspconfig").jsonls.setup {
   capabilities = capabilities,
   -- NOTE: disable LSP provided formatting; use prettier thru conform instead
   init_options = { provideFormatter = false },
+  settings = {
+    json = {
+      schemas = glob_json_schemas("*.schema.json"),
+      validate = { enable = true },
+    },
+  },
 }
 require("lspconfig").yamlls.setup {
   -- disable yamlls for Azure (DevOps) Pipeline files
