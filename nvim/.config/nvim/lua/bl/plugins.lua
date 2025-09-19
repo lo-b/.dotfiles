@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   {
     "marko-cerovac/material.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
@@ -83,30 +83,6 @@ local plugins = {
   {
     'neovim/nvim-lspconfig',
     dependencies = { 'saghen/blink.cmp' },
-
-    -- example using `opts` for defining servers
-    opts = {
-      servers = {
-        lua_ls = {}
-      }
-    },
-    config = function(_, opts)
-      local lspconfig = require('lspconfig')
-      for server, config in pairs(opts.servers) do
-        -- passing config.capabilities to blink.cmp merges with the capabilities in your
-        -- `opts[server].capabilities, if you've defined it
-        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
-      end
-    end,
-
-   -- example calling setup directly for each LSP
-    config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local lspconfig = require('lspconfig')
-
-      lspconfig['lua_ls'].setup({ capabilities = capabilities })
-    end
   },
   {
     "j-hui/fidget.nvim",
@@ -122,7 +98,7 @@ local plugins = {
       }
     end,
   },
-  { "github/copilot.vim", lazy = true },
+  { "github/copilot.vim",          lazy = true },
   "onsails/lspkind-nvim",
   {
     "stevearc/conform.nvim",
@@ -210,13 +186,13 @@ local plugins = {
     end,
     ft = { "markdown" },
   },
-  { "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
+  { "folke/trouble.nvim",                     dependencies = "kyazdani42/nvim-web-devicons" },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false }
   },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter",        build = ":TSUpdate" },
   { "nvim-treesitter/nvim-treesitter-context" },
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
