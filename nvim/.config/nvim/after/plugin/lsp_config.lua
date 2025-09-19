@@ -51,11 +51,9 @@ require('mason-lspconfig').setup({
       "pyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
       "jsonls", "lemminx", "bicep"
     },
+    automatic_enable = true,
 })
-
--- TOML lsp
-require("lspconfig").taplo.setup {}
-require("lspconfig").jsonls.setup {
+vim.lsp.config("jsonls", {
   capabilities = capabilities,
   -- NOTE: disable LSP provided formatting; use prettier thru conform instead
   init_options = { provideFormatter = false },
@@ -65,8 +63,8 @@ require("lspconfig").jsonls.setup {
       validate = { enable = true },
     },
   },
-}
-require("lspconfig").yamlls.setup {
+})
+vim.lsp.config("yamlls", {
   -- disable yamlls for Azure (DevOps) Pipeline files
   on_attach = function(client, bufnr)
     local filename = vim.api.nvim_buf_get_name(bufnr)
@@ -84,35 +82,21 @@ require("lspconfig").yamlls.setup {
       },
     },
   },
-}
-require'lspconfig'.gh_actions_ls.setup{}
-require("lspconfig").emmet_ls.setup {
+})
+vim.lsp.config('gh_actions_ls', {
   capabilities = capabilities,
+  -- INFO: Custom filetype is set for GitHub Actions files;
+  -- prevents start of all `*.y[a]ml`-related LSP servers.
   filetypes = {
-    "html",
-    "typescriptreact",
-    "javascriptreact",
-    "css",
-    "less",
-    "svelte",
-  },
-}
-require("lspconfig").svelte.setup {
-  capabilities = capabilities,
-}
-require("lspconfig").bashls.setup {
+    "yaml.github"
+  }
+})
+vim.lsp.config("bashls", {
   capabilities = capabilities,
   filetypes = { "sh", "zsh" },
-}
-require("lspconfig").volar.setup {
-  filetypes = {
-    "vue",
-  },
-}
-require("lspconfig").gopls.setup {
-  capabilities = capabilities,
-}
-require("lspconfig").ansiblels.setup {
+})
+vim.lsp.enable('gopls')
+vim.lsp.config("ansiblels", {
   filetypes = { "ansible", "yaml.ansible" },
   capabilities = capabilities,
   settings = {
@@ -125,15 +109,8 @@ require("lspconfig").ansiblels.setup {
       }
     }
   }
-}
-require("lspconfig").rust_analyzer.setup {
-  capabilities = capabilities,
-}
-require("lspconfig").dockerls.setup {
-  capabilities = capabilities,
-}
--- Setup LaTeX LSP
-require("lspconfig").texlab.setup{
+})
+vim.lsp.config("texlab", {
   settings = {
     texlab = {
       bibtexFormatter = "texlab",
@@ -151,36 +128,8 @@ require("lspconfig").texlab.setup{
       },
     },
   },
-}
-require("lspconfig").vimls.setup {
-  capabilities = capabilities,
-  cmd = { "vim-language-server", "--stdio" },
-  filetypes = { "vim" },
-  init_options = {
-    diagnostic = {
-      enable = true,
-    },
-    indexes = {
-      count = 3,
-      gap = 100,
-      projectRootPatterns = {
-        "runtime",
-        "nvim",
-        ".git",
-        "autoload",
-        "plugin",
-      },
-      runtimepath = true,
-    },
-    iskeyword = "@,48-57,_,192-255,-#",
-    runtimepath = "",
-    suggest = {
-      fromRuntimepath = true,
-      fromVimruntime = true,
-    },
-    vimruntime = "",
-  },
-}
+})
+vim.lsp.enable("texlab")
 
 -- viml setting
 vim.g.markdown_fenced_languages = {
@@ -205,7 +154,8 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require("lspconfig").lua_ls.setup {
+vim.lsp.config("lua_ls", {
+  capabilities = capabilities,
   settings = {
     Lua = {
       format = {
@@ -233,14 +183,12 @@ require("lspconfig").lua_ls.setup {
       },
     },
   },
-  capabilities = capabilities,
-}
-require("lspconfig").terraformls.setup {}
+})
 require("roslyn").setup {
   capabilities = capabilities,
 }
-require("lspconfig").lemminx.setup {}
-require("lspconfig").azure_pipelines_ls.setup {
+vim.lsp.config("azure_pipelines_ls", {
+  capabilities=capabilities,
   settings = {
     yaml = {
       schemas = {
@@ -253,18 +201,21 @@ require("lspconfig").azure_pipelines_ls.setup {
       },
     },
   },
-}
-require("lspconfig").templ.setup{}
+})
 -- FIX: Hover will not work for both lsp clients (htmx and templ) in a .templ file. 
 -- In particular, hover will only work for htmx LSP, hover over templ syntax will return nothing.
 -- Probably because htmx lsp is used to 'hover' templ syntax. Using LSPs separately works as expected; i.e. issues
 -- arise when using both together.
-require("lspconfig").htmx.setup{
+vim.lsp.config("templ", {
+  capabilities=capabilities,
+})
+vim.lsp.config('htmx', {
+  capabilities=capabilities,
   filetypes = {
     "templ"
   },
-}
-require("lspconfig").ts_ls.setup{
+})
+vim.lsp.config("ts_ls", {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.diagnostics = false
@@ -289,14 +240,13 @@ require("lspconfig").ts_ls.setup{
       format = { enable = false },
     },
   },
-}
-require("lspconfig").eslint.setup{
+})
+vim.lsp.config("eslint", {
   filetypes = {
     "javascript",
     "typescript",
   },
-}
-
+})
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
