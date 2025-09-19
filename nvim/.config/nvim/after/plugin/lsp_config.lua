@@ -20,14 +20,14 @@ end
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local function organize_imports()
-    local params = {
-      command = "_typescript.organizeImports",
-      arguments = { vim.api.nvim_buf_get_name(0) },
-      title = "",
-    }
-    -- FIX: replace with Client:exec_cmd
-    vim.lsp.buf.execute_command(params)
-  end
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+    title = "",
+  }
+  -- FIX: replace with Client:exec_cmd
+  vim.lsp.buf.execute_command(params)
+end
 
 -- Converts JSON schema files matching a pattern into JSONLS schema configuration objects
 -- @param pattern: glob pattern to match schema files (e.g., "*.schema.json")
@@ -47,11 +47,11 @@ end
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = {
-      "pyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
-      "jsonls", "lemminx", "bicep"
-    },
-    automatic_enable = true,
+  ensure_installed = {
+    "pyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
+    "jsonls", "lemminx", "bicep"
+  },
+  automatic_enable = true,
 })
 vim.lsp.config("jsonls", {
   capabilities = capabilities,
@@ -77,7 +77,8 @@ vim.lsp.config("yamlls", {
     yaml = {
       schemas = {
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "**/*compose.yaml",
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
+        "**/*compose.yaml",
         kubernetes = "/*.k8s.yaml",
       },
     },
@@ -124,7 +125,7 @@ vim.lsp.config("texlab", {
       },
       forwardSearch = {
         executable = "zathura",
-        args = {"--synctex-forward", "%l:1:%f", "%p"}
+        args = { "--synctex-forward", "%l:1:%f", "%p" }
       },
     },
   },
@@ -188,7 +189,7 @@ require("roslyn").setup {
   capabilities = capabilities,
 }
 vim.lsp.config("azure_pipelines_ls", {
-  capabilities=capabilities,
+  capabilities = capabilities,
   settings = {
     yaml = {
       schemas = {
@@ -202,15 +203,15 @@ vim.lsp.config("azure_pipelines_ls", {
     },
   },
 })
--- FIX: Hover will not work for both lsp clients (htmx and templ) in a .templ file. 
+-- FIX: Hover will not work for both lsp clients (htmx and templ) in a .templ file.
 -- In particular, hover will only work for htmx LSP, hover over templ syntax will return nothing.
 -- Probably because htmx lsp is used to 'hover' templ syntax. Using LSPs separately works as expected; i.e. issues
 -- arise when using both together.
 vim.lsp.config("templ", {
-  capabilities=capabilities,
+  capabilities = capabilities,
 })
 vim.lsp.config('htmx', {
-  capabilities=capabilities,
+  capabilities = capabilities,
   filetypes = {
     "templ"
   },
