@@ -4,7 +4,6 @@ if not has_lint then
 end
 
 lint.linters_by_ft = {
-  python = { "mypy" },
   zsh = { "shellcheck" },
   ansible = { "ansible_lint" },
   sql = { "sqlfluff" },

@@ -53,6 +53,17 @@ require('mason-lspconfig').setup({
   },
   automatic_enable = true,
 })
+vim.lsp.config("pyright", {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "standard",
+        venvPath = ".venv"
+      },
+    },
+  },
+  -- ... other config
+})
 vim.lsp.config("jsonls", {
   capabilities = capabilities,
   -- NOTE: disable LSP provided formatting; use prettier thru conform instead

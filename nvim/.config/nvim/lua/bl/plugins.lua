@@ -98,7 +98,6 @@ local plugins = {
       }
     end,
   },
-  { "github/copilot.vim",          lazy = true },
   "onsails/lspkind-nvim",
   {
     "stevearc/conform.nvim",
@@ -171,7 +170,6 @@ local plugins = {
     },
     opts_extend = { "sources.default" }
   },
-  { "heavenshell/vim-pydocstring", ft = "python", build = "make install" },
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {},
@@ -213,7 +211,23 @@ local plugins = {
       "tpope/vim-fugitive",
     },
   },
-  "rest-nvim/rest.nvim",
+  {
+    "rest-nvim/rest.nvim",
+    config = function()
+      vim.g.rest_nvim = {
+        request = {
+          skip_ssl_verification = false,
+        },
+      }
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "http")
+      end,
+    }
+  },
   "https://github.com/sindrets/diffview.nvim",
   "nanotee/sqls.nvim",
   { 'wakatime/vim-wakatime', lazy = false }

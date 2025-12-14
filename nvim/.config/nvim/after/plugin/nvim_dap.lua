@@ -48,10 +48,24 @@ dap.configurations.python = {
     args = { "--target", "api" },
     console = "integratedTerminal",
   },
+  {
+    type = "python",
+    request = "launch",
+    name = "FastAPI Debug",
+    module = "fastapi",
+    args = {
+      "dev",
+      "webhook/main.py",
+      "--port",
+      "8080",
+    },
+    console = "integratedTerminal",
+    justMyCode = false,
+  },
 }
 
 local dap_python = require "dap-python"
-dap_python.setup("/usr/bin/python", {
+dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python", {
   console = "externalTerminal",
   include_configs = true,
 })
@@ -59,7 +73,7 @@ dap_python.setup("/usr/bin/python", {
 dap.adapters.coreclr = {
   type = "executable",
   command = "/usr/bin/netcoredbg",
-  args = {'--interpreter=vscode'}
+  args = { '--interpreter=vscode' }
 }
 
 dap.configurations.cs = {
@@ -68,29 +82,29 @@ dap.configurations.cs = {
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+      return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
     end,
   },
 }
 
 dap.adapters.delve = function(callback, config)
-    if config.mode == 'remote' and config.request == 'attach' then
-        callback({
-            type = 'server',
-            host = config.host or '127.0.0.1',
-            port = config.port or '38697'
-        })
-    else
-        callback({
-            type = 'server',
-            port = '${port}',
-            executable = {
-                command = mason_bin_dir .. "/dlv",
-                args = { 'dap', '-l', '127.0.0.1:${port}', '--log', '--log-output=dap' },
-                detached = vim.fn.has("win32") == 0,
-            }
-        })
-    end
+  if config.mode == 'remote' and config.request == 'attach' then
+    callback({
+      type = 'server',
+      host = config.host or '127.0.0.1',
+      port = config.port or '38697'
+    })
+  else
+    callback({
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = mason_bin_dir .. "/dlv",
+        args = { 'dap', '-l', '127.0.0.1:${port}', '--log', '--log-output=dap' },
+        detached = vim.fn.has("win32") == 0,
+      }
+    })
+  end
 end
 
 require("dapui").setup {
