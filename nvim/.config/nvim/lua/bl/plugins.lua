@@ -118,6 +118,7 @@ local plugins = {
   {
     "norcalli/nvim-colorizer.lua", -- Colored color codes/names
     lazy = true,
+    cmd = { "ColorizerToggle" },
     config = function()
       require("colorizer").setup()
     end,
@@ -128,7 +129,6 @@ local plugins = {
   "folke/zen-mode.nvim",
   "szw/vim-maximizer",
   "kyazdani42/nvim-web-devicons", -- Devicons d by telescope
-  "nvim-treesitter/playground",
   "jiangmiao/auto-pairs",
   "lambdalisue/suda.vim",
   {

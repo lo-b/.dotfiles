@@ -101,6 +101,7 @@ alias ap='ansible-playbook'
 alias tf='terraform'
 alias bp='bat --theme=gruvbox-dark --paging always'
 alias clip='xclip -selection clipboard'
+alias task='go-task'
 
 # powerlevel10k sourcing
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

@@ -76,21 +76,24 @@ vim.lsp.config("jsonls", {
   },
 })
 vim.lsp.config("yamlls", {
-  -- disable yamlls for Azure (DevOps) Pipeline files
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     local filename = vim.api.nvim_buf_get_name(bufnr)
     if filename:match('[%.]?azure%-pipelines%.y[a]?ml$') or filename:match('%.github/workflow') then
       vim.cmd("LspStop yamlls")
     end
   end,
-  capabilities = capabilities,
   settings = {
     yaml = {
       schemas = {
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
         ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
         "**/*compose.yaml",
-        kubernetes = "/*.k8s.yaml",
+        ["kubernetes"] = "/*.k8s.yaml",
+        ["https://taskfile.dev/schema.json"] = {
+          "**/Taskfile.yml",
+          "**/taskfiles/*.yml",
+        }
       },
     },
   },
