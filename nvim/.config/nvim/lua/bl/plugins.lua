@@ -108,6 +108,12 @@ local plugins = {
     dependencies = { "kyazdani42/nvim-web-devicons" }
   },
   {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    build = ':TSUpdate'
+  },
+  "nvim-treesitter/nvim-treesitter-context",
+  {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -184,14 +190,12 @@ local plugins = {
     end,
     ft = { "markdown" },
   },
-  { "folke/trouble.nvim",                     dependencies = "kyazdani42/nvim-web-devicons" },
+  { "folke/trouble.nvim",    dependencies = "kyazdani42/nvim-web-devicons" },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false }
   },
-  { "nvim-treesitter/nvim-treesitter",        build = ":TSUpdate" },
-  { "nvim-treesitter/nvim-treesitter-context" },
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
   "nvim-neotest/nvim-nio",
