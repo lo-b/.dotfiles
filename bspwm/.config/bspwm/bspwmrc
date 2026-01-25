@@ -15,7 +15,6 @@ bspc config gapless_monocle true
 bspc config pointer_modifier mod1
 
 bspc rule -a Zathura state=tiled
-bspc rule -a firefox desktop='^3'
 bspc rule -a PictureInPicture sticky=on
 
 wmname compiz

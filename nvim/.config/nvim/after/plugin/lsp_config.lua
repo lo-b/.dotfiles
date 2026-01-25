@@ -213,6 +213,7 @@ vim.lsp.config('lua_ls', {
 require("roslyn").setup {
   capabilities = capabilities,
 }
+vim.lsp.enable("roslyn")
 vim.lsp.config("azure_pipelines_ls", {
   capabilities = capabilities,
   settings = {
