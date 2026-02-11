@@ -200,7 +200,6 @@ local plugins = {
   "L3MON4D3/LuaSnip",
   "nvim-neotest/nvim-nio",
   -- "mattn/emmet-vim",
-  "evanleck/vim-svelte",
   "hashivim/vim-terraform",
   "sindrets/diffview.nvim",
   {
@@ -234,7 +233,19 @@ local plugins = {
   },
   "https://github.com/sindrets/diffview.nvim",
   "nanotee/sqls.nvim",
-  { 'wakatime/vim-wakatime', lazy = false }
+  { 'wakatime/vim-wakatime', lazy = false },
+  {
+    'isakbm/gitgraph.nvim',
+    keys = {
+      {
+        "<leader>gl",
+        function()
+          require('gitgraph').draw({}, { all = true, max_count = 5000 })
+        end,
+        desc = "GitGraph - Draw",
+      },
+    },
+  },
 }
 
 local opts = {}

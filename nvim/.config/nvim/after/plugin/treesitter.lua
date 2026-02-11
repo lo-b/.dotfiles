@@ -3,7 +3,7 @@ if not has_ts then
   return
 end
 
-local parsers = { "go", "templ", "html", "css", "js" }
+local parsers = { "go", "templ", "html", "css", "js", "svelte" }
 ts.install()
 
 vim.api.nvim_create_autocmd('FileType', {

@@ -49,7 +49,7 @@ require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
     "pyright", "ruff", "bashls", "lua_ls", "taplo", "ansiblels",
-    "jsonls", "lemminx", "bicep"
+    "jsonls", "lemminx", "bicep", "svelte"
   },
   automatic_enable = true,
 })
@@ -79,8 +79,9 @@ vim.lsp.config("yamlls", {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     local filename = vim.api.nvim_buf_get_name(bufnr)
+    -- INFO: prevent attach of yaml files handled by other LSPs
     if filename:match('[%.]?azure%-pipelines%.y[a]?ml$') or filename:match('%.github/workflow') then
-      vim.cmd("LspStop yamlls")
+      vim.lsp.stop_client(client.id)
     end
   end,
   settings = {
@@ -170,6 +171,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -183,25 +185,18 @@ vim.lsp.config('lua_ls', {
 
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most
-        -- likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        -- Tell the language server how to find Lua modules same way as Neovim
-        -- (see `:h lua-module-load`)
         path = {
           'lua/?.lua',
           'lua/?/init.lua',
         },
       },
-      -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
-          -- Depending on the usage, you might want to add additional paths
-          -- here.
-          -- '${3rd}/luv/library'
-          -- '${3rd}/busted/library'
+          vim.env.VIMRUNTIME,
+          -- WARN: loads all lazy plugin libs -- long workspace load!
+          os.getenv("XDG_DATA_HOME") .. "/nvim/lazy",
         }
       }
     })
@@ -272,8 +267,10 @@ vim.lsp.config("eslint", {
   filetypes = {
     "javascript",
     "typescript",
+    "svelte"
   },
 })
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
