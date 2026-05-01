@@ -294,6 +294,25 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = set_ft_augroup,
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*_templ.go",
+  callback = function(ev)
+    vim.schedule(function()
+      local templ = ev.file:gsub("_templ%.go$", ".templ")
+      if vim.uv.fs_stat(templ) then
+        local old_buf = ev.buf
+        vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = old_buf }))
+        vim.cmd.edit(templ)
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(old_buf) then
+            vim.api.nvim_buf_delete(old_buf, { force = true })
+          end
+        end)
+      end
+    end)
+  end,
+})
+
 _ = vim.cmd [[
   hi Conceal ctermfg=250 ctermbg=238 guifg=#BBBBBB guibg=#46484A
 ]]

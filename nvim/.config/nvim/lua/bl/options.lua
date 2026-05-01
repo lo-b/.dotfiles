@@ -44,7 +44,13 @@ g.loaded_netrwPlugin = 1
 g.copilot_node_command = "/home/bram/.nvm/versions/node/v16.15.1/bin/node"
 g.material_style = "darker"
 g.highlightedyank_highlight_duration = 500
-g.python3_host_prog="/usr/bin/python"
+g.python3_host_prog = "/usr/bin/python"
+
+vim.filetype.add {
+  extension = {
+    templ = "templ"
+  }
+}
 
 vim.cmd [[
   syntax enable

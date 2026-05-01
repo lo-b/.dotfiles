@@ -116,9 +116,9 @@ local plugins = {
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
+      "lewis6991/async.nvim",
     },
+    lazy = false,
   },
   "hoob3rt/lualine.nvim",
   {
@@ -199,20 +199,17 @@ local plugins = {
   "lewis6991/gitsigns.nvim",
   "L3MON4D3/LuaSnip",
   "nvim-neotest/nvim-nio",
-  -- "mattn/emmet-vim",
+  {
+    "olrtg/nvim-emmet",
+    config = function()
+      vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+    end,
+  },
   "hashivim/vim-terraform",
   "sindrets/diffview.nvim",
   {
     "seblj/roslyn.nvim",
     ft = "cs",
-  },
-  {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
-    dependencies = {
-      "tpope/vim-fugitive",
-    },
   },
   {
     "rest-nvim/rest.nvim",
@@ -234,18 +231,7 @@ local plugins = {
   "https://github.com/sindrets/diffview.nvim",
   "nanotee/sqls.nvim",
   { 'wakatime/vim-wakatime', lazy = false },
-  {
-    'isakbm/gitgraph.nvim',
-    keys = {
-      {
-        "<leader>gl",
-        function()
-          require('gitgraph').draw({}, { all = true, max_count = 5000 })
-        end,
-        desc = "GitGraph - Draw",
-      },
-    },
-  },
+  'isakbm/gitgraph.nvim',
 }
 
 local opts = {}

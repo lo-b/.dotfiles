@@ -218,3 +218,11 @@ map("n", "<leader>-", ":lua require('oil').toggle_float()<CR>", options)
 
 -- ReST nvim
 map("n", "<leader>x", ":Rest run<CR>", options)
+
+-- GitGraph
+map("n", "<leader>gl", "", vim.tbl_extend("keep", options, {
+  callback = function()
+    require('gitgraph').draw({ pretty = false }, { all = true, max_count = 5000 })
+  end,
+  desc = "GitGraph - Draw",
+}))
